@@ -1,8 +1,7 @@
 class ImagesController < ApplicationController
   def index
-    @images = Image.all
-    @comment = Comment.new
-  end
+    @images = Image.paginate(page: params[:page], per_page: 2)
+   end
 
   def new
     @image = Image.new
