@@ -29,6 +29,8 @@ class ImagesController < ApplicationController
   end
 
   def show
+    @image = Image.find(params[:id])
+    @comment = Comment.new
   end
 
   def destroy
@@ -40,6 +42,7 @@ class ImagesController < ApplicationController
 
   def edit
     @image = Image.find(params[:id])
+    
   end
 
   private

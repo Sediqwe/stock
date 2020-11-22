@@ -2,6 +2,14 @@ h1 Images#index
 h3 Új kép feltöltés:
 = link_to "Feltöltés", new_image_path, class: "btn btn-success"
 table.table.table-bordered.table-dark
+    tr
+        
+            td IMAGE
+            td ID
+            td TITLE
+            td DESCRIPTION
+            td COMMENTS
+            td ACTION
     - @images.each do |image|
         tr
             td = image_tag image.image, width: 200 if image.image.present?
@@ -9,11 +17,15 @@ table.table.table-bordered.table-dark
             td = image.title
             td = image.description
             td 
+                - image.comments.each do |com|
+                    = com.idea
+                    p
+                    = com.user.email
+               
+            td 
                 = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary"
                 = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary"
-            td  = simple_form_for @comment do |f|
-                    = f.input :idea
-                    = f.submit
+                = link_to "Kommentár", image_path(image.id), class: "btn btn-success"
         
   
   
