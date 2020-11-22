@@ -1,4 +1,6 @@
-<h1>Images#index</h1>
+h1 Images#index 
+h3 Új kép feltöltés:
+= link_to "Feltöltés", new_image_path, class: "btn btn-success"
 table.table.table-bordered.table-dark
     - @images.each do |image|
         tr
@@ -9,6 +11,9 @@ table.table.table-bordered.table-dark
             td 
                 = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary"
                 = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary"
-  
+            td  = simple_form_for @comment do |f|
+                    = f.input :idea
+                    = f.submit
+        
   
   
