@@ -1,14 +1,14 @@
 <h1>Images#index</h1>
 table.table.table-bordered.table-dark
-    - @images.each do |f|
+    - @images.each do |image|
         tr
-            td = 
-            td = f.id
-            td = f.title
-            td = f.description
+            td = image_tag image.image, width: 200 if image.image.present?
+            td = image.id
+            td = image.title
+            td = image.description
             td 
-                = link_to "Módosít", edit_image_path(f.id), class: "btn btn-primary"
-                = link_to "Töröl", image_path(f.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary"
+                = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary"
+                = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary"
   
   
   
