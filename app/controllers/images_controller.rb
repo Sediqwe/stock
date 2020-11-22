@@ -31,6 +31,10 @@ class ImagesController < ApplicationController
   end
 
   def destroy
+    @image = Image.find(params[:id])
+    @image.destroy
+    redirect_to @image
+    
   end
 
   def edit
@@ -39,6 +43,6 @@ class ImagesController < ApplicationController
 
   private
     def image_params
-      params.require(:image).permit(:title, :description)
+      params.require(:image).permit(:title, :description, images: [])
     end
 end
