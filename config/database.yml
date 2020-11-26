@@ -27,5 +27,5 @@ test:
 production:
   <<: *default
   database: 'stocky'
-  username: 'postgres'
+  username: 'pittyu'
   password: <%= Rails.application.credentials.database[:password] %>
