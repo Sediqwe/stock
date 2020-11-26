@@ -9,6 +9,9 @@ set :application, "stock"
 set :repo_url, "https://github.com/Sediqwe/stock.git"
 set :branch, "master"
 set :deploy_to, "/var/www/pittyu"
+set :keep_releases, 3
+set :migration_command, 'db:migrate'
+set :conditionally_migrate, true
 
 append :linked_files,  "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets" "public/system", "public/uploads", "storage"
