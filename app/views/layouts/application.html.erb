@@ -9,12 +9,16 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-  
+  <body class="pt-4">
+  <% if current_user.present? %>
+  <%= current_user.id %>
+  <% else %>
+  nincs
+  <% end %>
   <%= render 'shared/menu' %>
-  <%= render 'shared/error_devise' %>
-  <div class="container-fluid">
+   <div class="container-fluid">
   <%= yield %>
+  
     </div>
   </body>
 </html>

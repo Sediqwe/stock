@@ -8,21 +8,22 @@
             <li class="nav-item active">
               <a class="nav-link" href="/">Főoldal <span class="sr-only">(current)</span></a>
             </li>
-              <% if !user_signed_in? %>
+              
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Belépés</a>
+                  <%= link_to "Belépés", login_path, class: "nav-link"  %>
                 </li>
-              <% else %>
+                <li class="nav-item">
+                  <a class="nav-link" href="signup">Regisztrálás</a>
+                </li>
+              
                 <li class="nav-item">
                     <%= link_to "Képek", images_path, class: "nav-link" %>
                 </li>
-                  <li class="nav-item">
-                    <%= link_to "Felhasználók", users_path, class: "nav-link" %>
-                </li>
+               
                 <li class="nav-item">
-                    <%= link_to "Kilépés", destroy_user_session_path , method: 'delete', class: "nav-link" %>
+                    <%= link_to "Kilépés", "/logout", class: "nav-link" %>
                 </li>          
-              <% end %>
+
             
            
           </ul>

@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  get 'login', to: 'sessions#login'
+  post 'login', to: 'sessions#controll'
   resources :comments
-  resources :images
-  get 'users', to: 'users#index'
-  devise_for :users
-  root "welcome#index"
+  resources :images   
+  root 'users#new'
+  get 'signup', to: 'users#new'
+  get 'logout', to: 'users#destroy'
+  resources :users, except: [:new]
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

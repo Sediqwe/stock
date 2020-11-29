@@ -17,8 +17,7 @@ table.table.table-bordered.table-dark
             td ACTION
     - @images.each do |image|
         tr
-            td = image_tag image.image.variant(resize_to_limit: [200, 200]).processed if image.image.present?
-            td = image_tag image.image, width: 200 if image.image.present?
+            td = image_tag image.image.variant(resize_to_limit: [400, 400]).processed if image.image.present?
             td = image.id
             td = image.title
             td = image.description
