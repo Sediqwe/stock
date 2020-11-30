@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     end
     def controll
         
-        @user = User.find_by_username(params[:user][:username])
+        @user = User.find_by(username: params[:user][:username])
         #render plain: @user.inspect
         if @user && @user.authenticate(params[:user][:password])
             session[:user_id] = @user.id
