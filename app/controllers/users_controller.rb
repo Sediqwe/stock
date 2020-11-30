@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized? only: [:index]
+  before_action :authorized?, only: [:index]
   def index
     @user = User.all
   end
