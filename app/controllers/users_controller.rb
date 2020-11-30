@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authorized? only: [:index]
   def index
     @user = User.all
   end
@@ -8,8 +9,7 @@ class UsersController < ApplicationController
  
 
   def create   
-    @user = User.create(user_params)
-    @user.username =  @user.username.downcase
+    @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id   
       redirect_to '/'

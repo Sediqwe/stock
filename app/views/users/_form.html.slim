@@ -1,9 +1,9 @@
 = simple_form_for @user do |f|
     = f.label :Felhasználó
     = f.text_field :username
-    = f.label "E-mail"
-    = f.text_field :email
     = f.label :Jelszó 
     = f.password_field :password
+    = f.label "E-mail"
+    = f.text_field :email
     hr
     = f.submit "Regisztráció"

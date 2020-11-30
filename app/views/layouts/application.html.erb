@@ -22,7 +22,7 @@
     </div>
     <% end %>
   <% if current_user.present? %>
-    Üdvözöllek: <%= current_user.username %> <br>
+    Üdvözöllek: <%= current_user.username.capitalize() %> <br>
   <% else %>
  
   <% end %>

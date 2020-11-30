@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#controll'
   resources :comments
   resources :images   
-  root 'users#new'
+  root 'welcome#index'
   get 'signup', to: 'users#new'
   get 'logout', to: 'users#destroy'
   resources :users, except: [:new]

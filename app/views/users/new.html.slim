@@ -1,4 +1,14 @@
 h1 Regisztráció
 hr
+-   if @user.errors.any?
+    div
+        h2
+            = pluralize(@user.errors.count, "error")
+                
+ 
+    ul
+       - @user.errors.full_messages.each do |msg|
+            li 
+                = msg
 
 = render 'form'

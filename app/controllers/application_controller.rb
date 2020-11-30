@@ -8,4 +8,12 @@ add_flash_types :info, :error, :warning
             @current_user = nil
     end
   end
+  private
+
+  def authorized?
+    return if current_user.present?
+
+    flash[:error] = 'Na előbb lépjél be légyszi.'
+    redirect_to login_path
+  end
 end
