@@ -10,10 +10,21 @@
   </head>
 
   <body class="pt-4">
+
+    <% flash.each do |type, msg| %>
+    
+    <% if type == "notice"%>
+      <div class="alert alert-info">
+    <% else %>
+      <div class="alert alert-danger">
+    <% end %>
+        <%= msg %>
+    </div>
+    <% end %>
   <% if current_user.present? %>
-  <%= current_user.id %>
+    Üdvözöllek: <%= current_user.username %> <br>
   <% else %>
-  nincs
+ 
   <% end %>
   <%= render 'shared/menu' %>
    <div class="container-fluid">

@@ -8,21 +8,24 @@
             <li class="nav-item active">
               <a class="nav-link" href="/">Főoldal <span class="sr-only">(current)</span></a>
             </li>
-              
+              <% unless current_user.present? %>
                 <li class="nav-item">
                   <%= link_to "Belépés", login_path, class: "nav-link"  %>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="signup">Regisztrálás</a>
                 </li>
-              
+                <% end %>
+                <% if current_user.present? %>
+
                 <li class="nav-item">
                     <%= link_to "Képek", images_path, class: "nav-link" %>
                 </li>
                
                 <li class="nav-item">
                     <%= link_to "Kilépés", "/logout", class: "nav-link" %>
-                </li>          
+                </li>
+                <% end %>
 
             
            

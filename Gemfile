@@ -2,12 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'image_processing'
 gem 'will_paginate', '~> 3.1.0'
-<<<<<<< HEAD
 ruby '2.7.0'
-=======
-ruby '2.7.2'
 gem 'devise'
->>>>>>> 12430b0cac979f04cccd256b00994326970a7c9a
 gem 'slim-rails'
 gem 'simple_form'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -27,7 +23,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-
+gem 'net-scp'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'pg'

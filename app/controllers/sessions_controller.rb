@@ -3,14 +3,13 @@ class SessionsController < ApplicationController
     end
     def controll
         
-        @user = User.where(username: params[:user][:username] )
-        #render plain: user.inspect
-        if @user && @user.authenticate(params[:password])
+        @user = User.find_by_username(params[:user][:username])
+        #render plain: @user.inspect
+        if @user && @user.authenticate(params[:user][:password])
             session[:user_id] = @user.id
-            redirect_to root_url, notice: "Logged in!"
+            redirect_to root_url, notice: "Belépve!"
         else
-            flash.now[:alert] = "Email or password is invalid"
-            render 'login'
+            redirect_to login_url , error: "Helytelen felhasználó / jelszó páros!"
         end
 
         

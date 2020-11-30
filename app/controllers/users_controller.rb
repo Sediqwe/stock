@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  
+  def index
+    @user = User.all
+  end
   def new
     @user = User.new
   end
@@ -12,7 +14,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id   
       redirect_to '/'
     else
-      render @user
+      render 'new'
     end
     
   end
