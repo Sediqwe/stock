@@ -16,3 +16,11 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+$( 'a a' ).remove();
+
+document.documentElement.setAttribute("lang", "en");
+document.documentElement.removeAttribute("class");
+
+axe.run( function(err, results) {
+  console.log( results.violations );
+} );

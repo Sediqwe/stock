@@ -9,18 +9,19 @@ div.digg_pagination
 table.table.table-bordered.table-dark
     tr
         
-            td IMAGE
-            td ID
-            td TITLE
-            td DESCRIPTION
+            td style="width:100px" IMAGE
             td COMMENTS
-            td ACTION
+            td style="width:300px" ACTION
     - @images.each do |image|
         tr
-            td = image_tag image.image.variant(resize_to_limit: [400, 400]).processed if image.image.present?
-            td = image.id
-            td = image.title
-            td = image.description
+            td  
+                a data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#" class="color-gray-darker td-hover-none"
+				    div class="ba-0 tp-s"
+                        = image_tag image.image.variant(resize_to_limit: [400, 400]).processed, class: "" if image.image.present?
+					    div class="card-body"
+						    h4 class="card-title color-gray-darker" = image.title
+						    p class="card-text color-gray-darker" = image.description
+				
             td 
                 - image.comments.each do |com|
                     = com.idea
@@ -28,10 +29,33 @@ table.table.table-bordered.table-dark
                     = com.user.email
                
             td 
-                = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary"
-                = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary"
+                = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary mr-2"
+                = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2"
                 = link_to "Kommentár", image_path(image.id), class: "btn btn-success"
         
   
 div.digg_pagination
     = will_paginate @images, :container => false 
+
+
+
+- @images.each do |image|  		
+    div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG_#{image.id}" role="dialog" tabindex="-1"
+        div class="modal-dialog modal-xl" role="document"
+            div class="modal-content"
+                div class="modal-body mb-0 p-0"
+                    = image_tag image.image, class: "card-img-top" if image.image.present?
+                
+                div class="modal-footer"
+                    div
+                        = link_to 'Letöltés', rails_blob_path(image.image, disposition: 'attachment')
+                        p = image.image.blob.filename                        
+                        p = image.image.blob.content_type
+                        p = image.image.blob.metadata.inspect
+                        p = image.image.blob.byte_size 
+                        p = image.image.blob.created_at
+
+
+                    button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button" Bezárás
+	
+
