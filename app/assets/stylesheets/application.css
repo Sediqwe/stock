@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap/scsss/bootstrap";
+
  .digg_pagination {
     background: black;
     cursor: default;

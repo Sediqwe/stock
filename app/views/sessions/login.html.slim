@@ -1,7 +1,16 @@
-= form_for :user do |f|
-    = f.label :username, 'Felhasználó:'
-    = f.text_field :username 
-    = f.label :password, 'Jelszó:'
-    = f.password_field :password
-    br
-    = f.submit "Belépés"
+br
+br
+br
+br
+ 
+= form_for :user , html: { autocomplete: "off" }  do |f|
+    div class="wrapper fadeInDown"
+        div id="formContent"
+            div class="fadeIn first"
+                span style="font-size: 48px; color: black;"
+                  i class="fas fa-language fa-3x"
+                = f.text_field :username, placeholder: "Felhasználó"
+                = f.password_field :password, placeholder: "Jelszó", class:"fadeIn third"
+                = f.submit "Belépés", class: "fadeIn fourth"
+                div id="formFooter"
+                    h5 Powered by Sediqwe
