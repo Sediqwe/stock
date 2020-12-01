@@ -1,9 +1,12 @@
 = simple_form_for @user do |f|
-    = f.label :Felhasználó
-    = f.text_field :username
-    = f.label :Jelszó 
-    = f.password_field :password
-    = f.label "E-mail"
-    = f.text_field :email
-    hr
-    = f.submit "Regisztráció"
+    div class="wrapper fadeInDown"
+        div id="formContent"
+            div class="fadeIn first"
+                span style="font-size: 48px; color: black;"
+                  i class="fas fa-language fa-3x"
+                = f.text_field :username, placeholder: "Felhasználó", autocomplete: 'off'
+                = f.password_field :password, placeholder: "Jelszó", class:"fadeIn third"
+                = f.text_field :email, placeholder: "E-mail", class:"fadeIn third"
+                = f.submit "Regisztráció", class: "fadeIn fourth"
+                div id="formFooter"
+                    h5 Powered by Sediqwe
