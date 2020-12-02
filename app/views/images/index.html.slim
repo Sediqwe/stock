@@ -24,9 +24,28 @@ table.table.table-bordered.table-dark
 				
             td 
                 - image.comments.each do |com|
-                    = com.idea
+                    div class="comment-box"
+	                    div class="heading"
+                            span style="font-size: 48px; color: gray;"
+                                i class="fas fa-user"
+                        div class="content"
+                            div class="h-in"
+                                div class="cont text-dark"
+                                    strong 
+                                        = com.user.username
+                                    small class="pull-right m-2" = com.created_at
+                                    br
+                                p class="text-dark"  = com.idea
+                            div class="c-f"
+				                = link_to "Kommentár", image_path(image.id), class: "btn btn-success"
+				                
+			        
+                    
+                                
+	
+                   
                     p
-                    = com.user.email
+                    
                
             td 
                 = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary mr-2"
