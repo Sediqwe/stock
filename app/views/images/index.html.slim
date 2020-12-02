@@ -67,14 +67,29 @@ div.digg_pagination
                 
                 div class="modal-footer"
                     div
-                        = link_to 'Letöltés', rails_blob_path(image.image, disposition: 'attachment')
-                        p = image.image.blob.filename                        
-                        p = image.image.blob.content_type
-                        p = image.image.blob.metadata.inspect
-                        p = image.image.blob.byte_size 
-                        p = image.image.blob.created_at
+                        
+                        p 
+                            | Filename:
+                            = image.image.blob.filename                        
+                        p 
+                            | Type:
+                            = image.image.blob.content_type
+                        p 
+                            | Size:
+                            = image.image.blob.metadata[:width] 
+                            | x
+                            = image.image.blob.metadata[:height]              
+                        p 
+                            | Size:
+                            = number_to_human_size(image.image.blob.byte_size)
+                                                    p 
+                            | Created:
+                            = image.image.blob.created_at
+                        
+                        = link_to 'Letöltés', rails_blob_path(image.image, disposition: 'attachment'), class: "bg-dark text-light p-2"
 
 
                     button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button" Bezárás
+                    
 	
 
