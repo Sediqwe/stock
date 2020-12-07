@@ -1,0 +1,42 @@
+h1 Alap állapot
+
+
+table class="table table-dark"
+  thead
+    tr
+      th scope="col" ID
+      th scope="col" User
+      th scope="col" Darab
+  tbody
+    - @apoca.each do |a|
+        tr
+            td =a.id
+            td =a.user
+            td =a.darab
+
+
+table class="table table-dark"
+  thead
+    tr
+      th scope="col" ID
+      th scope="col" User
+      th scope="col" Darab
+  tbody
+    - @apoca_group.each do |a|
+        tr
+            td =a.id
+            td =a.inspect
+            td =a.darab      
+
+table class="table table-dark"
+  thead
+    tr
+      th scope="col" ID
+      th scope="col" User
+      th scope="col" Darab
+  tbody
+    - @apoca_count.each do |a|
+        tr
+            td 
+            td =a.inspect
+            td   

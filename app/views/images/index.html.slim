@@ -1,6 +1,7 @@
-h1 Images#index 
-h3 Új kép feltöltés:
-= link_to "Feltöltés", new_image_path, class: "btn btn-success"
+
+div 
+    h2 class="bg-light text-dark" Új kép feltöltés:
+    = link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
 
 div.digg_pagination
     = will_paginate @images, :container => false
@@ -17,7 +18,7 @@ table.table.table-bordered.table-dark
             td  
                 a data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#" class="color-gray-darker td-hover-none"
 				    div class="ba-0 tp-s"
-                        = image_tag image.image.variant(resize_to_limit: [400, 400]).processed, class: "" if image.image.present?
+                        = image_tag image.image.variant(resize_to_limit: [800, 800]).processed, class: "" if image.image.present?
 					    div class="card-body"
 						    h4 class="card-title color-gray-darker" = image.title
 						    p class="card-text color-gray-darker" = image.description
@@ -32,21 +33,14 @@ table.table.table-bordered.table-dark
                             div class="h-in"
                                 div class="cont text-dark"
                                     strong 
-                                        = com.user.username
+                                        = com.user.username.capitalize()
                                     small class="pull-right m-2" = com.created_at
                                     br
                                 p class="text-dark"  = com.idea
                             div class="c-f"
-				                = link_to "Kommentár", image_path(image.id), class: "btn btn-success"
-				                
-			        
-                    
-                                
-	
-                   
-                    p
-                    
-               
+				                = link_to "Kommentár", image_path(image.id), class: "btn btn-success"  
+                                = link_to "Edit", edit_comment_path(com), class: "btn btn-primary"
+                                = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary"
             td 
                 = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary mr-2"
                 = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2"
@@ -69,23 +63,38 @@ div.digg_pagination
                     div
                         
                         p 
-                            | Filename:
+                            |  Filename:
                             = image.image.blob.filename                        
-                        p 
-                            | Type:
-                            = image.image.blob.content_type
-                        p 
-                            | Size:
-                            = image.image.blob.metadata[:width] 
-                            | x
-                            = image.image.blob.metadata[:height]              
-                        p 
-                            | Size:
-                            = number_to_human_size(image.image.blob.byte_size)
-                                                    p 
-                            | Created:
-                            = image.image.blob.created_at
                         
+                            |  Type:
+                            = image.image.blob.content_type
+                         
+                            |  Size:
+                            = image.image.blob.metadata[:width] 
+                            |  x 
+                            = image.image.blob.metadata[:height]              
+                         
+                            |  Size:
+                            = number_to_human_size(image.image.blob.byte_size)
+                            
+                            |  Created:
+                            = image.image.blob.created_at
+                        p
+                            - image.comments.each do |com|
+                                div class="comment-box"
+                                    div class="heading"
+                                        span style="font-size: 48px; color: gray;"
+                                            i class="fas fa-user"
+                                    div class="content"
+                                        div class="h-in"
+                                            div class="cont text-dark"
+                                                strong 
+                                                    = com.user.username.capitalize()
+                                                small class="pull-right m-2" = com.created_at
+                                                br
+                                            p class="text-dark"  = com.idea
+                                        div class="c-f"
+                                            = link_to "Edit", edit_comment_path(com), class: "btn btn-primary"
                         = link_to 'Letöltés', rails_blob_path(image.image, disposition: 'attachment'), class: "bg-dark text-light p-2"
 
 

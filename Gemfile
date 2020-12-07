@@ -10,6 +10,7 @@ gem 'simple_form'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
+gem 'binding_of_caller'
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
@@ -42,7 +43,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'better_errors'
+  #gem 'better_errors'
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-passenger'

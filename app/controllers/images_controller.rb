@@ -30,7 +30,8 @@ class ImagesController < ApplicationController
 
   def show
     @image = Image.find(params[:id])
-    @comment = Comment.new
+    @comment = Comment.new()
+  
   end
 
   def destroy
@@ -48,5 +49,9 @@ class ImagesController < ApplicationController
   private
     def image_params
       params.require(:image).permit(:title, :description, :image)
+    end
+
+    def comment_params
+      
     end
 end

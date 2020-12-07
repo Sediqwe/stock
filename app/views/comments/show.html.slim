@@ -1,2 +1,8 @@
 h1 Comments#show
 p Find me in app/views/comments/show.html.slim
+
+= @comment.id
+= @user.username
+= @comment.idea
+= link_to "Edit", edit_comment_path(@comment), class: "btn btn-success"
+

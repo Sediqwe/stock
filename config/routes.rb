@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#login'
   post 'login', to: 'sessions#controll'
   resources :comments
+  resources :apocas, only: [:index, :show]
   resources :images   
   root 'welcome#index'
   get 'signup', to: 'users#new'

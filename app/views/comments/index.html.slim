@@ -1,2 +1,24 @@
-h1 Comments#index
-p Find me in app/views/comments/index.html.slim
+| Az összes hozzászólás:
+table class="bg-secondary"
+    
+    - @comment.each do |c|
+        tr
+            td
+                div class="comment-box"
+                    div class="heading"
+                        span style="font-size: 48px; color: gray;"
+                            i class="fas fa-user"
+                    div class="content"
+                        div class="h-in"
+                            div class="cont text-dark"
+                                strong 
+                                    = c.user.username.capitalize()
+                                small class="pull-right m-2" = c.created_at
+                                br
+                            p class="text-dark"  = c.idea
+                        div class="c-f"
+                            = link_to "Edit", edit_comment_path(c), class: "btn btn-primary"
+
+
+            
+    

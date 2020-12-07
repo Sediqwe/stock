@@ -1,0 +1,2 @@
+class Apoca < ApplicationRecord
+end

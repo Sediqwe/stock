@@ -1,12 +1,9 @@
-h1 Images#show
-p Find me in app/views/images/show.html.erb
-
-= image_tag @image.image, width: 200 if @image.image.present?
+= image_tag @image.image, width: '50%', height: '80%' if @image.image.present?
 
 
 = simple_form_for @comment do |f|
-    = f.input :idea
-    =f.hidden_field :image_id, :value => @image.id
-    =f.hidden_field :user_id, :value => current_user.id
+    = f.input :idea, :input_html => {resize: 'none', :rows => 7 , :style => 'width: 500px;'}
+    = f.hidden_field :image_id, :value => @image.id
+    = f.hidden_field :user_id, :value => current_user.id
     = f.submit
 
