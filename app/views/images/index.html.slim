@@ -42,9 +42,10 @@ table.table.table-bordered.table-dark
                                 = link_to "Edit", edit_comment_path(com), class: "btn btn-primary"
                                 = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary"
             td 
-                = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary mr-2"
-                = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2"
-                = link_to "Kommentár", image_path(image.id), class: "btn btn-success"
+                - if current_user.present? 
+                    = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary mr-2"
+                    = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2"
+                    = link_to "Kommentár", image_path(image.id), class: "btn btn-success"
         
   
 div.digg_pagination
