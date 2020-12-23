@@ -2,7 +2,9 @@ class ApocasController < ApplicationController
   def index
     @apoca = Apoca.all
     @apoca_group = Apoca.select(:darab).group(:darab)
-    @apoca_count = Apoca.select(:darab).group(:darab).count
+    @apoca_count = Apoca.select(:darab).group(:darab).size
+    @apoca_count_tovabb = Apoca.group(:user).size.sort_by(&:first)
+    
   end
 
   def show
@@ -26,3 +28,4 @@ class ApocasController < ApplicationController
     params.require(:apoca).permit(:user, :darab)
   end
 end
+
