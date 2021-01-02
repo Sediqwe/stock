@@ -11,7 +11,17 @@ class CommentsController < ApplicationController
     def edit
         @comment = Comment.find(params[:id])
     end
-
+    def create
+      @user = User.first
+      @user_id = @user.id
+      @comment = Comment.new(comment_params)
+  
+      if @comment.save
+        redirect_to images_path
+      else
+        render :new
+      end
+    end
     def update
         @comment = Comment.find(params[:id])
     
@@ -29,7 +39,7 @@ class CommentsController < ApplicationController
 
     private
     def comment_params
-      params.require(:comment).permit(:idea)
+      params.require(:comment).permit(:idea, :image_id, :user_id)
     end
 
 end
