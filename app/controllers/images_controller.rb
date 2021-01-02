@@ -1,7 +1,7 @@
 class ImagesController < ApplicationController
 #before_action :authorized?
   def index
-    @images = Image.paginate(page: params[:page], per_page: 2)
+    @images = Image.paginate(page: params[:page], per_page: 10).order(id: :desc)
    end
 
   def new
