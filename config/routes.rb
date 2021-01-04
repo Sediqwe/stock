@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'login', to: 'sessions#login'
   post 'login', to: 'sessions#controll'
+  post 'done', to: 'images#done'
   resources :comments
   resources :apocas
   resources :images   

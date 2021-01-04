@@ -7,6 +7,15 @@ class ImagesController < ApplicationController
   def new
     @image = Image.new
   end
+  
+  def done
+    image = Image.find(params[:id])
+    image.done = params[:done]
+    image.save
+    redirect_to images_path
+    
+  end
+
 
   def create
     @image = Image.new(image_params)
@@ -19,6 +28,7 @@ class ImagesController < ApplicationController
   end
 
   def update
+    
     @image = Image.find(params[:id])
 
     if @image.update(image_params)
@@ -48,7 +58,7 @@ class ImagesController < ApplicationController
 
   private
     def image_params
-      params.require(:image).permit(:title, :description, :image)
+      params.require(:image).permit(:title, :description, :image, :done)
     end
 
     def comment_params

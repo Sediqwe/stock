@@ -25,12 +25,3 @@ axe.run( function(err, results) {
   console.log( results.violations );
 } );
 
-//= require gallery/responsive
-//= require gallery/slideshow
-//= require gallery/galleria
-//= require gallery/galleria/classic
-//= require gallery/touch_touch
-
-//= require jquery/jquery.easing-1.3
-//= require jquery/jquery.elastislide
-//= require jquery/jquery.tmpl.min

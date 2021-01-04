@@ -7,7 +7,6 @@ gem 'devise'
 gem 'slim-rails'
 gem 'simple_form'
 gem 'iex-ruby-client'
-gem 'rails-gallery'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 # Use sqlite3 as the database for Active Record
