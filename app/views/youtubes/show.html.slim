@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Link:
+  = @youtube.link
+p
+  strong Title:
+  = @youtube.title
+p
+  strong Desc:
+  = @youtube.desc
+p
+  strong Done:
+  = @youtube.done
+
+=> link_to 'Edit', edit_youtube_path(@youtube)
+'|
+=< link_to 'Back', youtubes_path

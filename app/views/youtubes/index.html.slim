@@ -1,0 +1,32 @@
+
+
+h1 Listing youtubes
+
+
+table
+  thead
+    tr
+      th Link
+      th Title
+      th Desc
+      th Done
+      th
+      th
+      th
+
+  tbody
+    - @youtubes.each do |youtube|
+      tr
+        td 
+          iframe src='https://www.youtube.com/embed/#{youtube.link.gsub('https://youtu.be', '')}?rel=0&autoplay=#{youtube.link.gsub('https://youtu.be', '')}' frameborder='0' allowfullscreen
+        td
+          h1 = youtube.title
+        td = youtube.desc
+        td = youtube.done
+        td = link_to 'Show', youtube
+        td = link_to 'Edit', edit_youtube_path(youtube)
+        td = link_to 'Destroy', youtube, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Youtube', new_youtube_path

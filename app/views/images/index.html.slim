@@ -1,7 +1,9 @@
 
 div 
-    h2 class="bg-light text-dark" Új kép feltöltés:
-    = link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
+    
+    - if current_user.present? 
+        h2 class="bg-light text-dark" Új kép feltöltés:
+        = link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
 
 div.digg_pagination
     = will_paginate @images, :container => false
@@ -17,7 +19,7 @@ table.table.table-bordered.table-dark
         tr  
             td
                 = image.id
-            td  
+            td  class="#{ image.done ? 'bg-success' : 'bg-dark' }"  
                 a data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#" class="color-gray-darker td-hover-none"
 				    div class="ba-0 tp-s"
                         = image_tag image.image.variant(resize_to_limit: [300, 300]).processed, class: "" if image.image.present?
@@ -25,7 +27,7 @@ table.table.table-bordered.table-dark
 						    h4 class="card-title color-gray-darker" = image.title
 						    p class="card-text color-gray-darker" = image.description
 				
-            td class="#{ image.done ? 'bg-success' : 'bg-dark' }"
+            td
                 - image.comments.each do |com|
                     div class="comment-box"
 	                    div class="heading"
@@ -40,18 +42,18 @@ table.table.table-bordered.table-dark
                                     br
                                 p class="text-dark"  = com.idea
                             div class="c-f"
-				                = link_to "Kommentár", image_path(image.id), class: "btn btn-success"  
-                                = link_to "Edit", edit_comment_path(com), class: "btn btn-primary"
-                                = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary"
+				                = link_to "Kommentár", image_path(image.id), class: "btn btn-success "  
+                                = link_to "Edit", edit_comment_path(com), class: "btn btn-primary "
+                                = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary "
             td 
-                - if current_user.present? 
+                - if current_user.present?
                     - if image.done?
-                        = link_to 'Nincs kész', done_path(image.id, id: image.id, done:false), class: 'btn btn-warning mr-2', method: :post  
+                        = link_to 'Nincs kész', done_path(image.id, id: image.id, done:false), class: 'btn btn-warning mr-2 btn-block', method: :post  
                     -else
-                        = link_to 'Kész', done_path(image.id, id: image.id, done:true), class: 'btn btn-success mr-2', method: :post
-                    = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary mr-2"
-                    = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2"
-                    = link_to "Kommentár", image_path(image.id), class: "btn btn-success"
+                        = link_to 'Kész', done_path(image.id, id: image.id, done:true), class: 'btn btn-success mr-2 btn-block', method: :post
+                    = link_to "Módosít", edit_image_path(image.id), class: "btn btn-primary mr-2 btn-block"
+                    = link_to "Töröl", image_path(image.id), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2 btn-block"
+                    = link_to "Kommentár", image_path(image.id), class: "btn btn-success btn-block"
         
   
 div.digg_pagination
@@ -102,9 +104,8 @@ div.digg_pagination
                                         div class="c-f"
                                             = link_to "Edit", edit_comment_path(com), class: "btn btn-primary"
                         = link_to 'Letöltés', rails_blob_path(image.image, disposition: 'attachment'), class: "bg-dark text-light p-2"
-
-
                     button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button" Bezárás
+                    
                     
 	
 

@@ -1,0 +1,21 @@
+= form_for @youtube do |f|
+  - if @youtube.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@youtube.errors.count, "error")} prohibited this youtube from being saved:"
+      ul
+        - @youtube.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :link
+    = f.text_field :link
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :desc
+    = f.text_area :desc
+  .field
+    = f.label :done
+    = f.check_box :done
+  .actions = f.submit

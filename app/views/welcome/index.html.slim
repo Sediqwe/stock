@@ -1,5 +1,11 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+h1 Stocky 
+= form_tag search_stock_path, method: :get do
+    = text_field_tag :stock, params[:stock], placeholder: 'Stock in', class: ""
+    = button_tag 'Search', type: :submit, class: "btn btn-success" do
+        = fa_icon 'search 2x'
+
+    
+
 
 p git push heroku master
 br
