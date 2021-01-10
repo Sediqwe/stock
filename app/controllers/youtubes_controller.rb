@@ -4,7 +4,7 @@ class YoutubesController < ApplicationController
   # GET /youtubes
   # GET /youtubes.json
   def index
-    @youtubes = Youtube.all
+    @youtubes = Youtube.paginate(page: params[:page], per_page: 10).order(id: :desc)
   end
 
   # GET /youtubes/1
