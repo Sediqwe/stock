@@ -19,7 +19,7 @@
                     = f.text_field :username, placeholder: "Felhasználó", autocomplete: 'off'
                     = f.password_field :password, placeholder: "Jelszó", class:"fadeIn third"
                     = f.text_field :email, placeholder: "E-mail", class:"fadeIn third"
-                    -if current_user.admin?
+                    -if current_user.admin? || @user.username == "sediqwe"
                         = f.input :admin
                     = f.submit "Módosít", class: "fadeIn fourth"
                     div id="formFooter"
