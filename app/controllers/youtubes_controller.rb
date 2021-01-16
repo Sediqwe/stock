@@ -11,7 +11,13 @@ class YoutubesController < ApplicationController
   # GET /youtubes/1.json
   def show
   end
-
+  def done
+    youtube = Youtube.find(params[:id])
+    youtube.done = params[:done]
+    youtube.save
+    #redirect_to youtube_path
+    
+  end
   # GET /youtubes/new
   def new
     @youtube = Youtube.new

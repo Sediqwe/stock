@@ -1,8 +1,15 @@
 h1 Editing youtube
+- if current_user.admin?
+    = render 'form'
+- else
+    |Erre nincs jogod
 
-== render 'form'
 
-=> link_to 'Show', @youtube
+br
+br
+br
+
+=> link_to 'Show', @youtube, class: "btn btn-success text-light"
 '|
-=< link_to 'Back', youtubes_path
+=< link_to 'Back', youtubes_path,  class: "btn btn-primary text-light"
 

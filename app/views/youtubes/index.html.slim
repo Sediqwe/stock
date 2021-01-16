@@ -2,7 +2,7 @@ h1 Listing youtubes
 
 div.digg_pagination
     = will_paginate @images, :container => false
-div = link_to 'Új https://youtu.be link  feltöltés', new_youtube_path, class: "btn btn-success"
+div = link_to 'Új https://youtu.be link  feltöltés', new_youtube_path, class: "btn btn-success text-light"
 
 table
   thead
@@ -10,7 +10,7 @@ table
       th Link
       th Title
       th Desc
-      th Done
+      th
       th
       th
       th
@@ -18,17 +18,23 @@ table
   tbody
     - @youtubes.each do |youtube|
       tr
-        td 
+        td class="#{ youtube.done ? 'bg-success' : '' }" 
+
           iframe src='https://www.youtube.com/embed/#{youtube.link.gsub('https://youtu.be', '')}?rel=0&autoplay=#{youtube.link.gsub('https://youtu.be', '')}' frameborder='0' allowfullscreen
         td
           h1 = youtube.title
         td = youtube.desc
-        td = youtube.done
-        td = link_to 'Show', youtube
-        td = link_to 'Edit', edit_youtube_path(youtube)
         td 
           - if current_user.admin?
-            = link_to 'Destroy', youtube, data: { confirm: 'Are you sure?' }, method: :delete
+            - if youtube.done?
+              = link_to 'Nincs kész', done_youtube_path(youtube.id, id: youtube.id, done:false), class: 'btn btn-warning mr-2 btn-block', method: :post  
+            -else
+              = link_to 'Kész', done_youtube_path(youtube.id, id: youtube.id, done:true), class: 'btn btn-success mr-2 btn-block', method: :post
+        td = link_to 'Show', youtube,  class: "btn btn-primary text-light"
+        td = link_to 'Edit', edit_youtube_path(youtube),  class: "btn btn-primary text-light"
+        td 
+          - if current_user.admin?
+            = link_to 'Destroy', youtube, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger text-light"
 
 br
 

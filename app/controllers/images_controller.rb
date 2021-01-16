@@ -12,7 +12,6 @@ class ImagesController < ApplicationController
     image = Image.find(params[:id])
     image.done = params[:done]
     image.save
-    redirect_to images_path
     
   end
 

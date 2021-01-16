@@ -2,4 +2,5 @@
   = f.file_field :image
   = f.input :title
   = f.input :description
-  = f.submit
+  - if current_user.admin?
+    = f.submit
