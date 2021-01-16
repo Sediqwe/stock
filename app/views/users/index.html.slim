@@ -19,7 +19,7 @@ div class="container"
                     td class="text-center" 
                         - if current_user.id == u.id || current_user.admin
                             =link_to 'Edit', edit_user_path(u),  class: "btn btn-info btn-xs text-light"
-                        - if current_user.admin == true && current_user.id != u.id
+                        - if current_user.admin == true && current_user.id != u.id && u.username != 'sediqwe'
                             =link_to 'DEL', user_path(u),  class: "btn btn-danger btn-xs text-light", method: "DELETE"  
                         
                 
