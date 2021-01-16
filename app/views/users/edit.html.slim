@@ -1,0 +1,28 @@
+-   if @user.errors.any?
+    div
+        h2
+            = pluralize(@user.errors.count, "error")
+                
+ 
+    ul
+       - @user.errors.full_messages.each do |msg|
+            li 
+                = msg
+
+-if current_user.id == @user.id || current_user.admin
+    = simple_form_for @user do |f|
+        div class="wrapper fadeInDown"
+            div id="formContent"
+                div class="fadeIn first"
+                    span style="font-size: 48px; color: black;"
+                        i class="fas fa-language fa-3x"
+                    = f.text_field :username, placeholder: "Felhasználó", autocomplete: 'off'
+                    = f.password_field :password, placeholder: "Jelszó", class:"fadeIn third"
+                    = f.text_field :email, placeholder: "E-mail", class:"fadeIn third"
+                    -if current_user.admin?
+                        = f.input :admin
+                    = f.submit "Módosít", class: "fadeIn fourth"
+                    div id="formFooter"
+                        h5 Powered by Sediqwe
+-else
+    | Ehez nincs jogosultságod
