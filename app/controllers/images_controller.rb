@@ -2,6 +2,7 @@ class ImagesController < ApplicationController
 #before_action :authorized?
   def index
     @images = Image.paginate(page: params[:page], per_page: 10).order(id: :desc)
+    
    end
 
   def new
@@ -12,6 +13,10 @@ class ImagesController < ApplicationController
     image = Image.find(params[:id])
     image.done = params[:done]
     image.save
+    respond_to do |format|
+      format.js { flash.now[:notice] = "Here is my flash notice" }
+    end
+   
     
   end
 
@@ -20,7 +25,7 @@ class ImagesController < ApplicationController
     @image = Image.new(image_params)
 
     if @image.save
-      redirect_to @image
+      redirect_to imagesnew_path, notice: "Felvétel sikeres"
     else
       render :new
     end

@@ -4,7 +4,11 @@ h1 Stocky
     = button_tag 'Search', type: :submit, class: "btn btn-success" do
         = fa_icon 'search 2x'
 
-    
+- if @stock
+    div class="card card-header"
+        strong Symbol: =@stock.ticker
+        strong Name: =@stock.name
+        strong Price =@stock.last_price
 
 
 p git push heroku master

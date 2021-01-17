@@ -11,18 +11,13 @@
   </head>
 
   <body class="pt-4">
+<div id="flash">
+  <% if notice.present? %>
+    <%= render partial: "shared/notice" %>
+  <% end %>
+</div>
 
 
-    <% flash.each do |type, msg| %>
-    
-    <% if type == "notice"%>
-      <div class="alert alert-info">
-    <% else %>
-      <div class="alert alert-danger">
-    <% end %>
-        <%= msg %>
-    </div>
-    <% end %>
   <% if current_user.present? %>
     Üdvözöllek: <%= current_user.username.capitalize() %> <br>
   <% else %>
