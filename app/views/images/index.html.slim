@@ -39,9 +39,8 @@ table.table.table-bordered.table-dark
                                         = com.user.username.capitalize()
                                     small class="pull-right m-2" = com.created_at
                                     br
-                                p class="text-dark"
-                                    - string = com.idea.scan(/(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/){|x| print x }
-                                    = link_to "LINK", string, target: "_blank", class: "btn btn-success"
+                                p class="text-dark" = com.idea.gsub(URI.regexp, '<a href="\0" target="_BLANK" class="btn btn-success">Link</a>').html_safe
+                                    
                             div class="c-f"
 				                = link_to "Kommentár", image_path(image.id), class: "btn btn-success "  
                                 = link_to "Edit", edit_comment_path(com), class: "btn btn-primary "
