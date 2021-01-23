@@ -1,4 +1,3 @@
-= link_to "Email report", users_path, remote: true
 div 
     
     - if current_user.present? 
@@ -40,13 +39,15 @@ table.table.table-bordered.table-dark
                                         = com.user.username.capitalize()
                                     small class="pull-right m-2" = com.created_at
                                     br
-                                p class="text-dark"  = com.idea
+                                p class="text-dark"
+                                    - string = com.idea.scan(/(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/){|x| print x }
+                                    = link_to "LINK", string, target: "_blank", class: "btn btn-success"
                             div class="c-f"
 				                = link_to "Kommentár", image_path(image.id), class: "btn btn-success "  
                                 = link_to "Edit", edit_comment_path(com), class: "btn btn-primary "
                                 = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary "
             td 
-                = link_to "Email report", images_path, remote: true, class: "btn btn-success"
+                = link_to "Category", done_path(image.id, id: image.id, done:false), method: :post, remote: true
                 - if current_user.present?
                     - if image.done?
                         = link_to 'Nincs kész', done_path(image.id, id: image.id, done:false), class: 'btn btn-warning mr-2 btn-block', method: :post, remote: true   
@@ -102,12 +103,18 @@ div.digg_pagination
                                                     = com.user.username.capitalize()
                                                 small class="pull-right m-2" = com.created_at
                                                 br
-                                            p class="text-dark"  = com.idea
+                                            p class="text-dark" = com.idea
+                                            
+
+
                                         div class="c-f"
                                             = link_to "Edit", edit_comment_path(com), class: "btn btn-primary"
                         = link_to 'Letöltés', rails_blob_path(image.image, disposition: 'attachment'), class: "bg-dark text-light p-2"
                     button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button" Bezárás
                     
                     
-	
+
+
+
+
 

@@ -10,14 +10,12 @@ class ImagesController < ApplicationController
   end
   
   def done
-    image = Image.find(params[:id])
-    image.done = params[:done]
-    image.save
+    @image = Image.find(params[:id])
+    @image.done = params[:done]
+    @image.save
     respond_to do |format|
-      format.js { flash.now[:notice] = "Here is my flash notice" }
+      format.js
     end
-   
-    
   end
 
 
