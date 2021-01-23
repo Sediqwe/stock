@@ -1,3 +1,5 @@
-= simple_form_for @comment do |f|
-  = f.input :idea
-  = f.submit
+- if current_user.present?
+  - if current_user.admin?
+    = simple_form_for @comment do |f|
+      = f.input :idea
+      = f.submit

@@ -15,9 +15,10 @@ table class="bg-secondary"
                                     = c.user.username.capitalize()
                                 small class="pull-right m-2" = c.created_at
                                 br
-                            p class="text-dark"  = c.idea
+                            p class="text-dark" = simple_format(c.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-success text-light">Link</a>').html_safe
                         div class="c-f"
-                            = link_to "Edit", edit_comment_path(c), class: "btn btn-primary"
+                            - if current_user.admin?
+                                = link_to "Edit", edit_comment_path(c), class: "btn btn-primary"
 
 
             

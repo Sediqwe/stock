@@ -23,6 +23,8 @@ class CommentsController < ApplicationController
       end
     end
     def update
+      if current_user.admin?
+        
         @comment = Comment.find(params[:id])
     
         if @comment.update(comment_params)
@@ -30,11 +32,17 @@ class CommentsController < ApplicationController
         else
           render :edit
         end
+      end
+
+      
     end
     def destroy
-      @comment = Comment.find(params[:id])
-      @comment.destroy
-      redirect_to images_path
+      if current_user.admin?
+
+        @comment = Comment.find(params[:id])
+        @comment.destroy
+        redirect_to images_path
+      end
     end
 
     private
