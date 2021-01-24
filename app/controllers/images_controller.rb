@@ -12,6 +12,7 @@ class ImagesController < ApplicationController
     end
     @images_info_true = Image.where(done: true).size
     @images_info_false = Image.where(done: false).size
+    @images_info_all = Image.all.size
    end
 
   def new
