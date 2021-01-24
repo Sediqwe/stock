@@ -3,8 +3,8 @@ div
     - if current_user.present? 
         h2 class="bg-light text-dark" Új kép feltöltés:
         br = link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
-        = link_to "NINCS KÉSZ", images_path(:done => "1"), class: "btn btn-success text-light m-2"
-        = link_to "CSAK KÉSZ", images_path(:done => "0"), class: "btn btn-success text-light m-2"
+        = link_to "NINCS KÉSZ", images_path(:done => "0"), class: "btn btn-success text-light m-2"
+        = link_to "CSAK KÉSZ", images_path(:done => "1"), class: "btn btn-success text-light m-2"
         = link_to "MIND", images_path(:done => "2"), class: "btn btn-success text-light m-2"
 
 div class="row"
