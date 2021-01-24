@@ -1,8 +1,17 @@
 class ImagesController < ApplicationController
 #before_action :authorized?
   def index
-    @images = Image.paginate(page: params[:page], per_page: 10).order(done: :desc, id: :desc)
-    
+
+    case params[:done]
+      when "0"
+        @images = Image.paginate(page: params[:page], per_page: 10).where('done = ?', false).order(done: :desc, id: :desc)
+      when "1"
+        @images = Image.paginate(page: params[:page], per_page: 10).where('done = ?', true).order(id: :desc)
+      else
+        @images = Image.paginate(page: params[:page], per_page: 10).order(id: :desc)
+    end
+    @images_info_true = Image.where('done = ?', true).size
+    @images_info_false = Image.where('done = ?', false).size
    end
 
   def new
