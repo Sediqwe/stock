@@ -103,8 +103,10 @@ div.digg_pagination
                                                 strong 
                                                     = com.user.username.capitalize()
                                                 small class="pull-right m-2" = com.created_at
+                                                small class="pull-right m-2" = com.updated_at
                                                 br
-                                            p class="text-dark" = com.idea
+                                            
+                                            p class="text-dark" = simple_format(com.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-success text-light">Link</a>').html_safe
                                             
 
 

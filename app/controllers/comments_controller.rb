@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
     def index
-        @comment = Comment.all
+        @comment = Comment.all.order(id: :desc)
     end
     def show
         @comment = Comment.find(params[:id])

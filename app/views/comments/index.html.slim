@@ -1,24 +1,25 @@
-| Az összes hozzászólás:
-table class="bg-secondary"
-    
-    - @comment.each do |c|
-        tr
-            td
-                div class="comment-box"
-                    div class="heading"
-                        span style="font-size: 48px; color: gray;"
-                            i class="fas fa-user"
-                    div class="content"
-                        div class="h-in"
-                            div class="cont text-dark"
-                                strong 
-                                    = c.user.username.capitalize()
-                                small class="pull-right m-2" = c.created_at
-                                br
-                            p class="text-dark" = simple_format(c.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-success text-light">Link</a>').html_safe
-                        div class="c-f"
-                            - if current_user.admin?
-                                = link_to "Edit", edit_comment_path(c), class: "btn btn-primary"
+div class="bg-dark"
+
+    table class=""
+        
+        - @comment.each do |c|
+            tr class=""
+                td
+                    div class="comment-box bg-dark text-light"
+                        div class="heading"
+                            span style="font-size: 48px; color: gray;"
+                                i class="fas fa-user"
+                        div class="content"
+                            div class="h-in"
+                                div class="cont text-light"
+                                    strong 
+                                        = c.user.username.capitalize()
+                                    small class="pull-right m-2" = c.created_at
+                                    br
+                                p class="text-dark" = simple_format(c.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-link text-light">Link</a>').html_safe
+                            div class="c-f"
+                                - if current_user.admin?
+                                    = link_to "Edit", edit_comment_path(c), class: "btn btn-primary"
 
 
             
