@@ -60,7 +60,7 @@
 #     # password: "please use keys"
 #   }
 set :rails_env, :production
-
+append :linked_files,  "config/master.key"
 server "pittyu.sediqwe.eu",
        user: "deploy",
        roles: %w{web app db},
@@ -69,4 +69,5 @@ server "pittyu.sediqwe.eu",
            keys: %w(~/.ssh/pittyuka.pub),
            forward_agent: false,
            auth_methods: %w(publickey)
+
        }
