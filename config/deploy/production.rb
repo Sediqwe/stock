@@ -60,7 +60,8 @@
 #     # password: "please use keys"
 #   }
 set :rails_env, :production
-append :linked_files,  "config/master.key"
+append :linked_files,  "config/master.key", "config/credentials/production.key"
+
 server "pittyu.sediqwe.eu",
        user: "deploy",
        roles: %w{web app db},
