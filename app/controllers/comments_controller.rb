@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
       @comment = Comment.new(comment_params)
   
       if @comment.save
-        redirect_to images_path
+        redirect_to images_path(done: "0")
       else
         render :new
       end
