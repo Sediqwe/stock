@@ -36,7 +36,7 @@ class ImagesController < ApplicationController
     @image = Image.new(image_params)
 
     if @image.save
-      redirect_to imagesnew_path, notice: "Felvétel sikeres"
+      redirect_to image_path(@image), notice: "Felvétel sikeres"
     else
       render :new
     end
