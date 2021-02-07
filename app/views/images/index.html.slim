@@ -44,6 +44,7 @@ table.table.table-bordered.table-dark
     - @images.each do |image|
         tr  
             td
+                |#
                 = image.id
             td  class="#{ image.done ? 'bg-success' : 'bg-dark' }"  
                 a data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#" class="color-gray-darker td-hover-none"
