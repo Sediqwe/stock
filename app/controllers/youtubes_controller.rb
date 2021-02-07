@@ -15,7 +15,7 @@ class YoutubesController < ApplicationController
   @youtubes_info_true = Youtube.where(done: true).size
   @youtubes_info_false = Youtube.where(done: false).size
   @youtubes_info_all = Youtube.all.size
-  end
+    end
 
   # GET /youtubes/1
   # GET /youtubes/1.json

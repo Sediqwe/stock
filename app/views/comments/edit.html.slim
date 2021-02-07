@@ -1,5 +1,5 @@
 - if current_user.present?
   - if current_user.admin?
     = simple_form_for @comment do |f|
-      = f.input :idea
+      = f.input :idea, :input_html => { :rows => 25 , :style => 'width: 50%'}
       = f.submit
