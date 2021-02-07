@@ -5,6 +5,21 @@ class YoutubesController < ApplicationController
   # GET /youtubes.json
   def index
     @youtubes = Youtube.paginate(page: params[:page], per_page: 10).order(id: :desc)
+
+    case params[:done]
+    when "0"
+      @youtubes = Youtube.paginate(page: params[:page], per_page: 10).where(done: false).order(done: :desc, id: :desc)
+    when "1"
+      @youtubes = Youtube.paginate(page: params[:page], per_page: 10).where(done: true).order( id: :desc)
+    else
+      @youtubes = Youtube.paginate(page: params[:page], per_page: 10).order(done: :desc, id: :desc)
+      
+  end
+  @youtube_info_true = Youtube.where(done: true).size
+  @youtube_info_false = Youtube.where(done: false).size
+  @youtube_info_all = Youtube.all.size
+
+
   end
 
   # GET /youtubes/1
@@ -18,6 +33,7 @@ class YoutubesController < ApplicationController
     #redirect_to youtube_path
     
   end
+  
   # GET /youtubes/new
   def new
     @youtube = Youtube.new

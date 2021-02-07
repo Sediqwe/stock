@@ -1,7 +1,18 @@
-h1 Listing youtubes
-
+-case params[:done]
+            -when "0"
+                = link_to "NINCS KÉSZ", youtubes_path(:done => "0"), class: "btn btn-primary text-light m-2"            
+                = link_to "CSAK KÉSZ", youtubes_path(:done => "1"), class: "btn btn-success text-light m-2"
+                = link_to "MIND", youtubes_path(:done => "2"), class: "btn btn-success text-light m-2"
+            -when "1"
+                = link_to "NINCS KÉSZ", youtubes_path(:done => "0"), class: "btn btn-success text-light m-2"            
+                = link_to "CSAK KÉSZ", youtubes_path(:done => "1"), class: "btn btn-primary text-light m-2"
+                = link_to "MIND", youtubes_path(:done => "2"), class: "btn btn-success text-light m-2"
+            -else
+                = link_to "NINCS KÉSZ", youtubes_path(:done => "0"), class: "btn btn-success text-light m-2"            
+                = link_to "CSAK KÉSZ", youtubes_path(:done => "1"), class: "btn btn-success text-light m-2"
+                = link_to "MIND", youtubes_path(:done => "2"), class: "btn btn-primary text-light m-2"
 div.digg_pagination
-    = will_paginate @images, :container => false
+    = will_paginate @youtubes, :container => false
 div = link_to 'Új https://youtu.be link  feltöltés', new_youtube_path, class: "btn btn-success text-light"
 
 table

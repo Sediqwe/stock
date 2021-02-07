@@ -1,5 +1,8 @@
 class ImagesController < ApplicationController
 #before_action :authorized?
+  def proba
+  end  
+
   def index
 
     case params[:done]
