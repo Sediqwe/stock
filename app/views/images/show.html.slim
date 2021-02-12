@@ -1,4 +1,4 @@
-= image_tag @image.image, width: '50%', height: '80%' if @image.image.present?
+
 
 
 = simple_form_for @comment do |f|
@@ -10,5 +10,5 @@
             
 
                                             
-    = f.submit
-
+    = f.submit "Komment beküldés", class: "bg-success"
+= image_tag @image.image if @image.image.present?
