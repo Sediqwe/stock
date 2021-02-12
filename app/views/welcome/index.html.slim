@@ -23,4 +23,7 @@ p sudo kill
 br
 p EDITOR="code --wait" bin/rails credentials:edit
     | Rails.application.credentials.aws[:access_key_id]
-
+div 
+    |Szabad hely: 
+    =FreeDiskSpace.megabytes('/')
+    |MB

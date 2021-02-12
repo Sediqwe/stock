@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'image_processing'
 gem 'will_paginate', '~> 3.1.0'
 ruby '2.7.2'
+gem 'free_disk_space'
 gem 'devise'
 gem 'slim-rails'
 gem 'simple_form'
