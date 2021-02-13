@@ -5,10 +5,5 @@
     = f.input :idea, :input_html => {resize: 'none', :rows => 20 , :style => 'width: 50%;'}
     = f.hidden_field :image_id, :value => @image.id
     = f.hidden_field :user_id, :value => current_user.id
-        
-                                            
-            
-
-                                            
     = f.submit "Komment beküldés", class: "bg-success"
 = image_tag @image.image if @image.image.present?

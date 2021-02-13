@@ -34,13 +34,13 @@ div class="row"
 div.digg_pagination
   = will_paginate @youtubes, :container => false
 
-table.table.table-bordered.table-dark
+table.table.table-dark
   thead
     tr
-      th style="width:100px" ID
-      th style="width:300px" LINK
-      th Desc
-      th style="width:300px" ACTION
+      th style="width: 100px;" ID
+      th style="width: 100px;" LINK
+      th style="width: 100px;" Desc
+      th style="width: 300px;" ACTION
     
 
   tbody
@@ -49,7 +49,7 @@ table.table.table-bordered.table-dark
         td 
           |#
           = youtube.id
-        td class="col-md-1 #{ youtube.done ? 'bg-success' : '' }" 
+        td class="#{ youtube.done ? 'bg-success' : '' }" 
 
           iframe src='https://www.youtube.com/embed/#{youtube.link.gsub('https://youtu.be', '')}?rel=0&autoplay=#{youtube.link.gsub('https://youtu.be', '')}' frameborder='0' allowfullscreen
           br 
