@@ -2,22 +2,27 @@ import {  Controller } from "stimulus"
 
 export default class extends Controller {
   static targets = ["heading"]
-  connect() {
-    console.log("hello from StimulusJS")
+
+  done(event) {
+    event.preventDefault();
+    let id = this.element.getAttribute("data-done-id")
+
+    console.log(id)
+
+    this.headingTarget.innerHTML = "Nincs kész" + id
+    this.headingTarget.classList.remove('btn-success', 'text-light')
+    this.headingTarget.classList.add('text-dark', 'btn-warning')
   }
-  done() {
-    
-    this.headingTarget.innerHTML = "Nincs kész"
-    this.headingTarget.classList.remove('btn-success')
-    this.headingTarget.classList.remove('text-light')
-    this.headingTarget.classList.add('btn-warning')
-    this.headingTarget.classList.add('text-dark')
+
+  notdone(event) {
+    event.preventDefault();
+
+    let id = this.element.getAttribute("data-done-id")
+
+    console.log(id)
+
+    this.headingTarget.innerHTML = "Kész" + id
+    this.headingTarget.classList.add('text-light', 'btn-success')
+    this.headingTarget.classList.remove('text-dark', 'btn-warning')
   }
-  notdone() {
-    this.headingTarget.innerHTML = "Kész"
-    this.headingTarget.classList.add('btn-success')
-    this.headingTarget.classList.add('text-light')
-    this.headingTarget.classList.remove('btn-warning')
-    this.headingTarget.classList.remove('text-dark')
-  }  
 }

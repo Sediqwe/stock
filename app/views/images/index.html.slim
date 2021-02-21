@@ -1,8 +1,8 @@
-
-div     
+div
     - if current_user.present? 
-        h2 class="bg-light text-dark" Új kép feltöltés:
-        br = link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
+        h2.bg-light.text-dark Új kép feltöltés:
+        br
+        = link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
         
         -case params[:done]
             -when "0"
@@ -20,55 +20,61 @@ div
         
             
 
-div class="row"
-    div class="col-1"
+.row
+    .col-1
         | Kész:
         = @images_info_true
-    div class="col-1"
+    .col-1
         |Várakozik: 
         = @images_info_false
-    div class="col-1"
+    .col-1
         |Össz: 
         = @images_info_all
 
-div.digg_pagination
+.digg_pagination
     = will_paginate @images, :container => false
 
 
 table.table.table-bordered.table-dark
     tr
-            td style="width:100px" ID
-            td style="width:300px" IMAGE
-            td COMMENTS
-            td style="width:300px" ACTION
+      td style="width:100px" ID
+      td style="width:300px" IMAGE
+      td COMMENTS
+      td style="width:300px" ACTION
     - @images.each do |image|
-        tr id="#{image.id}"  
-            td id="id_#{image.id}"
-                = link_to "# #{image.id}", image_path(image.id), class: "btn btn-link"
-            td id="image_#{image.id}" class="#{ image.done ? 'bg-success' : 'bg-dark' }"  
-                a data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#" class="color-gray-darker td-hover-none"
-				    div class="ba-0 tp-s"
+        tr data-controller="done" data-done-id=image.id
+            td
+
+              button data-action="done#done" Done
+              button data-action="done#notdone" Notdone
+
+              div date-blog-target="heading"
+
+              = link_to "# #{image.id}", image_path(image.id), class: "btn btn-link"
+            td class="#{ image.done ? 'bg-success' : 'bg-dark' }"
+                a.color-gray-darker.td-hover-none data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#"
+				    .ba-0.tp-s
                         = image_tag image.image.variant(resize_to_limit: [300, 300]).processed, class: "" if image.image.present?
-					    div class="card-body"
-						    h4 class="card-title color-gray-darker" = image.title
-						    p class="card-text color-gray-darker" = image.description
+					    .card-body
+						    h4.card-title.color-gray-darker = image.title
+						    p.card-text.color-gray-darker = image.description
 				
             td id="comment_#{image.id}"  
                 - image.comments.each do |com|
                     div class="comment-box bg-dark"
 	                    div class="heading"
                             span style="font-size: 48px; color: gray;"
-                                i class="fas fa-user"
-                        div class="content"
-                            div class="h-in text-light"
-                                div class="cont text-light"
+                                i.fas.fa-user
+                        .content
+                            .h-in.text-light
+                                .cont.text-light
                                     strong 
                                         = com.user.username.capitalize()
-                                    small class="pull-right m-2" = com.created_at
+                                    small.pull-right.m-2 = com.created_at
                                     br
-                                p class="" = simple_format(com.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-success text-light">Link</a>').html_safe
+                                p = simple_format(com.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-success text-light">Link</a>').html_safe
                                     
-                            div class="c-f"
+                            .c-f
                                 - if current_user.present? 
                                     - if current_user.admin? 
                                         = link_to "Kommentár", image_path(image.id), class: "btn btn-success text-light "  
@@ -95,13 +101,13 @@ div.digg_pagination
 
 
 - @images.each do |image|  		
-    div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG_#{image.id}" role="dialog" tabindex="-1"
-        div class="modal-dialog modal-xl" role="document"
-            div class="modal-content"
-                div class="modal-body mb-0 p-0"
-                    = image_tag image.image, class: "card-img-top" if image.image.present? 
-                
-                div class="modal-footer"
+    .modal.fade aria-hidden="true" aria-labelledby="myModalLabel" id="modalIMG_#{image.id}" role="dialog" tabindex="-1"
+        .modal-dialog.modal-xl role="document"
+            .modal-content
+                .modal-body.mb-0.p-0
+                    = image_tag image.image, class: "card-img-top" if image.image.present?
+
+                .modal-footer
                     div
                         p 
                             |  Filename:
@@ -122,13 +128,13 @@ div.digg_pagination
                             = image.image.blob.created_at
                         p
                             - image.comments.each do |com|
-                                div class="comment-box"
-                                    div class="heading"
+                                .comment-box
+                                    .heading
                                         span style="font-size: 48px; color: gray;"
-                                            i class="fas fa-user"
-                                    div class="content"
-                                        div class="h-in"
-                                            div class="cont text-dark"
+                                            i.fas.fa-user
+                                    .content
+                                        .h-in
+                                            .cont.text-dark
                                                 strong 
                                                     = com.user.username.capitalize()
                                                 small class="pull-right m-2" = com.created_at
