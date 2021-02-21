@@ -3,8 +3,6 @@ div
     h2 class="bg-light text-dark" Új link feltöltés:
     br = link_to 'Új https://youtu.be link  feltöltés', new_youtube_path, class: "btn btn-success text-light"
 
-
-
 -case params[:done]
   -when "0"
     = link_to "NINCS KÉSZ", youtubes_path(:done => "0"), class: "btn btn-primary text-light m-2"            
@@ -65,7 +63,8 @@ table.table.table-dark
           = link_to 'Show', youtube,  class: "btn btn-primary text-light  btn-block"
           = link_to 'Edit', edit_youtube_path(youtube),  class: "btn btn-primary text-light  btn-block"
           - if current_user.admin?
-            = link_to 'Destroy', youtube, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger text-light btn-block"
+            div data-controller="delete"
+              =link_to 'Destroy', youtube, :"data-target" => "delete.heading",:"data-action" => "click->delete#delete",:"name" => "pittyu", remote: true, method: :delete, class: "mt-2 delete btn btn-danger text-light btn-block"
 
 
 

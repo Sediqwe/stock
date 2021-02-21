@@ -25,7 +25,7 @@ class YoutubesController < ApplicationController
     youtube = Youtube.find(params[:id])
     youtube.done = params[:done]
     youtube.save
-    #redirect_to youtube_path
+    format.js
     
   end
   
@@ -71,8 +71,9 @@ class YoutubesController < ApplicationController
   # DELETE /youtubes/1
   # DELETE /youtubes/1.json
   def destroy
-    @youtube.destroy
+   #@youtube.destroy
     respond_to do |format|
+      format.js
       format.html { redirect_to youtubes_url, notice: 'Youtube was successfully destroyed.' }
       format.json { head :no_content }
     end
