@@ -1,6 +1,3 @@
-
-
-
 = simple_form_for @comment do |f|
     = f.input :idea, :input_html => {resize: 'none', :rows => 20 , :style => 'width: 50%;'}
     = f.hidden_field :image_id, :value => @image.id

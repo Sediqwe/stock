@@ -95,7 +95,7 @@ table.table.table-bordered.table-dark
                         = link_to "Kommentár", image_path(image), class: "btn btn-success btn-block text-light"
         
   
-div.digg_pagination
+.digg_pagination
     = will_paginate @images, :container => false 
 
 
@@ -145,7 +145,7 @@ div.digg_pagination
                                             
 
 
-                                        div class="c-f"
+                                        .c-f
                                             = link_to "Edit", edit_comment_path(com), class: "btn btn-primary"
                         = link_to 'Letöltés', rails_blob_path(image.image, disposition: 'attachment'), class: "bg-dark text-light p-2"
                     button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button" Bezárás

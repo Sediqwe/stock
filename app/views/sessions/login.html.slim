@@ -1,7 +1,7 @@
 = form_for :user , html: { autocomplete: "off" }  do |f|
-    div class="wrapper fadeInDown"
+    .wrapper.fadeInDown
         div id="formContent"
-            div class="fadeIn first"
+            .fadeIn.first
                 span style="font-size: 48px; color: black;"
                   i class="fas fa-language fa-3x"
                 = f.text_field :username, placeholder: "Felhasználó"

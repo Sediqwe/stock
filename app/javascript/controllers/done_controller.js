@@ -9,7 +9,7 @@ export default class extends Controller {
 
     console.log(id)
 
-    this.headingTarget.innerHTML = "" + id
+    this.headingTarget.innerHTML = "Nincs kész"
     this.headingTarget.classList.remove('btn-success', 'text-light')
     this.headingTarget.classList.add('text-dark', 'btn-warning')
   }
@@ -21,7 +21,7 @@ export default class extends Controller {
 
     console.log(id)
 
-    this.headingTarget.innerHTML = "Kész" + id
+    this.headingTarget.innerHTML = "Kész"
     this.headingTarget.classList.add('text-light', 'btn-success')
     this.headingTarget.classList.remove('text-dark', 'btn-warning')
   }

@@ -22,10 +22,12 @@ class YoutubesController < ApplicationController
   def show
   end
   def done
-    youtube = Youtube.find(params[:id])
-    youtube.done = params[:done]
-    youtube.save
-    format.js
+    @youtube = Youtube.find(params[:id])
+    @youtube.done = params[:done]
+    @youtube.save
+    respond_to do |format|
+      format.js
+    end
     
   end
   
