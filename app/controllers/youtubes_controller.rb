@@ -6,11 +6,11 @@ class YoutubesController < ApplicationController
   def index
     case params[:done]
       when "0"
-        @youtubes = Youtube.paginate(page: params[:page], per_page: 10).where(done: false).order(done: :desc, id: :desc)
+        @youtubes = Youtube.paginate(page: params[:page], per_page: 10).where(done: false).order(done: :desc, updated_at: :desc)
       when "1"
-        @youtubes = Youtube.paginate(page: params[:page], per_page: 10).where(done: true).order( id: :desc)
+        @youtubes = Youtube.paginate(page: params[:page], per_page: 10).where(done: true).order( updated_at: :desc)
       else
-        @youtubes = Youtube.paginate(page: params[:page], per_page: 10).order(done: :desc, id: :desc)
+        @youtubes = Youtube.paginate(page: params[:page], per_page: 10).order(done: :desc, updated_at: :desc)
     end
   @youtubes_info_true = Youtube.where(done: true).size
   @youtubes_info_false = Youtube.where(done: false).size
@@ -71,7 +71,7 @@ class YoutubesController < ApplicationController
   # DELETE /youtubes/1
   # DELETE /youtubes/1.json
   def destroy
-   #@youtube.destroy
+   @youtube.destroy
     respond_to do |format|
       format.js
       format.html { redirect_to youtubes_url, notice: 'Youtube was successfully destroyed.' }
