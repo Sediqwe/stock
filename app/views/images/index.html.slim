@@ -81,7 +81,7 @@ table.table.table-bordered.table-dark
                                 -if com.idea.include? "http://gtav.forditas.xyz/index.php?m=forditas"
                                     -if com.idea.scan(/(?=#{'http://'})/).count >1
                                         = link_to "Autó_Össz_Link", x, class:"btn btn-danger mb-2 text-light", target: "_blank"
-                                    hr style="background-color: white; height: 1px; border: 0;"
+                                        hr style="background-color: white; height: 1px; border: 0;"
                                 p = simple_format(com.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-success text-light mb-2">Link</a>').html_safe 
                                 
                                     
