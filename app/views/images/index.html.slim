@@ -78,7 +78,10 @@ table.table.table-bordered.table-dark
                                 -d.each do |s|
                                     - s = s.strip
                                     - x += "-" + s.gsub!("http://gtav.forditas.xyz/index.php?m=forditas&s=","").to_s
-                                = link_to "Autó_Össz_Link", x, class:"btn btn-danger mb-2 text-light", target: "_blank"
+                                -if com.idea.include? "http://gtav.forditas.xyz/index.php?m=forditas"
+                                    = link_to "Autó_Össz_Link", x, class:"btn btn-danger mb-2 text-light", target: "_blank"
+                                
+                                
                                     
                             .c-f
                                 - if current_user.present? 
