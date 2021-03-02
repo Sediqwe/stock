@@ -1,6 +1,6 @@
 class YoutubesController < ApplicationController
   before_action :set_youtube, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorized?
   # GET /youtubes
   # GET /youtubes.json
   def index

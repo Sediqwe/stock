@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :todos
+  get 'todo/index'
   resources :youtubes
   get 'search_stock', to: 'stock#search'
   get 'login', to: 'sessions#login'

@@ -1,0 +1,29 @@
+h1 Listing todos
+
+table
+  thead
+    tr
+      th Name
+      th Description
+      th Prior
+      th Done
+      th
+      th
+      th
+
+  tbody
+    - @todos.each do |todo|
+      tr
+        td = todo.name
+        td = todo.description
+        td = todo.prior
+        td = todo.done
+        td = link_to 'Show', todo
+        td = link_to 'Edit', edit_todo_path(todo)
+        - if current_user.present? 
+          - if current_user.admin? 
+            td = link_to 'Destroy', todo, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Todo', new_todo_path

@@ -55,6 +55,7 @@ table.table.table-dark
         td
           =youtube.desc
         td 
+        - if current_user.present?
           - if current_user.admin?
             - if youtube.done?
               div data-controller="done"

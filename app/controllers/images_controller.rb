@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-#before_action :authorized?
+before_action :authorized?
   def proba
   end  
 
