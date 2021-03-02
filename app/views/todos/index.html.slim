@@ -18,12 +18,132 @@ table
         td = todo.description
         td = todo.prior
         td = todo.done
-        td = link_to 'Show', todo
-        td = link_to 'Edit', edit_todo_path(todo)
+        td = link_to 'Show', todo, class: "btn btn-secondary text-light"
+        td = link_to 'Edit', edit_todo_path(todo), class: "btn btn-primary text-light"
         - if current_user.present? 
           - if current_user.admin? 
-            td = link_to 'Destroy', todo, data: { confirm: 'Are you sure?' }, method: :delete
+            td = link_to 'Destroy', todo, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-danger text-light"
 
 br
 
-= link_to 'New Todo', new_todo_path
+= link_to 'New Todo', new_todo_path, class: "btn btn-success text-light"
+
+h1 TEMP TO SEDIQWE
+.row.d-flex.justify-content-center.container
+  .col-md-8
+    .card-hover-shadow-2x.mb-3.card
+      .card-header-tab.card-header
+        .card-header-title.font-size-lg.text-capitalize.font-weight-normal
+          i.fa.fa-tasks
+          | \&nbsp;Task Lists
+      .scroll-area-sm
+        perfect-scrollbar.ps-show-limits
+          .ps.ps--active-y style=("position: static;") 
+            .ps-content
+              ul.list-group.list-group-flush
+                li.list-group-item
+                  .todo-indicator.bg-warning
+                  .widget-content.p-0
+                    .widget-content-wrapper
+                      .widget-content-left.mr-2
+                        .custom-checkbox.custom-control
+                          input#exampleCustomCheckbox12.custom-control-input type="checkbox" /
+                          label.custom-control-label for="exampleCustomCheckbox12"  &nbsp;
+                      .widget-content-left
+                        .widget-heading
+                          | Call Sam For payments
+                          .badge.badge-danger.ml-2 Rejected
+                        .widget-subheading
+                          i By Bob
+                      .widget-content-right
+                        button.border-0.btn-transition.btn.btn-outline-success
+                          i.fa.fa-check
+                        button.border-0.btn-transition.btn.btn-outline-danger
+                          i.fa.fa-trash
+                li.list-group-item
+                  .todo-indicator.bg-focus
+                  .widget-content.p-0
+                    .widget-content-wrapper
+                      .widget-content-left.mr-2
+                        .custom-checkbox.custom-control
+                          input#exampleCustomCheckbox1.custom-control-input type="checkbox" /
+                          label.custom-control-label for="exampleCustomCheckbox1"  &nbsp;
+                      .widget-content-left
+                        .widget-heading Make payment to Bluedart
+                        .widget-subheading
+                          div
+                            | By Johnny
+                            .badge.badge-pill.badge-info.ml-2 NEW
+                      .widget-content-right
+                        button.border-0.btn-transition.btn.btn-outline-success
+                          i.fa.fa-check
+                        button.border-0.btn-transition.btn.btn-outline-danger
+                          i.fa.fa-trash
+                li.list-group-item
+                  .todo-indicator.bg-primary
+                  .widget-content.p-0
+                    .widget-content-wrapper
+                      .widget-content-left.mr-2
+                        .custom-checkbox.custom-control
+                          input#exampleCustomCheckbox4.custom-control-input type="checkbox" /
+                          label.custom-control-label for="exampleCustomCheckbox4"  &nbsp;
+                      .widget-content-left.flex2
+                        .widget-heading Office rent
+                        .widget-subheading By Samino!
+                      .widget-content-right
+                        button.border-0.btn-transition.btn.btn-outline-success
+                          i.fa.fa-check
+                        button.border-0.btn-transition.btn.btn-outline-danger
+                          i.fa.fa-trash
+                li.list-group-item
+                  .todo-indicator.bg-info
+                  .widget-content.p-0
+                    .widget-content-wrapper
+                      .widget-content-left.mr-2
+                        .custom-checkbox.custom-control
+                          input#exampleCustomCheckbox2.custom-control-input type="checkbox" /
+                          label.custom-control-label for="exampleCustomCheckbox2"  &nbsp;
+                      .widget-content-left
+                        .widget-heading Office grocery shopping
+                        .widget-subheading By Tida
+                      .widget-content-right
+                        button.border-0.btn-transition.btn.btn-outline-success
+                          i.fa.fa-check
+                        button.border-0.btn-transition.btn.btn-outline-danger
+                          i.fa.fa-trash
+                li.list-group-item
+                  .todo-indicator.bg-success
+                  .widget-content.p-0
+                    .widget-content-wrapper
+                      .widget-content-left.mr-2
+                        .custom-checkbox.custom-control
+                          input#exampleCustomCheckbox3.custom-control-input type="checkbox" /
+                          label.custom-control-label for="exampleCustomCheckbox3"  &nbsp;
+                      .widget-content-left.flex2
+                        .widget-heading Ask for Lunch to Clients
+                        .widget-subheading By Office Admin
+                      .widget-content-right
+                        button.border-0.btn-transition.btn.btn-outline-success
+                          i.fa.fa-check
+                        button.border-0.btn-transition.btn.btn-outline-danger
+                          i.fa.fa-trash
+                li.list-group-item
+                  .todo-indicator.bg-success
+                  .widget-content.p-0
+                    .widget-content-wrapper
+                      .widget-content-left.mr-2
+                        .custom-checkbox.custom-control
+                          input#exampleCustomCheckbox10.custom-control-input type="checkbox" /
+                          label.custom-control-label for="exampleCustomCheckbox10"  &nbsp;
+                      .widget-content-left.flex2
+                        .widget-heading Client Meeting at 11 AM
+                        .widget-subheading By CEO
+                      .widget-content-right
+                        button.border-0.btn-transition.btn.btn-outline-success
+                          i.fa.fa-check
+                        button.border-0.btn-transition.btn.btn-outline-danger
+                          i.fa.fa-trash
+      .d-block.text-right.card-footer
+        button.mr-2.btn.btn-link.btn-sm Cancel
+        = link_to 'New Todo', new_todo_path, class: "btn btn-success text-light" 
+        

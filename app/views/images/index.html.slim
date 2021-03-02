@@ -96,8 +96,6 @@ table.table.table-bordered.table-dark
                                 =link_to 'Nincs kész', done_path(image, id: image.id, done: false), :"id" => image.id, :"data-target" => "done.heading",:"data-action" => "click->done#notdone",:"name" => "pittyu", remote: true, method: :post, class: "mb-2 done btn btn-warning text-light btn-block"
                         -else
                             div data-controller="done" data-done-id="#{image.id}"
-                                button data-action="done#done" Done
-                                button data-action="done#notdone" Notdone
                                 =link_to 'Kesz', done_path(image, id: image.id, done:true), :"id" => image.id, :"data-target" => "done.heading",:"data-action" => "click->done#done",:"name" => "pittyu", remote: true, method: :post, class: "mb-2 done btn btn-success text-light btn-block"
                             = link_to "Módosít", edit_image_path(image), class: "btn btn-primary mr-2 btn-block text-light"
                             = link_to "Töröl", image_path(image), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2 btn-block text-light"
