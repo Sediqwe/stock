@@ -42,14 +42,10 @@ table.table.table-bordered.table-dark
       td COMMENTS
       td style="width:300px" ACTION
     - @images.each do |image|
-        tr data-controller="done" data-done-id=image.id
+        tr data-controller="done" data-done-target="heading" data-done-id=image.id
             td
 
-              button data-action="done#done" Done
-              button data-action="done#notdone" Notdone
-
-              div data-done-target="heading"
-
+             
               = link_to "# #{image.id}", image_path(image.id), class: "btn btn-link"
             td class="#{ image.done ? 'bg-success' : 'bg-dark' }"
                 a.color-gray-darker.td-hover-none data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#"
@@ -100,6 +96,8 @@ table.table.table-bordered.table-dark
                                 =link_to 'Nincs kész', done_path(image, id: image.id, done: false), :"id" => image.id, :"data-target" => "done.heading",:"data-action" => "click->done#notdone",:"name" => "pittyu", remote: true, method: :post, class: "mb-2 done btn btn-warning text-light btn-block"
                         -else
                             div data-controller="done" data-done-id="#{image.id}"
+                                button data-action="done#done" Done
+                                button data-action="done#notdone" Notdone
                                 =link_to 'Kesz', done_path(image, id: image.id, done:true), :"id" => image.id, :"data-target" => "done.heading",:"data-action" => "click->done#done",:"name" => "pittyu", remote: true, method: :post, class: "mb-2 done btn btn-success text-light btn-block"
                             = link_to "Módosít", edit_image_path(image), class: "btn btn-primary mr-2 btn-block text-light"
                             = link_to "Töröl", image_path(image), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2 btn-block text-light"
