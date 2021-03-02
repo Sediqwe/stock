@@ -55,17 +55,14 @@ table.table.table-dark
         td
           =youtube.desc
         td 
-        - if current_user.present?
           - if current_user.admin?
-            - if youtube.done?
-              div data-controller="done"
-                =link_to 'Nincs kész', done_youtube_path(youtube, id: youtube.id, done: false), :"id" => youtube.id, :"data-target" => "done.heading",:"data-action" => "click->done#notdone",:"name" => "pittyu", remote: true, method: :post, class: "mb-2 done btn btn-warning text-light btn-block"
-            -else
-              div data-controller="done" data-done-id="#{youtube.id}"
-                =link_to 'Kesz', done_youtube_path(youtube, id: youtube.id, done:true), :"id" => youtube.id, :"data-target" => "done.heading",:"data-action" => "click->done#done",:"name" => "pittyu", remote: true, method: :post, class: "mb-2 done btn btn-success text-light btn-block"
-            
-            
-            
+            - if current_user.admin?
+              - if youtube.done?
+                div data-controller="done"
+                  =link_to 'Nincs kész', done_youtube_path(youtube, id: youtube.id, done: false), :"id" => youtube.id, :"data-target" => "done.heading",:"data-action" => "click->done#notdone",:"name" => "pittyu", remote: true, method: :post, class: "mb-2 done btn btn-warning text-light btn-block"
+              -else
+                div data-controller="done" data-done-id="#{youtube.id}"
+                  =link_to 'Kesz', done_youtube_path(youtube, id: youtube.id, done:true), :"id" => youtube.id, :"data-target" => "done.heading",:"data-action" => "click->done#done",:"name" => "pittyu", remote: true, method: :post, class: "mb-2 done btn btn-success text-light btn-block"
           = link_to 'Show', youtube,  class: "btn btn-primary text-light  btn-block"
           = link_to 'Edit', edit_youtube_path(youtube),  class: "btn btn-primary text-light  btn-block"
           - if current_user.admin?
