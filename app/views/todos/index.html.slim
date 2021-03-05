@@ -15,7 +15,18 @@ hr
               ul.list-group.list-group-flush
                 - @todos.each do |todo|
                   li.list-group-item
-                    .todo-indicator.bg-warning
+                    - if todo.done?
+                      .todo-indicator.bg-success                    
+                    - else
+                      -case todo.prior
+                        -when 0
+                          .todo-indicator.bg-danger
+                        -when 1
+                          .todo-indicator.bg-warning
+                        -when 2
+                          .todo-indicator.bg-primary
+                        -when 3
+                          .todo-indicator.bg-secondary                            
                     .widget-content.p-0
                       .widget-content-wrapper
                         .widget-content-left.mr-2
@@ -28,8 +39,8 @@ hr
                             = todo.name
                             br
                             |Desc: 
-                            = todo.description
-                            br
+                            = simple_format(todo.description)
+                            
                             |User: 
                             = User.find(todo.user_id).username.capitalize 
                           .widget-subheading
