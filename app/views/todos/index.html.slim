@@ -1,6 +1,8 @@
-h1 Listing todos
+hr
+H1 GTA V és a Javaslat GTA portálok fejlesztési tervei
+hr
 .row.d-flex.justify-content-center.container
-  .col-md-8
+  .col-md-12
     .card-hover-shadow-2x.mb-3.card
       .card-header-tab.card-header
         .card-header-title.font-size-lg.text-capitalize.font-weight-normal
@@ -32,19 +34,14 @@ h1 Listing todos
                             = User.find(todo.user_id).username.capitalize 
                           .widget-subheading
                         .widget-content-right
-                          button.border-0.btn-transition.btn.btn-outline-success
-                            i.fa.fa-check
                           - if current_user.present? 
                             - if current_user.id == todo.user_id
-                              = link_to edit_todo_path(todo) do 
-                                button.border-0.btn.btn-outline-success
-                                  i.fa.fa-edit
+                              = link_to edit_todo_path(todo), class:" border-0 btn btn-outline-success" do 
+                                i.fa.fa-edit
                             - if current_user.admin? 
-                              = link_to todo_path(todo), data: { confirm: 'Are you sure?' }, method: :delete do 
-                                button.border-0.btn-transition.btn.btn-outline-danger
-                                  i.fa.fa-trash  
-                              
-                          
-                
+                              button.border-0.btn-transition.btn.btn-outline-success
+                                i.fa.fa-check
+                              = button_to todo_path(todo), data: { confirm: 'Biztos vagy benne hogy törlöd??' }, class: "border-0 btn-transition btn btn-outline-danger", method: :delete do 
+                                i.fa.fa-trash  
       .d-block.text-right.card-footer
         = link_to 'Új Todo', new_todo_path, class: "btn btn-success text-light" 
