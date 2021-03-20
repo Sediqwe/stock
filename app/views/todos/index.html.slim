@@ -1,7 +1,6 @@
 hr
 H1 GTA V és a Javaslat GTA portálok fejlesztési tervei
 hr
-
 .row.justify-content-center.container-md
   .col-md-6
     .card-hover-shadow-2x.mb-3.card
@@ -19,7 +18,6 @@ hr
                   li class=(todo.done? ? 'list-group-item bg-success' : 'list-group-item bg-secondary text-light')
                     - if todo.done?
                       .todo-indicator.bg-success
-                        
                     - else
                       -case todo.prior
                         -when 0
@@ -36,11 +34,8 @@ hr
                           .custom-checkbox.custom-control
                             input id="mino_#{todo.id}" type="checkbox" class="custom-control-input"
                             label.custom-control-label for="mino_#{todo.id}"  &nbsp;
-                            
-                          
                         .widget-content-left
                           .widget-heading
-                            div = todo.done?
                             |Name:
                             = todo.name
                             br

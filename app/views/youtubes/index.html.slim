@@ -1,6 +1,6 @@
 div     
   - if current_user.present? 
-    h2 class="bg-light text-dark" Új link feltöltés:
+    h2 class="text-dark" Új link feltöltés:
     br = link_to 'Új https://youtu.be link  feltöltés', new_youtube_path, class: "btn btn-success text-light"
 
 -case params[:done]

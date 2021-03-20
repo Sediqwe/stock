@@ -1,3 +1,6 @@
+h2.text-dark Új kép feltöltés:
+  br
+= link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
 = simple_form_for @comment do |f|
     = f.input :idea, :input_html => {resize: 'none', :rows => 20 , :style => 'width: 50%;'}
     = f.hidden_field :image_id, :value => @image.id
