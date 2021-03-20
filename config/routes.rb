@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#controll'
   post 'done', to: 'images#done'
   post 'done_youtube', to: 'youtubes#done'
+  get 'done_todo', to: 'todos#done'
   get 'imagesnew', to: 'images#new'
   resources :comments
   resources :apocas

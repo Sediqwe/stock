@@ -10,6 +10,14 @@ class TodosController < ApplicationController
   def show
   end
 
+  def done
+    @todo = Todo.find(params[:id])
+    @todo.done = params[:done]
+    @todo.save
+    redirect_to todos_path
+  end
+
+
   # GET /todos/new
   def new
     @todo = Todo.new

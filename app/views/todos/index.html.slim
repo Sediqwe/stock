@@ -1,8 +1,9 @@
 hr
 H1 GTA V és a Javaslat GTA portálok fejlesztési tervei
 hr
-.row.d-flex.justify-content-center.container
-  .col-md-12
+
+.row.justify-content-center.container-md
+  .col-md-6
     .card-hover-shadow-2x.mb-3.card
       .card-header-tab.card-header
         .card-header-title.font-size-lg.text-capitalize.font-weight-normal
@@ -14,9 +15,11 @@ hr
             .ps-content
               ul.list-group.list-group-flush
                 - @todos.each do |todo|
-                  li.list-group-item
+                  
+                  li class=(todo.done? ? 'list-group-item bg-success' : 'list-group-item bg-secondary text-light')
                     - if todo.done?
-                      .todo-indicator.bg-success                    
+                      .todo-indicator.bg-success
+                        
                     - else
                       -case todo.prior
                         -when 0
@@ -33,8 +36,11 @@ hr
                           .custom-checkbox.custom-control
                             input id="mino_#{todo.id}" type="checkbox" class="custom-control-input"
                             label.custom-control-label for="mino_#{todo.id}"  &nbsp;
+                            
+                          
                         .widget-content-left
                           .widget-heading
+                            div = todo.done?
                             |Name:
                             = todo.name
                             br
@@ -42,7 +48,8 @@ hr
                             = simple_format(todo.description)
                             
                             |User: 
-                            = User.find(todo.user_id).username.capitalize 
+                            = User.find(todo.user_id).username.capitalize
+                         
                           .widget-subheading
                         .widget-content-right
                           - if current_user.present? 
@@ -50,8 +57,13 @@ hr
                               = link_to edit_todo_path(todo), class:" border-0 btn btn-outline-success" do 
                                 i.fa.fa-edit
                             - if current_user.admin? 
-                              button.border-0.btn-transition.btn.btn-outline-success
-                                i.fa.fa-check
+                              -if todo.done?
+                                = link_to done_todo_path(id: todo.id, done:false), class:" border-0 btn-transition btn btn-outline-danger text-light" do 
+                                  i.fa.fa-check.text-danger
+                              -else 
+                                = link_to done_todo_path(id: todo.id, done:true), class:" border-0 btn-transition btn btn-outline-success" do 
+                                  i.fa.fa-check
+
                               = button_to todo_path(todo), data: { confirm: 'Biztos vagy benne hogy törlöd??' }, class: "border-0 btn-transition btn btn-outline-danger", method: :delete do 
                                 i.fa.fa-trash  
       .d-block.text-right.card-footer
