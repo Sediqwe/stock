@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'je', to: 'je#read'
   resources :todos
   get 'todo/index'
   resources :youtubes
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   post 'done_youtube', to: 'youtubes#done'
   get 'done_todo', to: 'todos#done'
   get 'imagesnew', to: 'images#new'
+  post 'donetwo', to: 'images#donetwo'
   resources :comments
   resources :apocas
   resources :images   

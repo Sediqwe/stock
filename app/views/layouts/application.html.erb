@@ -13,9 +13,13 @@
   </head>
 
   <body class="pt-4">
+  <br>
 <div id="flash">
   <% if notice.present? %>
     <%= render partial: "shared/notice" %>
+  <% end %>
+  <% if error.present? %>
+    <%= render partial: "shared/error" %>
   <% end %>
 </div>
 <br>
@@ -27,7 +31,7 @@
   <%= render 'shared/menu' %>
    <div class="container-fluid">
   <%= yield %>
-  
+
     </div>
   </body>
 </html>

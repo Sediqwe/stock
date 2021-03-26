@@ -4,6 +4,8 @@ before_action :authorized?
   end  
 
   def index
+    #image.image.blob.content_type
+    
 
     case params[:done]
       when "0"
@@ -22,6 +24,20 @@ before_action :authorized?
     @image = Image.new
   end
   
+  
+  def donetwo
+    image = Image.find(je_params[:id])
+    image.done = je_params[:done]
+    if image.save
+      render json: { info: je_params[:id] }
+    else
+      render json: { info: 'NOK' }
+    end
+    
+  end
+
+  
+
   def done
     @image = Image.find(params[:id])
     @image.done = params[:done]
@@ -52,6 +68,7 @@ before_action :authorized?
       render :edit
     end
   end
+  
 
   def show
     @image = Image.find(params[:id])
@@ -78,5 +95,8 @@ before_action :authorized?
 
     def comment_params
       
+    end
+    def je_params
+      params.require(:image).permit(:id, :done, :title, :description, :image,)
     end
 end
