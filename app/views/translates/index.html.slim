@@ -1,0 +1,35 @@
+h1 Listing translates
+
+table
+  thead
+    tr
+      th String add
+      th Gta
+      th Gta original
+      th Status
+      th Xml name
+      th Xml palce
+      th User
+      th Type
+      th
+      th
+      th
+
+  tbody
+    - @translates.each do |translate|
+      tr
+        td = translate.string_add
+        td = translate.gta_id
+        td = translate.gta_original
+        td = translate.status
+        td = translate.xml_name
+        td = translate.xml_palce
+        td = translate.user_id
+        td = translate.type
+        td = link_to 'Show', translate
+        td = link_to 'Edit', edit_translate_path(translate)
+        td = link_to 'Destroy', translate, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Translate', new_translate_path

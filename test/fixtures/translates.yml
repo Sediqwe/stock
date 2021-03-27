@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  string_add: MyString
+  gta_id: MyString
+  gta_original: MyString
+  status: 1
+  xml_name: MyString
+  xml_palce: 1
+  user_id: one
+  type: 1
+
+two:
+  string_add: MyString
+  gta_id: MyString
+  gta_original: MyString
+  status: 1
+  xml_name: MyString
+  xml_palce: 1
+  user_id: two
+  type: 1

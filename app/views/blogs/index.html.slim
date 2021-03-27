@@ -1,0 +1,27 @@
+.container
+  .page-header
+    h1#timeline Főbb verziók:
+  ul.timeline  
+    - @blogs.each_with_index do |blog, index|
+      li class="#{ index.odd? ? 'timeline-inverted' : ''}"
+      
+        .timeline-badge.primary
+          i.far.fa-plus-square
+        .timeline-panel
+          .timeline-heading
+            h4.timeline-title =blog.name  
+            p
+              small.text-muted
+                i.glyphicon.glyphicon-time
+                =blog.date
+          .timeline-body
+            p =blog.description
+            - if current_user.present?
+              - if current_user.admin && current_user = "Sediqwe"
+                = link_to 'Show', blog, class: "btn btn-success mr-1 text-light"
+                = link_to 'Edit', edit_blog_path(blog), class: "btn btn-primary mr-1 text-light"
+                = link_to 'Destroy', blog, data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-danger mr-1 text-light", method: :delete
+      
+- if current_user.present?
+  -if current_user.admin
+    = link_to 'Új verzió felvétele', new_blog_path, class: "btn btn-success"

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :blogs
+  resources :translates
   post 'je', to: 'je#read'
   resources :todos
   get 'todo/index'
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :apocas
   resources :images   
-  root 'welcome#index'
+  root 'blogs#index'
   get 'signup', to: 'users#new'
   get 'logout', to: 'sessions#logout'
   get 'admin', to: 'users#admin'

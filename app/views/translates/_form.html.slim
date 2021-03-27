@@ -1,0 +1,33 @@
+= form_for @translate do |f|
+  - if @translate.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@translate.errors.count, "error")} prohibited this translate from being saved:"
+      ul
+        - @translate.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :string_add
+    = f.text_field :string_add
+  .field
+    = f.label :gta_id
+    = f.text_field :gta_id
+  .field
+    = f.label :gta_original
+    = f.text_field :gta_original
+  .field
+    = f.label :status
+    = f.number_field :status
+  .field
+    = f.label :xml_name
+    = f.text_field :xml_name
+  .field
+    = f.label :xml_palce
+    = f.number_field :xml_palce
+  .field
+    = f.label :user_id
+    = f.text_field :user_id
+  .field
+    = f.label :type
+    = f.number_field :type
+  .actions = f.submit

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_05_132502) do
+ActiveRecord::Schema.define(version: 2021_03_27_164741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 2021_03_05_132502) do
   create_table "apocas", force: :cascade do |t|
     t.string "user"
     t.integer "darab"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -93,6 +100,22 @@ ActiveRecord::Schema.define(version: 2021_03_05_132502) do
     t.boolean "done", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_todos_on_user_id"
+  end
+
+  create_table "translates", force: :cascade do |t|
+    t.string "string_add"
+    t.string "gta_id"
+    t.string "gta_original"
+    t.integer "status"
+    t.string "xml_name"
+    t.integer "xml_palce"
+    t.bigint "user_id", null: false
+    t.integer "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_translates_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -124,4 +147,6 @@ ActiveRecord::Schema.define(version: 2021_03_05_132502) do
   add_foreign_key "comments", "images"
   add_foreign_key "comments", "images", column: "images_id"
   add_foreign_key "comments", "users"
+  add_foreign_key "todos", "users"
+  add_foreign_key "translates", "users"
 end
