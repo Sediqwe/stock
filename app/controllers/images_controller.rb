@@ -26,12 +26,16 @@ before_action :authorized?
   
   
   def donetwo
-    image = Image.find(params[:id])
-    image.done = params[:done]
-    image.save
-    respond_to do |format|
-      format.js
+    p je_params[:id]
+    image = Image.find(je_params[:id])
+    image.done = je_params[:done]
+    if image.save
+      render json: { valami: 'OK' }
+    else
+      render json: { valami: 'NOK' }
     end
+
+    
   end
 
   
@@ -95,6 +99,6 @@ before_action :authorized?
       
     end
     def je_params
-      params.require(:image).permit(:id, :done, :title, :description, :image,)
+      params.require(:product).permit(:id, :done)
     end
 end

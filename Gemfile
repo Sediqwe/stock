@@ -10,6 +10,7 @@ gem 'slim-rails'
 gem 'simple_form'
 gem 'iex-ruby-client'
 gem "font-awesome-rails"
+gem 'jquery-turbolinks'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 # Use sqlite3 as the database for Active Record
