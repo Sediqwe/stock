@@ -1,5 +1,5 @@
 = form_for :user , html: { autocomplete: "off" }  do |f|
-    .wrapper.fadeInDown
+    .wrapper.fadeInDown.bg-secondary
         div id="formContent"
             .fadeIn.first
                 span style="font-size: 48px; color: black;"
@@ -7,5 +7,5 @@
                 = f.text_field :username, placeholder: "Felhasználó"
                 = f.password_field :password, placeholder: "Jelszó", class:"fadeIn third"
                 = f.submit "Belépés", class: "fadeIn fourth"
-                div id="formFooter"
+                div id="formFooter text-dark"
                     h5 Powered by Sediqwe

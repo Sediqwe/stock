@@ -5,34 +5,34 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item <%= (url_for(only_path: true)) == "/blogs" ? "active" : "" %> ">
               <a class="nav-link" href="/">Főoldal <span class="sr-only">(current)</span></a>
             </li>
               <% unless current_user.present? %>
-                <li class="nav-item">
+                <li class="nav-item <%= (url_for(only_path: true)) == "/login" ? "active" : "" %> ">
                   <%= link_to "Belépés", login_path, class: "nav-link"  %>
                 </li>
                 
-                <li class="nav-item">
+                <li class="nav-item <%= (url_for(only_path: true)) == "/signup" ? "active" : "" %> ">
                   <a class="nav-link" href="signup">Regisztrálás</a>
                 </li>
                 <% end %>
                 <% if current_user.present? %>
 
-                <li class="nav-item">
+                <li class="nav-item <%= (url_for(only_path: true)) == "/images" ? "active" : "" %> ">
                     <%= link_to "Képek", images_path(done: "0"), class: "nav-link" %>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item <%= (url_for(only_path: true)) == "/youtubes" ? "active" : "" %> ">
                   <%= link_to "Youtube", youtubes_path(done: "0"), class: "nav-link"  %>
                 </li>
                
-                <li class="nav-item active">
+                <li class="nav-item <%= (url_for(only_path: true)) == "/users" ? "active" : "" %> ">
                   <%= link_to "Users", users_path, class: "nav-link"  %>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item <%= (url_for(only_path: true)) == "/todos" ? "active" : "" %> ">
                   <%= link_to "TODO", todos_path, class: "nav-link"  %>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item <%= (url_for(only_path: true)) == "/comments" ? "active" : "" %> ">
                   <%= link_to "Comments", comments_path, class: "nav-link"  %>
                 </li>
                 
@@ -45,3 +45,4 @@
           
         </div>
       </nav>
+

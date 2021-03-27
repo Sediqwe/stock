@@ -15,7 +15,9 @@
  *= require_self
  
  */
-
+.container{
+  background-color: #fff;
+}
  .digg_pagination {
     background: black;
     cursor: default;

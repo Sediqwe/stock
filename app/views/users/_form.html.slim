@@ -1,5 +1,5 @@
 = simple_form_for @user do |f|
-    div class="wrapper fadeInDown"
+    div class="wrapper fadeInDown bg-secondary"
         div id="formContent"
             div class="fadeIn first"
                 span style="font-size: 48px; color: black;"
@@ -7,6 +7,6 @@
                 = f.text_field :username, placeholder: "Felhasználó", autocomplete: 'off'
                 = f.password_field :password, placeholder: "Jelszó", class:"fadeIn third"
                 = f.text_field :email, placeholder: "E-mail", class:"fadeIn third"
-                = f.submit "Regisztráció", class: "fadeIn fourth"
-                div id="formFooter"
+                = f.submit "Regisztráció", class: "fadeIn fourth text-dark"
+                div id="formFooter text-dark"
                     h5 Powered by Sediqwe

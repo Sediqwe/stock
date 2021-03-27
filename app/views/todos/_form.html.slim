@@ -1,4 +1,4 @@
-.container.bg-info.shadow-lg.rounded.col-4
+.container.bg-secondary.border.shadow-lg.rounded.col-4
   = form_for @todo do |f|
     - if @todo.errors.any?
       #error_explanation
@@ -14,9 +14,9 @@
       = f.label "A feladat leírása:", class: "text-light"
       = f.text_area :description, rows: 10, class: "form-control"
     .field
-      = f.label "prior 0 fontos -> 3 Nem fontos"
+      = f.label "#0 fontos -> #3 Nem fontos"
       = f.number_field :prior, in: 0..3, class: "form-control col-12", value: "3"
       = f.hidden_field :user_id, :value => current_user.id
     - if current_user.present? 
       - if current_user.admin? 
-        .actions = f.submit
+        .actions = f.submit class: "bg-success"
