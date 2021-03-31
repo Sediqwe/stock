@@ -3,7 +3,6 @@ h1 Listing translates
 table
   thead
     tr
-      th String add
       th Gta
       th Gta original
       th Status
@@ -18,7 +17,6 @@ table
   tbody
     - @translates.each do |translate|
       tr
-        td = translate.string_add
         td = translate.gta_id
         td = translate.gta_original
         td = translate.status

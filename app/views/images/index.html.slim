@@ -2,7 +2,9 @@ div
     - if current_user.present? 
         h2.text-dark Új kép feltöltés:
         br
-        = link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
+        = link_to new_image_path(), class: "btn btn-success text-light" do 
+            i class="fas fa-cloud-upload-alt"  Feltöltés
+        
         
         -case params[:done]
             -when "0"
@@ -33,7 +35,7 @@ div
     = will_paginate @images, :container => false
 
 
-table.table.table-bordered.table-dark
+table.table.table-dark
     tr
       td style="width:100px" ID
       td style="width:300px" IMAGE
@@ -42,17 +44,18 @@ table.table.table-bordered.table-dark
       td style="width:300px" ACTION
     - @images.each do |image|
         tr id="tr_#{image.id}"
-            td
-              = link_to "# #{image.id}", image_path(image.id), class: "btn btn-link"
-            td class="#{ image.done ? 'bg-success' : 'bg-dark' }"
+            td class="text-light #{ image.done ? ' bg-success' : ' bg-dark' }"
+              = link_to "# #{image.id}", image_path(image.id), class: "btn btn-link text-light"
+            td 
                 a.color-gray-darker.td-hover-none data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#"
 				    .ba-0.tp-s
                         = image_tag image.image.variant(resize_to_limit: [300, 300]).processed, class: "" if image.image.present?
-					    .card-body
-						    h4.card-title.color-gray-darker = image.title
-						    p.card-text.color-gray-darker = image.description
+					    
 				
-            td id="comment_#{image.id}"  
+            td id="comment_#{image.id}" 
+                .card-body
+						    h4.card-title.color-gray-darker = image.title
+						    p.card-text.color-gray-darker = image.description 
                 - image.comments.each do |com|
                     div class="comment-box bg-dark"
 	                    div class="heading"

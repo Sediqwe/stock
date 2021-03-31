@@ -3,7 +3,7 @@ class TodosController < ApplicationController
   before_action :authorized?
   # GET /todos or /todos.json
   def index
-    @todos = Todo.all.order(updated_at: :desc)
+    @todos = Todo.all.order(done: :asc, updated_at: :desc)
   end
 
   # GET /todos/1 or /todos/1.json

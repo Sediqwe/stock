@@ -35,6 +35,9 @@
                 <li class="nav-item <%= (url_for(only_path: true)) == "/comments" ? "active" : "" %> ">
                   <%= link_to "Comments", comments_path, class: "nav-link"  %>
                 </li>
+                 <li class="nav-item <%= (url_for(only_path: true)) == "/translates" ? "active" : "" %> ">
+                  <%= link_to "Translates", translates_path, class: "nav-link"  %>
+                </li>
                 
                
                 <li class="nav-item">
