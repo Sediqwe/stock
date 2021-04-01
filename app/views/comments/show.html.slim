@@ -1,6 +1,32 @@
-h1 Kommentek
-= @comment.id
-= @user.username
-= @comment.idea
-= link_to "Edit", edit_comment_path(@comment), class: "btn btn-success"
+h1 Komment:
+.card-body
+    h4.card-title.color-gray-darker
+    p.card-text.color-gray-darker
+.comment-box.bg-dark
+    .heading
+        span style="font-size: 48px; color: gray;"
+            i.fas.fa-user
+    .content
+        .h-in.text-light
+            .cont.text-light
+                strong 
+                   
+                small.pull-right.m-2 
+                br
+                - d = @comment.idea.gsub(/http[s]?:\/\/(.+)/i)
+                - x = "http://gtav.forditas.xyz/index.php?m=forditas4&link_id="
+
+                -d.each do |s|
+                    - s = s.strip
+                    - x += "-" + s.gsub!("http://gtav.forditas.xyz/index.php?m=forditas&s=","").to_s
+                -if @comment.idea.include? "http://gtav.forditas.xyz/index.php?m=forditas"
+                    -if @comment.idea.scan(/(?=#{'http://'})/).count >1
+                        = link_to "Autó_Össz_Link", x, class:"btn btn-danger mb-2 text-light", target: "_blank"
+                        hr style="background-color: white; height: 1px; border: 0;"
+                p = simple_format(@comment.idea).gsub(URI.regexp, '<a href="\0" target="_blank" style="max-width:320px;" class="btn btn-block  btn-success text-light mb-2">\8</a>').gsub(">m=forditas&amp;s=",">").html_safe
+
+
+br
+= link_to "Módosítás", edit_comment_path(@comment), class: "btn btn-success"
+= link_to "Vissza", images_path(:done => "1"), class: "btn btn-success text-light m-2"
 

@@ -54,11 +54,11 @@ table.table.table-dark
 				
             td id="comment_#{image.id}" 
                 .card-body
-						    h4.card-title.color-gray-darker = image.title
-						    p.card-text.color-gray-darker = image.description 
+					h4.card-title.color-gray-darker = image.title
+					p.card-text.color-gray-darker = image.description 
                 - image.comments.each do |com|
-                    div class="comment-box bg-dark"
-	                    div class="heading"
+                    .comment-box.bg-dark
+	                    .heading
                             span style="font-size: 48px; color: gray;"
                                 i.fas.fa-user
                         .content
@@ -78,7 +78,7 @@ table.table.table-dark
                                     -if com.idea.scan(/(?=#{'http://'})/).count >1
                                         = link_to "Autó_Össz_Link", x, class:"btn btn-danger mb-2 text-light", target: "_blank"
                                         hr style="background-color: white; height: 1px; border: 0;"
-                                p = simple_format(com.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-block btn-outline-secondary text-light mb-2">\8</a>').gsub(">m=forditas&amp;s=",">").html_safe
+                                p = simple_format(com.idea).gsub(URI.regexp, '<a href="\0" target="_blank" style="max-width:320px;" class="btn btn-block btn-outline-secondary text-light mb-2">\8</a>').gsub(">m=forditas&amp;s=",">").html_safe
                                 
                                     
                             .c-f

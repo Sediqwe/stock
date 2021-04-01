@@ -64,6 +64,6 @@ class TranslatesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def translate_params
-      params.require(:translate).permit(:gta_id, :gta_original, :status, :xml_name, :xml_palce, :user_id_id, :type)
+      params.require(:translate).permit(:gta_id, :gta_original, :status, :xml_name, :xml_palce, :user_id, :type)
     end
 end
