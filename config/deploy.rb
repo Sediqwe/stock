@@ -8,7 +8,7 @@ set :default_stage, "production"
 set :application, "stock"
 set :repo_url, "https://github.com/Sediqwe/stock.git"
 set :branch, "master"
-set :deploy_to, "/var/www/pittyu"
+set :deploy_to, "/var/www/gtav"
 set :keep_releases, 3
 set :migration_command, 'db:migrate'
 set :conditionally_migrate, true

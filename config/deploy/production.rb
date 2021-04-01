@@ -62,7 +62,7 @@
 set :rails_env, :production
 append :linked_files,  "config/master.key", "config/credentials/production.key"
 
-server "pittyu.sediqwe.eu",
+server "gtav.sediqwe.eu",
        user: "deploy",
        roles: %w{web app db},
        ssh_options: {
