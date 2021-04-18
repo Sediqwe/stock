@@ -1,0 +1,35 @@
+h1 Multi feltöltés TESZT :)
+
+table class="table table-dark"
+  thead
+    tr
+      th Name
+      th Description
+      th Version
+      th User
+      th
+      th
+     
+
+  tbody
+  
+    - @uploads.each do |upload|
+      tr
+        td = upload.name
+        td = upload.description
+        td = upload.version
+        td = User.find(upload.user_id).username
+        td  
+          -upload.uploads.each do |thing|
+            = link_to 'download', rails_blob_path(thing, disposition: "attachment"), class: "btn btn-secondary mb-1 text-light"
+            br
+
+
+        td
+          = link_to 'Show', upload, class: "btn btn-primary mb-1 btn-block text-light"
+          = link_to 'Edit', edit_upload_path(upload), class: "btn btn-primary btn-block mb-1 text-light"
+          = link_to 'Destroy', upload, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-block btn-danger mb-1 text-light"
+
+
+
+= link_to 'New Upload', new_upload_path, class: "btn btn-success text-light"

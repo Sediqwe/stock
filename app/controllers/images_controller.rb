@@ -4,9 +4,6 @@ before_action :authorized?
   end  
 
   def index
-    #image.image.blob.content_type
-    
-
     case params[:done]
       when "0"
         @images = Image.paginate(page: params[:page], per_page: 10).where(done: false).order(done: :desc, updated_at: :desc)

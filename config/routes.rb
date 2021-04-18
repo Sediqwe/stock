@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :uploads
   resources :blogs
   resources :translates
   post 'je', to: 'je#read'
