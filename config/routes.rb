@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'translater', to: 'translater#index'
   resources :uploads
   resources :blogs
   resources :translates
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   post 'done_youtube', to: 'youtubes#done'
   get 'done_todo', to: 'todos#done'
   get 'imagesnew', to: 'images#new'
+  get 'proc', to: 'uploads#proccc'
   post 'donetwo', to: 'images#donetwo'
   resources :comments
   resources :apocas

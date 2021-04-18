@@ -20,6 +20,24 @@ class UploadsController < ApplicationController
   def edit
   end
   def proccc
+    de = Upload.find(params[:id])
+    de.uploads.each do |ezafile|
+      filepath = ActiveStorage::Blob.service.send(:path_for, ezafile.key)
+      data = File.read(filepath)
+      translation_content = []
+      enum_content = data.each_line
+      enum_content.each do |content_line|
+        key, value = content_line.split('=')
+        next if key == "\r\n"
+        translation_content << {file_id:ezafile.id, trans_id: key, original: value, translate: ""}
+      end
+      Translate.insert_all(translation_content)
+    end
+    redirect_to uploads_path
+  end
+
+
+  def pro_alt
     if upload_params[:file].content_type == 'application/zip'
       Zip::File.open(upload_params[:file].tempfile) do |zip_file|
         zip_file.each do |entry|

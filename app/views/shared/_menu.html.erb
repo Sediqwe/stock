@@ -35,6 +35,9 @@
                 <li class="nav-item <%= (url_for(only_path: true)) == "/uploads" ? "active" : "" %> ">
                   <%= link_to "Uploads", uploads_path, class: "nav-link"  %>
                 </li>
+                  <li class="nav-item <%= (url_for(only_path: true)) == "/translater" ? "active" : "" %> ">
+                  <%= link_to "Translates", translater_path, class: "nav-link"  %>
+                </li>
                 <li class="nav-item <%= (url_for(only_path: true)) == "/comments" ? "active" : "" %> ">
                   <%= link_to "Comments", comments_path, class: "nav-link"  %>
                 </li>
