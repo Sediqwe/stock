@@ -20,9 +20,14 @@ table class="table table-dark"
         td = upload.version
         td = User.find(upload.user_id).username
         td  
-          -upload.uploads.each do |thing|
-            = link_to 'download', rails_blob_path(thing, disposition: "attachment"), class: "btn btn-secondary mb-1 text-light"
-            br
+          table
+
+          -upload.uploads.includes(:blob).references(:blob).order('active_storage_blobs.filename ASC').each_with_index do |thing,index|
+            = link_to thing.filename, rails_blob_path(thing, disposition: "attachment"), class: "btn btn-secondary mb-1 text-light", style: "width:150px"
+            - if (index+1)>0 && (index+1) % 10  == 0
+           
+            
+          
 
 
         td
