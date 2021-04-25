@@ -23,13 +23,14 @@ class UploadsController < ApplicationController
     de = Upload.find(params[:id])
     de.uploads.each do |ezafile|
       filepath = ActiveStorage::Blob.service.send(:path_for, ezafile.key)
+      valami = ezafile.blob.filename
       data = File.read(filepath)
       translation_content = []
       enum_content = data.each_line
       enum_content.each do |content_line|
         key, value = content_line.split('=')
         next if key == "\r\n"
-        translation_content << {file_id:ezafile.id, trans_id: key, original: value, translate: ""}
+        translation_content << {file_id:ezafile.id, trans_id: key, original: value, translate: valami.to_s , uploads_id: params[:id]}
       end
       Translate.insert_all(translation_content)
     end

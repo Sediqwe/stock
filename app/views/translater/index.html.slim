@@ -14,17 +14,15 @@ table class="table table-dark"
         th Translate_Text
 
     -@translater.each do |trans|
-        - if trans.original.to_s.length > 0 
-            tr
-                td
-                    -upload = Upload.find(6)
-                    =upload.uploads.find(trans.file_id).filename
-                td 
-                    =trans.trans_id
-                td 
-                    = trans.original
-                td 
-                    = trans.translate
+        tr
+            td
+                
+            td 
+                =trans.trans_id
+            td 
+                = trans.original
+            td 
+                = trans.translate
           
           
 
