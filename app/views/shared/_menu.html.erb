@@ -8,6 +8,7 @@
             <li class="nav-item <%= (url_for(only_path: true)) == "/blogs" ? "active" : "" %> ">
               <a class="nav-link" href="/">Főoldal <span class="sr-only">(current)</span></a>
             </li>
+            
               <% unless current_user.present? %>
                 <li class="nav-item <%= (url_for(only_path: true)) == "/login" ? "active" : "" %> ">
                   <%= link_to "Belépés", login_path, class: "nav-link"  %>
@@ -37,6 +38,9 @@
                 </li>
                   <li class="nav-item <%= (url_for(only_path: true)) == "/translater" ? "active" : "" %> ">
                   <%= link_to "Translates", translater_path, class: "nav-link"  %>
+                </li>
+                  <li class="nav-item <%= (url_for(only_path: true)) == "/projects" ? "active" : "" %> ">
+                  <%= link_to "Projects", projects_path, class: "nav-link"  %>
                 </li>
                 <li class="nav-item <%= (url_for(only_path: true)) == "/comments" ? "active" : "" %> ">
                   <%= link_to "Comments", comments_path, class: "nav-link"  %>

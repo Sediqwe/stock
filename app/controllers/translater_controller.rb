@@ -5,4 +5,8 @@ class TranslaterController < ApplicationController
     @translate_real_all = Translate.where("length(original) > 0").size
     
   end
+  def toroldlegyszi
+    Translate.delete_all
+    redirect_to translater_path
+  end
 end

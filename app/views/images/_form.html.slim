@@ -2,5 +2,10 @@
   = f.file_field :image
   = f.input :title
   = f.input :description
+  
   - if current_user.admin?
-    = f.submit
+    -if @image.id?
+      = f.submit "Edit", class: "btn btn-primary" 
+    -else
+      = f.submit "Felvétel", class: "btn btn-primary"
+    

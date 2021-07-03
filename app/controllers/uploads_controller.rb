@@ -30,11 +30,11 @@ class UploadsController < ApplicationController
       enum_content.each do |content_line|
         key, value = content_line.split('=')
         next if key == "\r\n"
-        translation_content << {file_id:ezafile.id, trans_id: key, original: value, translate: valami.to_s , uploads_id: params[:id]}
+        translation_content << {file_id:ezafile.id, trans_id: key, original: value, translate: valami.to_s , upload_id: params[:id]}
       end
       Translate.insert_all(translation_content)
     end
-    redirect_to uploads_path
+    redirect_to translater_path
   end
 
 
@@ -105,6 +105,6 @@ class UploadsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def upload_params
-      params.require(:upload).permit(:name, :description, :version, :user_id, uploads: [] )
+      params.require(:upload).permit(:name, :description, :version, :project_id, :user_id, uploads: [] )
     end
 end

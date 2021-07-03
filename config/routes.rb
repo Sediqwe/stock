@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post 'torol', to: 'translater#toroldlegyszi'
+  resources :projects
   get 'translater', to: 'translater#index'
   resources :uploads
   resources :blogs
