@@ -1,8 +1,11 @@
 class TranslaterController < ApplicationController
   def index
-    @translater = Translate.all.last(200)
+    @translater = Translate.where("original ~ ?", '^(((?!_|[0-9])|[a-z].*).)*$')
+    #@translater = Translate.where('original ~ :pat', :pat => "^(((?!_)|[a-z].*).)*$")
+    
+    
     @translate_all = Translate.all.size
-    @translate_real_all = Translate.where("length(original) > 0").size
+    @translate_real_all =  Translate.where("original ~ ?", '^(((?!_|[0-9])|[a-z].*).)*$').size
     
   end
   def toroldlegyszi

@@ -7,7 +7,7 @@ table class="table table-dark"
       th Description
       th Version
       th User
-      th
+      th PROJECT
       th
      
 
@@ -18,12 +18,16 @@ table class="table table-dark"
         td = upload.name
         td = upload.description
         td = upload.version
-        td = User.find(upload.user_id).username
+        td = upload.user.username
+        td = upload.project.title
         td  
           -upload.uploads.includes(:blob).references(:blob).order('active_storage_blobs.filename ASC').each_with_index do |thing,index|
             = link_to thing.filename, rails_blob_path(thing, disposition: "attachment"), class: "btn btn-primary m-1 text-light", style: "width:150px"
             - if current_user.admin == true && current_user.username == 'sediqwe'
-              = link_to thing.filename, proc_path(did: thing,id: upload.id), class: "btn btn-success"
+              - if upload.done != true
+                = link_to thing.filename, proc_path(did: thing,id: upload.id), class: "btn btn-success text-light"
+              - else
+                = link_to "RESET", file_reset_path(id: upload.id), class: "btn btn-primary text-light", method: :post
         td
           = link_to 'Show', upload, class: "btn btn-primary mb-1 btn-block text-light"
           - if current_user.admin == true && current_user.username == 'sediqwe'

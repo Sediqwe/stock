@@ -19,8 +19,16 @@ class UploadsController < ApplicationController
   # GET /uploads/1/edit
   def edit
   end
+  def file_reset
+    de = Upload.find(params[:id])
+    de.done = false
+    de.save
+    redirect_to uploads_path
+  end
   def proccc
     de = Upload.find(params[:id])
+    de.done = true
+    de.save
     de.uploads.each do |ezafile|
       filepath = ActiveStorage::Blob.service.send(:path_for, ezafile.key)
       valami = ezafile.blob.filename
