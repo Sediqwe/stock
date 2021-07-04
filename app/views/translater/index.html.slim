@@ -15,13 +15,17 @@ table class="table table-dark"
         th Translate_Text
 
     -@translater.each do |trans|
-        tr
-            td
-                = 
+        tr id="tr_#{trans.id}"
             td 
-                = trans.trans_id
+                
+            td 
+                = trans.trans_id 
+                
             td 
                 = trans.original
+                br
+                input type="text" id="new_#{trans.id}"
+                =link_to "Mentés", translate_path(id: trans.id), :"id" => "SAVE_#{trans.id}",:"name" => trans.id, remote: true, method: :post, class: "btn btn-success"
             td 
                 = trans.translate
           

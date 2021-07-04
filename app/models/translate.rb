@@ -1,4 +1,4 @@
 class Translate < ApplicationRecord
   belongs_to :user
-  belongs_to :uploads
+  has_many_attached :upload
 end
