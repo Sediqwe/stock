@@ -23,7 +23,7 @@ $(document).on('turbolinks:load', function() {
       
       var id = $(this).attr('id').replace('SAVE_','');
       var data = $("#new_"+ id).val();
-     
+      if(data.length>3){
       $.ajax({
           url: "/translate",
           type: "POST",
@@ -31,15 +31,32 @@ $(document).on('turbolinks:load', function() {
           success: function(data) {
               //alert("OK ->" + data.valami);
               $("#tr_"+ id).addClass('bg-success');
+              $("#SAVE_"+ id).removeClass('bg-success').addClass('bg-warning').html("Elmentve");
+              setTimeout(
+                function() 
+                {
+                  $("#tr_"+ id).removeClass('bg-success');
+                  $("#SAVE_"+ id).addClass('bg-success').removeClass("bg-warning").html("Mentés");
+                }, 2000);
           },
           error: function(data) {
               //alert("ERROR " + data.valami);
               $("#tr_"+ id).addClass('bg-warning');
+
           }
         })
-      
+      }
+      else{
+        
+        $("#new_"+ id).addClass('bg-warning');
+        setTimeout(
+          function() 
+          {
+            $("#new_"+ id).removeClass('bg-warning');
+          }, 2000);
+      }
     
-  });  
+      });  
       //Átmásolja a fordításba a vezérlőt, de csak azt!
       $('button#only').on("click",function(){
         var id = $(this).attr('name');
@@ -74,12 +91,17 @@ $(document).on('turbolinks:load', function() {
         var data = $("#old_"+ id).val();
         $("#new_"+ id).val(data);
       })  
+      //Átmásolja az egész fordítást
+      $('button#copy_translate').on("click",function(){
+        var id = $(this).attr('name');
+        var data = $("#trans_"+ id).val();
+        $("#new_"+ id).val(data);        
+      })  
         //statusz_4 re dobja a dolgokat
         $('button#status_4').on("click",function(){
-          var id = $(this).attr('name');
-          var data = $("#old_"+ id).val();
-          $("#new_"+ id).val(data);
+          var id = $(this).attr('name');          
         }) 
+        $('[data-toggle="tooltip"]').tooltip()
   });
 
  

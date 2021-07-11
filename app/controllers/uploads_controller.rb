@@ -38,7 +38,7 @@ class UploadsController < ApplicationController
       enum_content.each do |content_line|
         key, value = content_line.split('=')
         next if key == "\r\n"
-        translation_content << {file_id:ezafile.id, trans_id: key, original: value, translate: "", file: valami.to_s , upload_id: params[:id], status: 0, trans_type: false}
+        translation_content << {file_id:ezafile.id, trans_id: key.to_s.strip, original: value.to_s.strip, translate: "", file: valami.to_s , upload_id: params[:id], status: 0, trans_type: false}
       end
       Translate.insert_all(translation_content)
     end

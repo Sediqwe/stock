@@ -1,9 +1,9 @@
 class TranslaterController < ApplicationController
   before_action :authorized?
   def index
-    @translater = Translate.paginate(page: params[:page], per_page: 10).where("original ~ ?", '^(((?!_)|[a-z].*).)*$').where(trans_type: :false)
+    @translater = Translate.paginate(page: params[:page], per_page: 10).where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').where(trans_type: :false).where("length(original) > 1")
     @translate_all = Translate.all.size
-    @translate_real_all =  Translate.where("original ~ ?", '^(((?!_)|[a-z].*).)*$').size
+    @translate_real_all =  Translate.where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').size
     
   end
   def toroldlegyszi
@@ -15,13 +15,13 @@ class TranslaterController < ApplicationController
 
   def translate
     
-    translate_data = Translate.find(je_params[:id])
-    trans = Translate.new()
+    translate_data = Translate.find_by(trans_id: je_params[:id])
+    trans = Translate.find_or_create_by(trans_id: translate_data.trans_id, users_id: current_user.id)
     trans.file_id = translate_data.file_id
-    trans.trans_id = translate_data.trans_id
-    trans.original = translate_data.original
+    trans.trans_id = translate_data.trans_id.strip
+    trans.original = translate_data.original.strip
     trans.upload_id = translate_data.upload_id
-    trans.file = translate_data.file
+    trans.file = translate_data.file.strip
     trans.trans_type = true
     trans.translate = je_params[:data]
     trans.users_id = current_user.id

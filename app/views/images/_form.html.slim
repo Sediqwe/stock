@@ -1,11 +1,17 @@
-= simple_form_for @image do |f|
-  = f.file_field :image
-  = f.input :title
-  = f.input :description
-  
-  - if current_user.admin?
-    -if @image.id?
-      = f.submit "Edit", class: "btn btn-primary" 
-    -else
-      = f.submit "Felvétel", class: "btn btn-primary"
+.row
+  .col-3
+    
+  .bg-dark.justify-content-md-center.col-6.rounded
+      = simple_form_for @image do |f|
+        = f.file_field :image
+        = f.label :Title
+        = f.text_field :title, class: "form-control col-5"
+        = f.label :Description
+        = f.text_area :description, class: "form-control col-5"
+        hr
+        - if current_user.admin?
+          -if @image.id?
+            = f.submit "Edit", class: "btn btn-primary" 
+          -else
+            = f.submit "Felvétel", class: "btn btn-primary"
     
