@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   post 'translate', to: 'translater#translate'
+  post 'ok', to: 'translater#ok'
+  post 'nok', to: 'translater#nok'
   post 'file_reset', to: 'uploads#file_reset'
   post 'torol', to: 'translater#toroldlegyszi'
   resources :projects

@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function() {
 
     });
     //Translate oldalon menti el az új fordítást!!
-    $('div[id^="SAVE_"]').on("click",function(){
+    $('button[id^="SAVE_"]').on("click",function(){
       
       var id = $(this).attr('id').replace('SAVE_','');
       var data = $("#new_"+ id).val();
@@ -32,10 +32,11 @@ $(document).on('turbolinks:load', function() {
               //alert("OK ->" + data.valami);
               $("#tr_"+ id).addClass('bg-success');
               $("#SAVE_"+ id).removeClass('bg-success').addClass('bg-warning').html("Elmentve");
+              
               setTimeout(
                 function() 
                 {
-                  $("#tr_"+ id).removeClass('bg-success');
+                  $("#tr_"+ id).removeClass('bg-success').hide( "slow" );
                   $("#SAVE_"+ id).addClass('bg-success').removeClass("bg-warning").html("Mentés");
                 }, 2000);
           },
@@ -85,11 +86,42 @@ $(document).on('turbolinks:load', function() {
         }
 
       })
+      //Beszurja a vezérlőket
+      $('button#vez').on("click",function(){
+        var id = $(this).attr('name');
+        var adat = $(this).attr('data-adat');
+        var data = $("#new_"+ id).val();
+        $("#new_"+ id).val(data+ "~" +adat+ "~" );
+
+      }) 
       //Átmásolja az egész eredetit
       $('button#copy_original').on("click",function(){
         var id = $(this).attr('name');
         var data = $("#old_"+ id).val();
         $("#new_"+ id).val(data);
+
+      }) 
+      //Elfogadom a fordítást
+      $('button#ok').on("click",function(){
+        var id = $(this).attr('name');
+        var ter = $(this).attr('data-adat');
+        var data = $("#old_"+ id).val();
+        $.ajax({
+          url: "/ok",
+          type: "POST",
+          data: { product: { id: id, data: data} },
+          success: function(data) {
+              //alert("OK ->" + data.valami);
+              $("#tr_"+ ter).addClass('bg-success');
+              
+          },
+          error: function(data) {
+              //alert("ERROR " + data.valami);
+              $("#tr_"+ ter).addClass('bg-warning');
+
+          }
+        })
+        
       })  
       //Átmásolja az egész fordítást
       $('button#copy_translate').on("click",function(){
@@ -99,7 +131,23 @@ $(document).on('turbolinks:load', function() {
       })  
         //statusz_4 re dobja a dolgokat
         $('button#status_4').on("click",function(){
-          var id = $(this).attr('name');          
+          var id = $(this).attr('name');
+          var data = $("#old_"+ id).val();
+          $.ajax({
+            url: "/nok",
+            type: "POST",
+            data: { product: { id: id, data: data} },
+            success: function(data) {
+                //alert("OK ->" + data.valami);
+                $("span#"+ id).addClass('bg-danger');
+                
+            },
+            error: function(data) {
+                //alert("ERROR " + data.valami);
+                $("#tr_"+ id).addClass('bg-warning');
+  
+            }
+          })       
         }) 
         $('[data-toggle="tooltip"]').tooltip()
   });

@@ -1,7 +1,7 @@
 class TranslaterController < ApplicationController
   before_action :authorized?
   def index
-    @translater = Translate.paginate(page: params[:page], per_page: 10).where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').where(trans_type: :false).where("length(original) > 1")
+    @translater = Translate.paginate(page: params[:page], per_page: 10).where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').where(trans_type: :false).where("length(original) > 1").order(:id)
     @translate_all = Translate.all.size
     @translate_real_all =  Translate.where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').size
     
@@ -11,7 +11,50 @@ class TranslaterController < ApplicationController
     redirect_to translater_path
   end
   
+  def ok 
+    trans = Translate.find(je_params[:id])
+    byebug
+     #át kell állítani mindent előbb pirosra hogy aztán csak ez legyen a zöld
+    trans_all = Translate.where(trans_id: trans.trans_id, trans_type: true, status: 2)
+    trans_all.each do |d|
+      d.status = 4
+      d.save
+      p "igen"
+    end
+    trans_original = Translate.find_by(trans_id: trans.trans_id, trans_type: false)
+   
+    trans_original.status = 2
+    trans_original.save
+    trans.status = 2 
+    
+    if trans.save
  
+      
+      render json: { valami: "OK" }
+     else
+      
+     render json: { valami: "NOK" }
+     end
+
+  end
+  def nok 
+    trans = Translate.find(je_params[:id])
+    if(trans.trans_type == false)
+        trans2 = Translate.where(trans_id: trans.trans_id, trans_type: true)
+        trans2.each do |d|
+          d.status = 4
+          d.save
+        end
+    else
+    end
+    trans.status = 4
+    if trans.save
+      render json: { valami: "OK" }
+     else
+     render json: { valami: "NOK" }
+     end
+  end
+
 
   def translate
     
