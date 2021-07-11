@@ -1,33 +1,99 @@
-h1 Translater#index Last 200 record
+h1 Translater#index Last 20 record
 = link_to 'Töröld', torol_path, class: "btn btn-primary text-light", method: :post
+br
+| Össz adatábzis rekord:  #{@translate_all}
 hr
-| Össz adatábzis rekord: 
-=@translate_all
-hr
-| Össz translatere váró:
-=@translate_real_all
 
-table class="table table-dark"
+
+| Össz fordításra váró: #{@translate_real_all}
+br
+br
+.digg_pagination
+    = will_paginate @images, :container => false
+table class="table table-hover table-dark"
     tr 
-        th FileName_ID
-        th Original_ID
-        th Original_Text
-        th Translate_Text
+        
+        th style="width:100px" Original_ID
+        th style="width:700px" Original_Text
+        th style="width:700px" Translate_Text
+        th style="width:700px" Duplicated
 
     -@translater.each do |trans|
         tr id="tr_#{trans.id}"
+              
             td 
+                .col.mx-3
+                    .row.text-light.bg-info
+                        |NFO BOX
+                    
+                    .row 
+                        |Dbase id: #{trans.id}
+                    .row 
+                        |File id: #{trans.trans_id}
+                    .row 
+                        |File name:#{trans.file}
+                
                 
             td 
-                = trans.trans_id 
+                .input-group.mb-3
+                    .input-group-prepend
+                        button class="btn btn-danger text-light" id="status_4}" title="Nem fordítandó" name="#{trans.id}"
+                            i class="fas fa-ban" aria-hidden="true"
+                        span class="input-group-text basic-addon1 bg-secondary text-light" style="width:100px" 
+                            |Angol:
+                            br Státusz: #{trans.status}
+                        
+                    textarea rows="2" class="form-control" id="old_#{trans.id}" disabled=""
+                        = trans.original
+                    button id="copy_original" class="btn btn-outline-light" name="#{trans.id}" title="Eredeti szöveget 1:1 ben átmásolja" 
+                        i class="far fa-copy" aria-hidden="true"
+                    button id="only" class="btn btn-outline-light" name="#{trans.id}" title="Csak a vezérlőket másolja át"
+                        i class="fas fa-font" aria-hidden="true"
+                .input-group.mb-3
+                    .input-group-prepend
+                        span class="input-group-text basic-addon1 bg-success text-light" style="width:100px" Fordítás:
+                    textarea rows="2" class="form-control" id="new_#{trans.id}"
+                        
                 
-            td 
-                = trans.original
-                br
-                input type="text" id="new_#{trans.id}"
-                =link_to "Mentés", translate_path(id: trans.id), :"id" => "SAVE_#{trans.id}",:"name" => trans.id, remote: true, method: :post, class: "btn btn-success"
-            td 
-                = trans.translate
+                
+                
+                .btn.btn-success id="SAVE_#{trans.id}"
+                    i class="fas fa-hand-paper" aria-hidden="true"
+                    |  Mentés                
+               
+            td
+                
+                    - t= reader(trans.trans_id)
+                    -if t.present?
+                        
+                        -t.each do |b|
+                            .input-group.mb-3
+                                .input-group-prepend
+                                    button class="btn btn-danger text-light" id="status_4" title="Nem fordítandó" name="#{b.id}"
+                                        i class="fas fa-ban" aria-hidden="true"
+                                    span class="input-group-text basic-addon1 bg-secondary text-light" style="width:100px" 
+                                        =User.find(b.users_id).username.capitalize  
+                                        br Státusz: #{b.status}
+                                        
+                                textarea rows="2" class="form-control" id="trans_#{b.id}" disabled=""
+                                    = b.translate
+                                button id="copy_translate" class="btn btn-outline-light" name="#{b.id}" title="A szöveget 1:1 ben átmásolja" 
+                                    i class="far fa-copy" aria-hidden="true"
+                                                   
+                                -if b.status = 0
+                                    button id="ok" class="btn btn-success" name="#{b.id}" title="Elfogadás" 
+                                        i class="fas fa-spell-check" aria-hidden="true"
+                                    
+            td
+.digg_pagination
+    = will_paginate @images, :container => false
+                    
+                    
+
+                
+                
+
+
           
           
 
