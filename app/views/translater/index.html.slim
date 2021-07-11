@@ -3,13 +3,11 @@ h1 Translater#index Last 20 record
 br
 | Össz adatábzis rekord:  #{@translate_all}
 hr
-
-
 | Össz fordításra váró: #{@translate_real_all}
 br
 br
 .digg_pagination
-    = will_paginate @images, :container => false
+    
 table class="table table-hover table-dark"
     tr 
         
@@ -25,7 +23,6 @@ table class="table table-hover table-dark"
                 .col.mx-3
                     .row.text-light.bg-info
                         |NFO BOX
-                    
                     .row 
                         |Dbase id: #{trans.id}
                     .row 
@@ -37,11 +34,12 @@ table class="table table-hover table-dark"
             td 
                 .input-group.mb-3
                     .input-group-prepend
-                        button class="btn btn-danger text-light" id="status_4}" title="Nem fordítandó" name="#{trans.id}"
+                        button class="btn btn-danger text-light" id="status_4" title="Nem fordítandó" name="#{trans.id}"
                             i class="fas fa-ban" aria-hidden="true"
                         span class="input-group-text basic-addon1 bg-secondary text-light" style="width:100px" 
                             |Angol:
-                            br Státusz: #{trans.status}
+                            br 
+                            |Státusz: #{trans.status}
                         
                     textarea rows="2" class="form-control" id="old_#{trans.id}" disabled=""
                         = trans.original
@@ -86,14 +84,4 @@ table class="table table-hover table-dark"
                                     
             td
 .digg_pagination
-    = will_paginate @images, :container => false
-                    
-                    
-
-                
-                
-
-
-          
-          
-
+    = will_paginate @translater, :container => false
