@@ -6,6 +6,7 @@ class SaveController < ApplicationController
   def controllka(file)
       if File.exists?(file)
         File.delete(file)
+        
       else
       end
   end
@@ -18,7 +19,8 @@ class SaveController < ApplicationController
 end
 
   def save
-    cont_dir("/tmp/gta/")
+    controllka("tmp/gta.zip")
+    cont_dir("tmp/gta/")
     file_nevek = Translate.select(:file).distinct
     file_nevek.each do |file|
       #Minden fájlnéven menjünk végig!
@@ -36,14 +38,14 @@ end
               dollar << "\t" + data.trans_id + " = " + data.original+"\n"
             end
           end #Data_each end
-      File.write("/tmp/gta/" + file.file, dollar , mode: "a")
+      File.write("tmp/gta/" + file.file, dollar , mode: "a")
       
     end #file_nevek.each end
-    directory_to_zip = "/tmp/gta/"
-    output_file = "/tmp/gta.zip"
+    directory_to_zip = "tmp/gta/"
+    output_file = "tmp/gta.zip"
     zf = ZipFileGenerator.new(directory_to_zip, output_file)
     zf.write()
-    send_file "/tmp/gta.zip", :disposition => 'attachment'
+    send_file "tmp/gta.zip", :disposition => 'attachment'
   end
 
 
