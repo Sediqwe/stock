@@ -27,7 +27,7 @@ class SaveController < ApplicationController
             elsif "{".in? data.trans_id
               dollar << data.trans_id + "\n"
             else
-              dollar << "\t" + data.trans_id + " = 1" + data.original+"\n"
+              dollar << "\t" + data.trans_id + " = " + data.original+"\n"
             end
           end #Data_each end
       File.write("tmp/" + file.file, dollar , mode: "a")
