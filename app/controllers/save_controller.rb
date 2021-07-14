@@ -23,7 +23,7 @@ class SaveController < ApplicationController
             if ["{", "}", "Version"].include? data.trans_id
               dollar << data.trans_id + "\n"
             else
-              dollar << data.trans_id + "=" + data.original+"\n"
+              dollar << "\t" + data.trans_id + " = " + data.original+"\n"
             end
           end #Data_each end
       File.write("tmp/" + file.file, dollar , mode: "a")
