@@ -20,10 +20,14 @@ class SaveController < ApplicationController
       data_all = Translate.where(trans_type: false, file: file.file).order(id: "ASC")
       dollar = ""
           data_all.each do |data|
-            if ["{", "}", "Version"].include? data.trans_id
+            if "Ver".in? data.trans_id
+              dollar << data.trans_id + "\n"
+            elsif "}".in? data.trans_id
+              dollar << data.trans_id + "\n"
+            elsif "{".in? data.trans_id
               dollar << data.trans_id + "\n"
             else
-              dollar << "\t" + data.trans_id + " = " + data.original+"\n"
+              dollar << "\t" + data.trans_id + " = 1" + data.original+"\n"
             end
           end #Data_each end
       File.write("tmp/" + file.file, dollar , mode: "a")
