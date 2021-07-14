@@ -17,9 +17,10 @@ class SaveController < ApplicationController
     file_nevek.each do |file|
       #Minden fájlnéven menjünk végig!
       controllka("tmp/" + file.file)
-      data_all = Translate.where(trans_type: false, file: file.file).order(id: "ASC")
+      data_all = Translate.where("original like ?", "%<img src%").order(id: "ASC")
       dollar = ""
           data_all.each do |data|
+            
             if "Ver".in? data.trans_id
               dollar << data.trans_id + "\n"
             elsif "}".in? data.trans_id

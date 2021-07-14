@@ -18,8 +18,7 @@ class TranslaterController < ApplicationController
     trans_all = Translate.where(trans_id: trans.trans_id, trans_type: true, status: 2)
     trans_all.each do |d|
       d.status = 4
-      d.save
-      p "igen"
+      d.save      
     end
     trans_original = Translate.find_by(trans_id: trans.trans_id, trans_type: false)
    
