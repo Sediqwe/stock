@@ -42,6 +42,9 @@
                   <li class="nav-item <%= (url_for(only_path: true)) == "/projects" ? "active" : "" %> ">
                   <%= link_to "Projects", projects_path, class: "nav-link"  %>
                 </li>
+                  <li class="nav-item <%= (url_for(only_path: true)) == "/save" ? "active" : "" %> ">
+                  <%= link_to "Save", save_path, class: "nav-link"  %>
+                </li>
                 <li class="nav-item <%= (url_for(only_path: true)) == "/comments" ? "active" : "" %> ">
                   <%= link_to "Comments", comments_path, class: "nav-link"  %>
                 </li>

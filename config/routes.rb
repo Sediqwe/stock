@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'save', to: 'save#index'
+  get 'save_to', to: 'save#save'
   post 'translate', to: 'translater#translate'
   post 'ok', to: 'translater#ok'
   post 'nok', to: 'translater#nok'
