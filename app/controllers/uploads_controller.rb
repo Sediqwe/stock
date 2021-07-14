@@ -36,7 +36,7 @@ class UploadsController < ApplicationController
       translation_content = []
       enum_content = data.each_line
       enum_content.each do |content_line|
-        key, value = content_line.split(' = ')
+        key, value = content_line.split(' = ',2)
         next if key == "\r\n"
         translation_content << {file_id:ezafile.id, trans_id: key.to_s.strip, original: value.to_s.strip, translate: "", file: valami.to_s , upload_id: params[:id], status: 0, trans_type: false}
       end
@@ -58,8 +58,12 @@ class UploadsController < ApplicationController
           file_content = entry.get_input_stream.read
           enum_content = file_content.each_line
           enum_content.each do |content_line|
-            key, value = content_line.split('=')
+            key, value, extra = content_line.split('=')
             next if key == "\r\n"
+            if extra.length >2
+              value = value.to_s.strip + " = " + extra
+            else
+            end
             translation_content << {translation_file_id: @translation_file.id, key: key, value: value}
           end
           @translation_file_content = TranslationFileContent.insert_all(translation_content)
