@@ -13,7 +13,6 @@ class TranslaterController < ApplicationController
   
   def ok 
     trans = Translate.find(je_params[:id])
-    byebug
      #át kell állítani mindent előbb pirosra hogy aztán csak ez legyen a zöld
     trans_all = Translate.where(trans_id: trans.trans_id, trans_type: true, status: 2)
     trans_all.each do |d|
