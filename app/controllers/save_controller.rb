@@ -45,10 +45,16 @@ end
     output_file = "tmp/gta.zip"
     zf = ZipFileGenerator.new(directory_to_zip, output_file)
     zf.write()
-    send_file "tmp/gta.zip", :disposition => 'attachment'
+    redirect_to save_final_path
   end
 
-
+  def save_final
+    
+  end
+  
+  def download()
+    send_file "tmp/" + params[:id]  + ".zip", :disposition => 'attachment'
+  end
 
 
 

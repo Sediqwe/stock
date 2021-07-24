@@ -20,9 +20,18 @@ class UploadsController < ApplicationController
   def edit
   end
   def file_reset
+    
     de = Upload.find(params[:id])
     de.done = false
     de.save
+    
+    de.translates.each do |w|
+      hello = Translate.find(w.id)
+      bad = Translate.where(file_id: hello.file_id)
+      bad.delete_all  
+      break
+    end
+
     redirect_to uploads_path
   end
   def proccc
@@ -36,9 +45,10 @@ class UploadsController < ApplicationController
       translation_content = []
       enum_content = data.each_line
       enum_content.each do |content_line|
-        key, value = content_line.split(' = ',2)
-        next if key == "\r\n"
-        translation_content << {file_id:ezafile.id, trans_id: key.to_s.strip, original: value.to_s.strip, translate: "", file: valami.to_s , upload_id: params[:id], status: 0, trans_type: false}
+        #szétválasztás
+        #key, value = content_line.split(' = ',2)
+        #next if key == "\r\n"
+        translation_content << {file_id:ezafile.id, trans_id: "", original: content_line.strip, translate: "", file: valami.to_s , upload_id: params[:id], status: 0, trans_type: false}
       end
       
       Translate.insert_all(translation_content)
