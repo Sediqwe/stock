@@ -6,11 +6,13 @@ before_action :authorized?
   def index
     case params[:done]
       when "0"
-        @images = Image.paginate(page: params[:page], per_page: 10).where(done: false).order(done: :desc, updated_at: :asc)
+        @images = Image.paginate(page: params[:page], per_page: 10).where(done: false).order(done: :desc, updated_at: :desc)
       when "1"
-        @images = Image.paginate(page: params[:page], per_page: 10).where(done: true).order(updated_at: :asc)
+        @images = Image.paginate(page: params[:page], per_page: 10).where(done: true).order(updated_at: :desc)
+      when "2"
+        @images = Image.paginate(page: params[:page], per_page: 10).where(done: true).order(id: :desc)
       else
-        @images = Image.paginate(page: params[:page], per_page: 10).order(done: :desc, updated_at: :asc)
+        @images = Image.paginate(page: params[:page], per_page: 10).where(done: true).order(updated_at: :desc)
     end
     @images_info_true = Image.where(done: true).size
     @images_info_false = Image.where(done: false).size
