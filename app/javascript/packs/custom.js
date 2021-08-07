@@ -140,11 +140,13 @@ $(document).on('turbolinks:load', function() {
             success: function(data) {
                 //alert("OK ->" + data.valami);
                 $("span#"+ id).addClass('bg-danger');
+                $("#tr_"+ id).hide("slow");
                 
             },
             error: function(data) {
                 //alert("ERROR " + data.valami);
                 $("#tr_"+ id).addClass('bg-warning');
+                
   
             }
           })       

@@ -29,13 +29,13 @@ end
       dollar = ""
           data_all.each do |data|
             if "Ver".in? data.trans_id
-              dollar << data.trans_id + "\n"
+              dollar << data.trans_id + "\r\n"
             elsif "}".in? data.trans_id
-              dollar << data.trans_id + "\n"
+              dollar << data.trans_id + "\r\n"
             elsif "{".in? data.trans_id
-              dollar << data.trans_id + "\n"
+              dollar << data.trans_id + "\r\n"
             else
-              dollar << "\t" + data.trans_id + " = " + data.original+"\n"
+              dollar << "\t" + data.trans_id + " = " + data.original+"\r\n"
             end
           end #Data_each end
       File.write("tmp/gta/" + file.file, dollar , mode: "a")

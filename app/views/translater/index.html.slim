@@ -17,7 +17,7 @@ table class="table table-striped table-dark"
         th style="width:700px" Duplicated
 
     -@translater.each do |trans|
-        tr id="tr_#{trans.trans_id}"
+        tr id="tr_#{trans.id}"
               
             td 
                 .col.mx-3
@@ -41,11 +41,11 @@ table class="table table-striped table-dark"
                             br 
                             |Státusz: #{trans.status}
                         
-                    textarea rows="2" class="form-control" id="old_#{trans.trans_id.strip}" disabled=""
+                    textarea rows="2" class="form-control" id="old_#{trans.id.strip}" disabled=""
                         = trans.original
-                    button id="copy_original" class="btn btn-outline-light" name="#{trans.trans_id.strip}" data-toggle="tooltip" data-placement="top" title="Eredeti szöveget 1:1 ben átmásolja"
+                    button id="copy_original" class="btn btn-outline-light" name="#{trans.id.strip}" data-toggle="tooltip" data-placement="top" title="Eredeti szöveget 1:1 ben átmásolja"
                         i class="far fa-copy" aria-hidden="true"
-                    button id="only" class="btn btn-outline-light" name="#{trans.trans_id.strip}" data-toggle="tooltip" data-placement="top" title="Csak a vezérlőket másolja át"
+                    button id="only" class="btn btn-outline-light" name="#{trans.id.strip}" data-toggle="tooltip" data-placement="top" title="Csak a vezérlőket másolja át"
                         i class="fas fa-font" aria-hidden="true"
                 
                 - if !trans_controll(trans.trans_id).present?
