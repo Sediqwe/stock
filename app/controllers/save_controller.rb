@@ -47,6 +47,34 @@ end
     zf.write()
     redirect_to save_final_path
   end
+  def save_csv
+    controllka("tmp/gta.zip")
+    cont_dir("tmp/gta/")
+    file_nevek = Translate.select(:file).distinct
+    file_nevek.each do |file|
+      #Minden fájlnéven menjünk végig!  
+      controllka("tmp/gta/" + file.file)
+      data_all = Translate.where(trans_type: false, file: file.file).order(id: "ASC")
+      maxi = Translate.where(file: file.file).maximum("col_num").to_i
+      dollar = ""
+          data_all.each do |data|
+            dollar << data.original.to_s
+            if data.col_num == maxi
+              dollar << "\r\n"
+            else
+              dollar << ","
+            end
+          end #Data_each end
+            
+      File.write("tmp/gta/" + file.file, dollar , mode: "a")
+      
+    end #file_nevek.each end
+    directory_to_zip = "tmp/gta/"
+    output_file = "tmp/gta.zip"
+    zf = ZipFileGenerator.new(directory_to_zip, output_file)
+    zf.write()
+    redirect_to save_final_path
+  end
 
   def save_final
     

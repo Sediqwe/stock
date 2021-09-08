@@ -29,7 +29,7 @@ $(document).on('turbolinks:load', function() {
           type: "POST",
           data: { product: { id: id, data: data} },
           success: function(data) {
-              //alert("OK ->" + data.valami);
+             // alert("OK ->" + data.valami);
               $("#tr_"+ id).addClass('bg-success');
               $("#SAVE_"+ id).removeClass('bg-success').addClass('bg-warning').html("Elmentve");
               

@@ -2,7 +2,7 @@ class TranslaterController < ApplicationController
   before_action :authorized?
   def index
     #@translater = Translate.paginate(page: params[:page], per_page: 10).where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').where(trans_type: :false, status: "0" ).order(:id)
-    @translater = Translate.paginate(page: params[:page], per_page: 30).order(Row_num: :ASC, Col_num: :ASC)
+    @translater = Translate.where(trans_type: false).paginate(page: params[:page], per_page: 30).order(row_num: :ASC, col_num: :ASC)
     @translate_all = Translate.all.size
     @translate_real_all =  Translate.where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').size
     
@@ -20,18 +20,14 @@ class TranslaterController < ApplicationController
       d.status = 4
       d.save      
     end
-    trans_original = Translate.find_by(trans_id: trans.trans_id, trans_type: false)
-   
+    #átállítom azt a fordítást hogy az el van fogadva!
+    trans_original = Translate.find(je_params[:id])
     trans_original.status = 2
     trans_original.save
     trans.status = 2 
-    
     if trans.save
- 
-      
-      render json: { valami: "OK" }
+     render json: { valami: "OK" }
      else
-      
      render json: { valami: "NOK" }
      end
 
@@ -64,8 +60,8 @@ class TranslaterController < ApplicationController
     trans.original = translate_data.original.strip
     trans.upload_id = translate_data.upload_id
     trans.file = translate_data.file.strip
-    trans.Row_num = translate_data.Row_num
-    trans.Col_num = translate_data.Col_num
+    trans.row_num = translate_data.row_num
+    trans.col_num = translate_data.col_num
     trans.trans_type = true
     trans.translate = je_params[:data]
     trans.users_id = current_user.id

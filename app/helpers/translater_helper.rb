@@ -1,7 +1,7 @@
 module TranslaterHelper
 
     def reader(numi)
-        trans = Translate.where(trans_id: numi, trans_type: :true)
+        trans = Translate.where(trans_id: numi)
         
     end
     def status(stat)
