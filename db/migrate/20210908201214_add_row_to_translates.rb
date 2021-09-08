@@ -1,7 +1,7 @@
 class AddRowToTranslates < ActiveRecord::Migration[6.0]
   def change
-    add_column :translates, :Row_num, :integer    
-    add_column :translates, :Col_num, :integer
-    add_column :translates, :Header, :boolean, default: false
+    add_column :translates, :row_num, :integer    
+    add_column :translates, :col_num, :integer
+    add_column :translates, :header, :boolean, default: false
   end
 end

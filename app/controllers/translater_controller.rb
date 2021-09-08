@@ -57,13 +57,15 @@ class TranslaterController < ApplicationController
 
   def translate
     
-    translate_data = Translate.find_by(trans_id: je_params[:id])
+    translate_data = Translate.find(je_params[:id])
     trans = Translate.find_or_create_by(trans_id: translate_data.trans_id, users_id: current_user.id)
     trans.file_id = translate_data.file_id
-    trans.trans_id = translate_data.trans_id.strip
+    trans.trans_id = je_params[:id]
     trans.original = translate_data.original.strip
     trans.upload_id = translate_data.upload_id
     trans.file = translate_data.file.strip
+    trans.Row_num = translate_data.Row_num
+    trans.Col_num = translate_data.Col_num
     trans.trans_type = true
     trans.translate = je_params[:data]
     trans.users_id = current_user.id
