@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   post 'done_youtube', to: 'youtubes#done'
   get 'done_todo', to: 'todos#done'
   get 'imagesnew', to: 'images#new'
-  get 'proc', to: 'uploads#proccc'
+  get 'proc', to: 'uploads#proc'
+  get 'proc_csv', to: 'uploads#proc_csv'
   post 'donetwo', to: 'images#donetwo'
   resources :comments
   resources :apocas

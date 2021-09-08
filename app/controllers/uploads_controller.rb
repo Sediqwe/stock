@@ -34,7 +34,7 @@ class UploadsController < ApplicationController
 
     redirect_to uploads_path
   end
-  def proccc
+  def proc
     de = Upload.find(params[:id])
     de.done = true
     de.save
@@ -53,6 +53,33 @@ class UploadsController < ApplicationController
       
       Translate.insert_all(translation_content)
     end
+    redirect_to translater_path
+  end
+
+  def proc_csv
+    de = Upload.find(params[:id])
+    de.done = true
+    de.save
+    de.uploads.each do |ezafile|
+      filepath = ActiveStorage::Blob.service.send(:path_for, ezafile.key)
+      valami = ezafile.blob.filename
+      data = File.read(filepath)
+      translation_content = []
+      require "csv"
+      c = CSV.read(filepath)
+      CSV.foreach((filepath), headers: false, col_sep: ",").with_index(1) do |row, rindex|
+        row.each_with_index do |item, cindex|
+          translation_content << {file_id:ezafile.id, original: item, trans_id: "", translate: "", Row_num: rindex , Col_num: cindex, file: valami.to_s , upload_id: params[:id], status: 0, trans_type: false}
+        end
+        
+      end    
+        #translation_content << {file_id:ezafile.id, trans_id: "", original: content_line.strip, translate: "", file: valami.to_s , upload_id: params[:id], status: 0, trans_type: false}
+      
+      
+      
+        Translate.insert_all(translation_content)  
+    end
+    
     redirect_to translater_path
   end
 
