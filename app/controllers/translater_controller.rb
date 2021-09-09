@@ -3,9 +3,9 @@ class TranslaterController < ApplicationController
   def index
     if params[:id].present?
       if params[:col].present?
-        @translater = Translate.where(trans_type: false, project_id: params[:id], col_num: params[:col]).paginate(page: params[:page], per_page: 1).order(row_num: :ASC, col_num: :ASC).where("length(original) > 2")
+        @translater = Translate.where(trans_type: false, project_id: params[:id], file: params[:file], col_num: params[:col]).paginate(page: params[:page], per_page: 1).order(row_num: :ASC, col_num: :ASC).where("length(original) > 2")
       else
-        @translater = Translate.where(trans_type: false, project_id: params[:id]).paginate(page: params[:page], per_page: 10).order(row_num: :ASC, col_num: :ASC)
+        @translater = Translate.where(trans_type: false, file: params[:file], project_id: params[:id]).paginate(page: params[:page], per_page: 10).order(row_num: :ASC, col_num: :ASC)
       end
       @translate_all = Translate.where(project_id: params[:id]).size
         @translate_real_all =  Translate.where(project_id: params[:id]).where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').size
