@@ -1,16 +1,31 @@
 hr
-- if session[:project_id].present?
-    |Kiválasztott project:  
-    = Project.find(session[:project_id]).title
-h2 File szűrő
-= select_tag 'project_id', options_for_select(@project.collect{ |u| [u.title, u.id] })
+- if params[:id].present?
+    |Kiválasztva:  
+    = Project.find(params[:id]).title
+    
+- if params[:file].present?
+    |  >>   
+    = params[:file]
+- if params[:col].present?
+    |  >>   
+    = params[:col]
+    | . oszlop (
+    = Translate.all.where(file: params[:file], header: true, project_id: params[:id], col_num: params[:col]).limit(1).first.original
 
+    |)
+br
+h2 File szűrő
+br
+= select 'file_id','',@translate_cucc.collect{ |u| [u.file, u.file] }, {prompt: 'Válassz fájlt'}
+
+- if params[:file].present?
+    = select 'oszlop_id','',@header.collect{ |u| [u.original, u.col_num] }, {prompt: 'Válassz oszlopot'}        
+br        
 = link_to 'Töröld', torol_path, class: "btn btn-primary text-light", method: :post
 br
 | Össz adatábzis rekord:  #{@translate_all}
-hr
-| Össz fordításra váró: #{@translate_real_all}
-br
+|   Össz fordításra váró: #{@translate_real_all}
+
 br
 
 .digg_pagination

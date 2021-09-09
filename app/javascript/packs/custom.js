@@ -58,20 +58,31 @@ $(document).on('turbolinks:load', function() {
       }
     
       });
-      $('div#next').on("click",function(){
-        var text = $("#project_id").val();
-        $.ajax({
-          url: "/project_save",
-          type: "POST",
-          data: { product: { id: text} },
-          success: function(data) {
-              alert("OK ->" + data.valami);
-          },
-          error: function(data) {
-              alert("ERROR " + data.valami);
-          }
-        })
-      }) 
+      $('select#file_id_').on('change', function() {
+        endre = window.location.href.indexOf("&file")
+        if(endre>0){
+        end = window.location.href.substring(0,endre)
+        }
+        else{
+          end = window.location.href
+        }
+        window.location.href = end + "&file=" + this.value;
+        
+        
+      });
+
+      $('select#oszlop_id_').on('change', function() {
+        endre = window.location.href.indexOf("&col")
+        if(endre>0){
+        end = window.location.href.substring(0,endre)
+        }
+        else{
+          end = window.location.href
+        }
+        window.location.href = end + "&col=" + this.value;
+        
+        
+      });
       //Átmásolja a fordításba a vezérlőt, de csak azt!
       $('button#only').on("click",function(){
         var id = $(this).attr('name');

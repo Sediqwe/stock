@@ -85,7 +85,7 @@ class UploadsController < ApplicationController
         Translate.insert_all(translation_content)  
     end
     
-    redirect_to translater_path
+    redirect_to uploads_path
   end
 
 
