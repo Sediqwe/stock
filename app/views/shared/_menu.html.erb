@@ -36,8 +36,8 @@
                 <li class="nav-item <%= (url_for(only_path: true)) == "/uploads" ? "active" : "" %> ">
                   <%= link_to "Uploads", uploads_path, class: "nav-link"  %>
                 </li>
-                  <li class="nav-item <%= (url_for(only_path: true)) == "/translater" ? "active" : "" %> ">
-                  <%= link_to "Translates", translater_path, class: "nav-link"  %>
+                  <li class="nav-item <%= (url_for(only_path: true)) == "/select" ? "active" : "" %> ">
+                  <%= link_to "Translates", select_path, class: "nav-link"  %>
                 </li>
                   <li class="nav-item <%= (url_for(only_path: true)) == "/projects" ? "active" : "" %> ">
                   <%= link_to "Projects", projects_path, class: "nav-link"  %>

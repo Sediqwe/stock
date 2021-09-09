@@ -1,0 +1,20 @@
+h1 Válassz fordítandó projectet 
+
+.container.bg-secondary
+    - @project.each do |p|
+        .row
+            .col-md-6.col-xl-4
+                .card
+                    .card-body.bg-dark
+                        |Title: 
+                        = p.title
+                        br
+                        |Desc: 
+                        = p.description
+                        br
+                        = link_to "tovább", translater_path(id: p.id), class: "btn btn-success"
+                            
+                            
+br
+
+    

@@ -1,17 +1,25 @@
 class TranslaterController < ApplicationController
   before_action :authorized?
   def index
-    #@translater = Translate.paginate(page: params[:page], per_page: 10).where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').where(trans_type: :false, status: "0" ).order(:id)
-    @translater = Translate.where(trans_type: false).paginate(page: params[:page], per_page: 30).order(row_num: :ASC, col_num: :ASC)
-    @translate_all = Translate.all.size
-    @translate_real_all =  Translate.where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').size
-    
+    if params[:id].present?
+      @translater = Translate.where(trans_type: false, project_id: params[:id]).paginate(page: params[:page], per_page: 30).order(row_num: :ASC, col_num: :ASC)
+      @translate_all = Translate.where(project_id: params[:id]).size
+      @translate_real_all =  Translate.where(project_id: params[:id]).where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').size
+    else
+      @translater = Translate.where(trans_type: false).paginate(page: params[:page], per_page: 30).order(row_num: :ASC, col_num: :ASC)  
+      @translate_all = Translate.all.size
+      @translate_real_all =  Translate.where("original ~ ?", '^(((?!_)(?!^\d+$)|[a-z]?![0-9].*).)*$').size
+    end
   end
   def toroldlegyszi
     Translate.delete_all
     redirect_to translater_path
   end
+  def select
+    @project = Project.all
+    end
   
+
   def ok 
     trans = Translate.find(je_params[:id])
      #át kell állítani mindent előbb pirosra hogy aztán csak ez legyen a zöld
@@ -80,5 +88,5 @@ private
   def je_params
     params.require(:product).permit(:id, :data)
   end
-
+ 
 end

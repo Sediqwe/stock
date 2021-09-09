@@ -4,9 +4,9 @@ p
   strong Title:
   = @project.title
 p
-  strong Descripion:
-  = @project.descripion
+  strong Description:
+  = @project.description
 
-=> link_to 'Edit', edit_project_path(@project)
+=> link_to 'Edit', edit_project_path(@project), class: "btn btn-success text-light"
 '|
-=< link_to 'Back', projects_path
+=< link_to 'Back', projects_path, class: "btn btn-success text-light"

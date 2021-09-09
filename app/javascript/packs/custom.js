@@ -57,7 +57,21 @@ $(document).on('turbolinks:load', function() {
           }, 2000);
       }
     
-      });  
+      });
+      $('div#next').on("click",function(){
+        var text = $("#project_id").val();
+        $.ajax({
+          url: "/project_save",
+          type: "POST",
+          data: { product: { id: text} },
+          success: function(data) {
+              alert("OK ->" + data.valami);
+          },
+          error: function(data) {
+              alert("ERROR " + data.valami);
+          }
+        })
+      }) 
       //Átmásolja a fordításba a vezérlőt, de csak azt!
       $('button#only').on("click",function(){
         var id = $(this).attr('name');

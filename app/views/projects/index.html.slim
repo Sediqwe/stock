@@ -4,7 +4,7 @@ table.table.table-dark
   thead
     tr
       th Title
-      th Descripion
+      th Description
       th File
       th
       th
@@ -14,7 +14,7 @@ table.table.table-dark
     - @projects.each do |project|
       tr
         td = project.title
-        td = project.descripion
+        td = project.description
         td = project.uploads.size
         td 
           = link_to 'Show', project, class: "btn btn-success text-light"

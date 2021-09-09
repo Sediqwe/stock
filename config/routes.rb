@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'save_to', to: 'save#save'
   get 'save_to_csv', to: 'save#save_csv'
   get 'save_final', to: 'save#save_final'
+  get 'select', to: 'translater#select'
   post 'download', to: 'save#download'
   post 'translate', to: 'translater#translate'
   post 'ok', to: 'translater#ok'
