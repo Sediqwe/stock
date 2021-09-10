@@ -48,7 +48,9 @@ table class="table table-striped table-dark"
                     .row 
                         |Dbase id: #{trans.id}
                     .row 
-                        |File id: #{trans.trans_id}
+                        |Row: #{trans.row_num}
+                    .row 
+                        |Col: #{trans.col_num}
                     .row 
                         |File name:#{trans.file}
                     .row 
@@ -81,14 +83,7 @@ table class="table table-striped table-dark"
                                     textarea rows="2" cols="60" class="form-control" id="new_#{trans.id}"
                                     button id="SAVE_#{trans.id}" class=" mr-2 btn btn-outline-success" name="#{trans.id}" data-toggle="tooltip" data-placement="top"  title="Mentés"
                                         |  Mentés 
-                                    button id="vez" class="btn btn-secondary mr-2" name="#{trans.id}" data-adat="s" data-toggle="tooltip" data-placement="top" title="Csak a vezérlőket másolja át"
-                                        | ~S~
-                                    button id="vez" class="btn btn-danger mr-2" name="#{trans.id}" data-adat="r" data-toggle="tooltip" data-placement="top" title="Csak a vezérlőket másolja át"
-                                        | ~R~
-                                    button id="vez" class="btn btn-warning mr-2" name="#{trans.id}" data-adat="y" data-toggle="tooltip" data-placement="top" title="Csak a vezérlőket másolja át"
-                                        | ~Y~
-                                    button id="vez" class="btn btn-success" name="#{trans.id}" data-adat="g" data-toggle="tooltip" data-placement="top" title="Csak a vezérlőket másolja át"
-                                        | ~G~
+                                    
                     -else
                         .bg-success
                             | Fejléc, nem editálható!
@@ -109,7 +104,7 @@ table class="table table-striped table-dark"
                                         
                                 textarea rows="2" class="form-control" id="trans_#{b.id}"
                                     = b.translate
-                                button id="copy_translate" class="btn btn-outline-light" data-toggle="tooltip" data-placement="top"  name="#{b.id}" title="A szöveget 1:1 ben átmásolja" 
+                                button id="copy_translate" class="btn btn-outline-light" data-adat = "#{b.trans_id}" data-toggle="tooltip" data-placement="top"  name="#{b.id}" title="A szöveget 1:1 ben átmásolja" 
                                     i class="far fa-copy" aria-hidden="true"
                                                    
                                 -if b.status = 0

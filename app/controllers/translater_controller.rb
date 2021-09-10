@@ -59,14 +59,22 @@ class TranslaterController < ApplicationController
   end
   def nok 
     trans = Translate.find(je_params[:id])
-    if(trans.trans_type == false)
-        trans2 = Translate.where(trans_id: trans.trans_id, trans_type: true)
+    if trans.trans_type == false
+        trans2 = Translate.where(trans_id: trans.id, trans_type: true)
         trans2.each do |d|
           d.status = 4
           d.save
         end
-    else
     end
+    if trans.status == 2
+      trans2 = Translate.where(id: trans.trans_id, trans_type: false)
+      trans2.each do |d|
+        d.status = 0
+        d.save
+      end
+    end
+
+    
     trans.status = 4
     if trans.save
       render json: { valami: "OK" }

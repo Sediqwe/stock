@@ -31,13 +31,13 @@ $(document).on('turbolinks:load', function() {
           success: function(data) {
              // alert("OK ->" + data.valami);
               $("#tr_"+ id).addClass('bg-success');
-              $("#SAVE_"+ id).removeClass('bg-success').addClass('bg-warning').html("Elmentve");
+              $("#SAVE_"+ id).removeClass('bg-success').addClass('bg-secondary').html("Elmentve");
               
               setTimeout(
                 function() 
                 {
-                  $("#tr_"+ id).removeClass('bg-success').hide( "slow" );
-                  $("#SAVE_"+ id).addClass('bg-success').removeClass("bg-warning").html("Mentés");
+                  $("#SAVE_"+ id).hide( "slow" );
+                  $("#SAVE_"+ id).addClass('bg-success').removeClass(" bg-secondary").html("Elmentve");
                 }, 2000);
           },
           error: function(data) {
@@ -152,6 +152,7 @@ $(document).on('turbolinks:load', function() {
       $('button#copy_translate').on("click",function(){
         var id = $(this).attr('name');
         var data = $("#trans_"+ id).val();
+        alert(data)
         $("#new_"+ id).val(data);        
       })  
         //statusz_4 re dobja a dolgokat
@@ -165,7 +166,7 @@ $(document).on('turbolinks:load', function() {
             success: function(data) {
                 //alert("OK ->" + data.valami);
                 $("span#"+ id).addClass('bg-danger');
-                $("#tr_"+ id).hide("slow");
+                //$("#tr_"+ id).hide("slow");
                 
             },
             error: function(data) {
