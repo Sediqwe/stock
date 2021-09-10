@@ -41,10 +41,15 @@ class TranslaterController < ApplicationController
       d.save      
     end
     #átállítom azt a fordítást hogy az el van fogadva!
-    trans_original = Translate.find(je_params[:id])
+    trans_translate = Translate.find(je_params[:id])
+    trans_translate.status = 2
+    trans_translate.save
+    trans.status = 2 
+    #átállítom azt ami eredeti hogy az el van fogadva!
+    trans_original = Translate.find(trans_translate.trans_id)
     trans_original.status = 2
     trans_original.save
-    trans.status = 2 
+    
     if trans.save
      render json: { valami: "OK" }
      else
@@ -74,7 +79,7 @@ class TranslaterController < ApplicationController
   def translate
     
     translate_data = Translate.find(je_params[:id])
-    trans = Translate.find_or_create_by(trans_id: translate_data.trans_id, users_id: current_user.id)
+    trans = Translate.find_or_create_by(trans_id: je_params[:id], users_id: current_user.id)
     trans.file_id = translate_data.file_id
     trans.trans_id = je_params[:id]
     trans.original = translate_data.original.strip
@@ -86,6 +91,10 @@ class TranslaterController < ApplicationController
     trans.translate = je_params[:data]
     trans.users_id = current_user.id
     trans.status = 0
+    if(translate_data.status == 2)
+      translate_data.status = 0
+      translate_data.save
+    end
     
     if trans.save
        render json: { valami: "OK" }
