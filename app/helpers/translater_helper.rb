@@ -22,5 +22,7 @@ module TranslaterHelper
     def trans_controll(numb)
         contr = Translate.where(trans_id: numb, trans_type: :true, users_id: current_user.id)
     end 
-
+    def dupe_controll(text, id, col)
+      dupe = Translate.where(original: text, trans_type: false, col_num: col).where.not(id: id)
+  end 
 end

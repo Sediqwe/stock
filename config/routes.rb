@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'save', to: 'save#index'
+  post 'urlke', to: 'translater#urlke'
   get 'save_to', to: 'save#save'
   get 'save_to_csv', to: 'save#save_csv'
   get 'save_final', to: 'save#save_final'

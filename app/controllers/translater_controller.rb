@@ -57,6 +57,16 @@ class TranslaterController < ApplicationController
      end
 
   end
+  def urlke
+    t = URI.parse(je_params[:id])
+    params = CGI.parse(t.query)
+    id     = params['id'].first
+    page     = params['page'].first
+    file     = params['file'].first
+    
+    render json: { host: je_params[:id][0,je_params[:id].index('?')], id: id, page: page, file:file }
+
+  end
   def nok 
     trans = Translate.find(je_params[:id])
     if trans.trans_type == false

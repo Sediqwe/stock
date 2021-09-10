@@ -59,27 +59,44 @@ $(document).on('turbolinks:load', function() {
     
       });
       $('select#file_id_').on('change', function() {
-        endre = window.location.href.indexOf("&file")
-        if(endre>0){
-        end = window.location.href.substring(0,endre)
-        }
-        else{
-          end = window.location.href
-        }
-        window.location.href = end + "&file=" + this.value;
+
+        var y = $(this).val();
+        $.ajax({
+          url: "/urlke",
+          type: "POST",
+          data: { product: { id: window.location.href} },
+          success: function(data) {
+              //alert("OK ->" + data.id + "-> " + data.file + "-> " + data.page);
+              window.location.href = data.host + "?id=" + data.id  + "&file=" +  y;
+              
+          },
+          error: function(data) {
+              //alert("ERROR " + data.valami);
+              }
+            })
+
+
+        
+        
         
         
       });
 
       $('select#oszlop_id_').on('change', function() {
-        endre = window.location.href.indexOf("&col")
-        if(endre>0){
-        end = window.location.href.substring(0,endre)
-        }
-        else{
-          end = window.location.href
-        }
-        window.location.href = end + "&col=" + this.value;
+        var y = $(this).val();
+        $.ajax({
+          url: "/urlke",
+          type: "POST",
+          data: { product: { id: window.location.href} },
+          success: function(data) {
+              //alert("OK ->" + data.id + "-> " + data.file + "-> " + data.page);
+              window.location.href = data.host + "?id=" + data.id  + "&file=" +  data.file + "&col=" + y;
+              
+          },
+          error: function(data) {
+              //alert("ERROR " + data.valami);
+              }
+            })
         
         
       });
@@ -151,9 +168,9 @@ $(document).on('turbolinks:load', function() {
       //Átmásolja az egész fordítást
       $('button#copy_translate').on("click",function(){
         var id = $(this).attr('name');
+        var adat = $(this).attr('data-adat');
         var data = $("#trans_"+ id).val();
-        alert(data)
-        $("#new_"+ id).val(data);        
+          $("#new_"+ adat).val(data);        
       })  
         //statusz_4 re dobja a dolgokat
         $('button#status_4').on("click",function(){
