@@ -17,11 +17,12 @@ br
 h2 File szűrő
 .row
     .col-2
-        -t = URI.parse(request.url)
-        -params2 = CGI.parse(t.query)
-        -file2     = params2['file'].first
-        -col2     = params2['col'].first
-        = select 'file_id','', @translate_cucc.collect{ |u| [u.file, u.file] }, {prompt: 'Válassz fájlt', selected: file2}, class: "form-control"
+        -if params[:id].present?
+            -t = URI.parse(request.url)
+            -params2 = CGI.parse(t.query)
+            -file2     = params2['file'].first
+            -col2     = params2['col'].first
+            = select 'file_id','', @translate_cucc.collect{ |u| [u.file, u.file] }, {prompt: 'Válassz fájlt', selected: file2}, class: "form-control"
     .col-2
         - if params[:file].present?
             = select 'oszlop_id','',@header.collect{ |u| [u.original, u.col_num] }, {prompt: 'Válassz oszlopot', selected: col2} , class: "form-control"       

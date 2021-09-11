@@ -58,7 +58,11 @@ end
       maxi = Translate.where(file: file.file).maximum("col_num").to_i
       dollar = ""
           data_all.each do |data|
-            dollar << data.original.to_s
+            data_original = data.original.to_s
+            if data_original.include? '\"'
+              data_original = data_original.gsub! '\"', '"'
+            end
+            dollar << data_original
             if data.col_num == maxi
               dollar << "\r\n"
             else

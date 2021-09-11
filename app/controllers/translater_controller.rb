@@ -26,7 +26,7 @@ class TranslaterController < ApplicationController
   end
   def toroldlegyszi
     Translate.delete_all
-    redirect_to translater_path
+    redirect_to select_path
   end
   def select
     @project = Project.all
