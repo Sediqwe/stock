@@ -66,19 +66,17 @@ class UploadsController < ApplicationController
       data = File.read(filepath)
       translation_content = []
       require "csv"
-      c = CSV.read(filepath)
-      CSV.foreach((filepath), headers: false, col_sep: ",").with_index(1) do |row, rindex|
+      CSV.foreach((filepath), :quote_char => "\x00", headers: false, col_sep: ",").with_index(1) do |row, rindex|
+        p row
         row.each_with_index do |item, cindex|
+         
           if rindex == 1
             data = true
           else
             data = false
           end
-          if item.present?
-            if item.include? '"'
-              item = item.gsub! '"', '\"'
-            end
-          end
+          p item 
+          p "\n##################################################"
           translation_content << {file_id:ezafile.id, original: item, trans_id: "", translate: "", row_num: rindex , col_num: cindex, file: valami.to_s , upload_id: params[:id], status: 0, trans_type: false, project_id: de.project_id, header: data }
         end
         
