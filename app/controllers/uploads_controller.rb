@@ -65,7 +65,7 @@ class UploadsController < ApplicationController
       valami = ezafile.blob.filename
       translation_content = []
       require "csv"
-      CSV.foreach((filepath), headers: false, col_sep: ",", liberal_parsing: true).with_index(1) do |row, rindex|
+      CSV.foreach((filepath), headers: false, col_sep: ",",quote_char: "\x00", liberal_parsing: true).with_index(1) do |row, rindex|
         row.each_with_index do |item, cindex|
          
           if rindex == 1
