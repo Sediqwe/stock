@@ -59,8 +59,8 @@ end
       dollar = ""
           data_all.each do |data|
             data_original = data.original.to_s
-            if data_original.include? '\"'
-              data_original = data_original.gsub! '\"', '"'
+            if data_original.include? ','
+              data_original = "\"" + data_original + "\""
             end
             dollar << data_original
             if data.col_num == maxi
