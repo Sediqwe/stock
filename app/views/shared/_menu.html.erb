@@ -26,13 +26,16 @@
                 <li class="nav-item <%= (url_for(only_path: true)) == "/youtubes" ? "active" : "" %> ">
                   <%= link_to "Youtube", youtubes_path(done: "0"), class: "nav-link"  %>
                 </li>
-               
+                
                 <li class="nav-item <%= (url_for(only_path: true)) == "/users" ? "active" : "" %> ">
                   <%= link_to "Users", users_path, class: "nav-link"  %>
                 </li>
                 <li class="nav-item <%= (url_for(only_path: true)) == "/todos" ? "active" : "" %> ">
                   <%= link_to "TODO", todos_path, class: "nav-link"  %>
                 </li>
+
+                <% if current_user.username == "sediqwe" %>
+
                 <li class="nav-item <%= (url_for(only_path: true)) == "/uploads" ? "active" : "" %> ">
                   <%= link_to "Uploads", uploads_path, class: "nav-link"  %>
                 </li>
@@ -48,6 +51,10 @@
                 <li class="nav-item <%= (url_for(only_path: true)) == "/comments" ? "active" : "" %> ">
                   <%= link_to "Comments", comments_path, class: "nav-link"  %>
                 </li>
+
+                  <% end %>
+                
+                
                 <li class="nav-item">
                     <%= link_to "Kilépés", "/logout", class: "nav-link" %>
                 </li>
