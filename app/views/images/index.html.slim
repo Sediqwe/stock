@@ -51,6 +51,12 @@ table.table.table-dark
 				    .ba-0.tp-s
                         = image_tag image.image.variant(resize_to_limit: [300, 300]).processed, class: "" if image.image.present?
 				.bg-dark
+                    |Uplader: 
+                    - if image.user_id
+                        =User.find(image.user_id).username
+                    - else 
+                        |Sediqwe
+                .bg-dark
                     |Updated: 
                     =image.updated_at	    
                 .bg-dark

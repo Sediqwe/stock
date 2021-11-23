@@ -51,7 +51,7 @@ before_action :authorized?
 
   def create
     @image = Image.new(image_params)
-
+    @image.user_id = current_user.id
     if @image.save
       redirect_to image_path(@image), notice: "Felvétel sikeres"
     else
