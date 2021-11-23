@@ -96,8 +96,10 @@ table.table.table-dark
                 -if image.done?
                     =link_to "NINCS KÉSZ", donetwo_path(id: image.id, done: "false"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"false", remote: true, method: :post, class: "btn btn-block btn-danger"
                 -else
-                    =link_to "ELKÉSZÜLT", donetwo_path(id: image.id, done: "true"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"true", remote: true, method: :post, class: "btn btn-block btn-success"
+                
+                
                 - if current_user.admin? 
+                    =link_to "ELKÉSZÜLT", donetwo_path(id: image.id, done: "true"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"true", remote: true, method: :post, class: "btn btn-block btn-success"
                     = link_to "Módosít", edit_image_path(image), class: "btn btn-primary mr-2 btn-block text-light"
                     = link_to "Töröl", image_path(image), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2 btn-block text-light"
                 = link_to "Kommentár", image_path(image), class: "btn btn-success btn-block text-light"
