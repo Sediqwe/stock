@@ -53,7 +53,7 @@ table.table.table-dark
 				.bg-dark
                     |Uplader: 
                     - if image.user_id
-                        =User.find(image.user_id).username
+                        =User.find(image.user_id).username.capitalize()
                     - else 
                         |Sediqwe
                 .bg-dark
@@ -94,6 +94,7 @@ table.table.table-dark
                                     
                             .c-f
                                 - if current_user.present? 
+                                    
                                     - if current_user.admin? 
                                         = link_to "Kommentár", image_path(image.id), class: "btn btn-success text-light "  
                                         = link_to "Edit", edit_comment_path(com), class: "btn btn-primary text-light "
@@ -103,10 +104,12 @@ table.table.table-dark
                     =link_to "NINCS KÉSZ", donetwo_path(id: image.id, done: "false"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"false", remote: true, method: :post, class: "btn btn-block btn-danger"
                 -else
                 
-                
+                -if current_user.id = image.user_id || current_user.admin? 
+                    = link_to "Módosít", edit_image_path(image), class: "btn btn-primary mr-2 btn-block text-light"
+                    
                 - if current_user.admin? 
                     =link_to "ELKÉSZÜLT", donetwo_path(id: image.id, done: "true"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"true", remote: true, method: :post, class: "btn btn-block btn-success"
-                    = link_to "Módosít", edit_image_path(image), class: "btn btn-primary mr-2 btn-block text-light"
+                    
                     = link_to "Töröl", image_path(image), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2 btn-block text-light"
                 = link_to "Kommentár", image_path(image), class: "btn btn-success btn-block text-light"
 
