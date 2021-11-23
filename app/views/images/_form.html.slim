@@ -9,9 +9,11 @@
         = f.label :Description
         = f.text_area :description, class: "form-control col-5"
         hr
-        - if current_user.admin?
+        -if not @image.id?
+          = f.submit "Felvétel", class: "btn btn-primary"
+        -if @image.user_id = current_user.id 
           -if @image.id?
             = f.submit "Edit", class: "btn btn-primary" 
-        -else
-          = f.submit "Felvétel", class: "btn btn-primary"
-    
+        
+            
+        
