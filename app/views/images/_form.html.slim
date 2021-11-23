@@ -12,6 +12,6 @@
         - if current_user.admin?
           -if @image.id?
             = f.submit "Edit", class: "btn btn-primary" 
-          -else
-            = f.submit "Felvétel", class: "btn btn-primary"
+        -else
+          = f.submit "Felvétel", class: "btn btn-primary"
     
