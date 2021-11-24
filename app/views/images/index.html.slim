@@ -101,7 +101,8 @@ table.table.table-dark
                                         = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary text-light "
             td
                 -if image.done?
-                    =link_to "NINCS KÉSZ", donetwo_path(id: image.id, done: "false"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"false", remote: true, method: :post, class: "btn btn-block btn-danger"
+                    - if current_user.admin? 
+                        =link_to "NINCS KÉSZ", donetwo_path(id: image.id, done: "false"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"false", remote: true, method: :post, class: "btn btn-block btn-danger"
                 -else
                 
                 
