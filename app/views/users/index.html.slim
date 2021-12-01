@@ -5,12 +5,14 @@ div class="container"
             tr
                 th ID
                 th Username
+                th Images
                 th Admin?
                 th class="text-center" Action
             - @user.each do |u|
                 tr
                     td =u.id
                     td =u.username
+                    td = Image.where(user_id: u.id).size
                     td 
                         - if u.admin?
                             = link_to 'Admin', '', class: "btn btn-success text-light"
