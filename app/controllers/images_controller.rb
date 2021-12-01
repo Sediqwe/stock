@@ -62,8 +62,13 @@ before_action :authorized?
   def update
     
     @image = Image.find(params[:id])
-
+    
     if @image.update(image_params)
+      if current_user.admin?
+        @image.user_id  = current_user.id
+        @image.save
+      else
+      end
       redirect_to @image
     else
       render :edit
