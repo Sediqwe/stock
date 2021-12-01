@@ -100,15 +100,13 @@ table.table.table-dark
                                         = link_to "Edit", edit_comment_path(com), class: "btn btn-primary text-light "
                                         = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary text-light "
             td
-                -if image.done?
-                    - if current_user.admin? 
-                        =link_to "NINCS KÉSZ", donetwo_path(id: image.id, done: "false"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"false", remote: true, method: :post, class: "btn btn-block btn-danger"
-                -else
-                
-                
+                -if image.done? &&  current_user.admin? 
                     
-                - if current_user.admin? 
-                    =link_to "ELKÉSZÜLT", donetwo_path(id: image.id, done: "true"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"true", remote: true, method: :post, class: "btn btn-block btn-success"
+                    =link_to "NINCS KÉSZ", donetwo_path(id: image.id, done: "false"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"false", remote: true, method: :post, class: "btn btn-block btn-danger"
+                    
+                -else                
+                    - if current_user.admin? 
+                        =link_to "ELKÉSZÜLT", donetwo_path(id: image.id, done: "true"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"true", remote: true, method: :post, class: "btn btn-block btn-success"
                 -if current_user.id == image.user_id || current_user.admin? 
                     = link_to "Módosít", edit_image_path(image), class: "btn btn-primary mr-2 btn-block text-light"    
                 - if current_user.admin? 
