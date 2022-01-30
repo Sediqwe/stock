@@ -22,7 +22,9 @@ before_action :authorized?
   def new
     @image = Image.new
   end
-  
+  def newmulti
+    @image = Image.new
+  end
   
   def donetwo
     p je_params[:id]
@@ -47,15 +49,32 @@ before_action :authorized?
       format.js
     end
   end
-
+  
 
   def create
-    @image = Image.new(image_params)
-    @image.user_id = current_user.id
-    if @image.save
-      redirect_to image_path(@image), notice: "Felvétel sikeres"
+   
+    if multifeltoltes?
+        if params[:image][:photos].any?
+        @image = Image.new(image_params)
+        @image.user_id = current_user.id
+        @image.multi = true
+        @image.title = ""
+        @image.description = ""
+        if @image.save
+          redirect_to images_path(:done => "0"), notice: "Felvétel sikeres"
+        else
+          render :newmulti
+        end
+      end
+
     else
-      render :new
+      @image = Image.new(image_params)
+      @image.user_id = current_user.id
+      if @image.save
+        redirect_to image_path(@image), notice: "Felvétel sikeres"  
+      else
+        render :new 
+      end
     end
   end
 
@@ -74,7 +93,6 @@ before_action :authorized?
       render :edit
     end
   end
-  
 
   def show
     @image = Image.find(params[:id])
@@ -94,9 +112,15 @@ before_action :authorized?
     
   end
 
+
+
+
   private
     def image_params
-      params.require(:image).permit(:title, :description, :image, :done)
+      params.require(:image).permit(:title, :description, :image, :done, :photos => [])
+    end
+    def image_params_multi
+      
     end
 
     def comment_params
@@ -105,4 +129,13 @@ before_action :authorized?
     def je_params
       params.require(:product).permit(:id, :done)
     end
+
+    def multifeltoltes?
+      params[:commit] == "Multi felvétel"
+    end
+    def feltoltes?
+      params[:commit] == "Felvétel"
+    end
+ 
+
 end

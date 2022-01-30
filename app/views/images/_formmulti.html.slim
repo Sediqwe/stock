@@ -1,0 +1,17 @@
+.row
+  .col-3
+    
+  .bg-dark.justify-content-md-center.col-6.rounded
+      = simple_form_for @image do |f|
+        
+        = f.file_field :photos, :multiple => true
+        hr
+        
+        -if not @image.id?
+          = f.submit "Multi felvétel", class: "btn btn-primary"
+        -if @image.user_id = current_user.id 
+          -if @image.id?
+            = f.submit "Edit", class: "btn btn-primary" 
+        
+            
+        

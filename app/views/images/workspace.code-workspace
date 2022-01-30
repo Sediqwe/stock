@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../ford"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}

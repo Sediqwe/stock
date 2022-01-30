@@ -4,7 +4,8 @@ div
         br
         = link_to new_image_path(), class: "btn btn-success text-light" do 
             i class="fas fa-cloud-upload-alt"  Feltöltés
-        
+        = link_to imagesnewmulti_path(), class: "btn btn-success text-light m-2" do 
+            i class="fas fa-cloud-upload-alt"  Multi feltöltés
         
         -case params[:done]
             -when "0"
@@ -37,81 +38,140 @@ div
 
 table.table.table-dark
     tr
-      td style="width:100px" ID
+      td style="width:40px" ID
       td style="width:300px" IMAGE
       td COMMENTS
      
       td style="width:300px" ACTION
     - @images.each do |image|
         tr id="tr_#{image.id}"
-            td class="text-light #{ image.done ? ' bg-success' : ' bg-dark' }"
+            td class="text-light #{ image.done ? ' bg-success' : ' bg-dark' }"  
               = link_to "# #{image.id}", image_path(image.id), class: "btn btn-link text-light"
-            td 
-                a.color-gray-darker.td-hover-none data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#"
-				    .ba-0.tp-s
-                        = image_tag image.image.variant(resize_to_limit: [300, 300]).processed, class: "" if image.image.present?
-				.bg-dark
-                    |Uplader: 
-                    - if image.user_id
-                        =User.find(image.user_id).username.capitalize()
-                    - else 
-                        |Sediqwe
-                .bg-dark
-                    |Updated: 
-                    =image.updated_at	    
-                .bg-dark
-                    |Created: 
-                    =image.created_at	    
-				
-            td id="comment_#{image.id}" 
-                .card-body
-					h4.card-title.color-gray-darker = image.title
-					p.card-text.color-gray-darker = image.description 
-                - image.comments.each do |com|
-                    .comment-box.bg-dark
-	                    .heading
-                            span style="font-size: 48px; color: gray;"
-                                i.fas.fa-user
-                        .content
-                            .h-in.text-light
-                                .cont.text-light
-                                    strong 
-                                        = com.user.username.capitalize()
-                                    small.pull-right.m-2 = com.created_at
-                                    br
-                               
-                                - d = com.idea.gsub(/http[s]?:\/\/(.+)/i)
-                                - x = "http://gtav.forditas.xyz/index.php?m=forditas4&link_id="
-                                -d.each do |s|
-                                    - s = s.strip
-                                    - x += "-" + s.gsub!("http://gtav.forditas.xyz/index.php?m=forditas&s=","").to_s
-                                -if com.idea.include? "http://gtav.forditas.xyz/index.php?m=forditas"
-                                    -if com.idea.scan(/(?=#{'http://'})/).count >1
-                                        = link_to "Autó_Össz_Link", x, class:"btn btn-danger mb-2 text-light", target: "_blank"
-                                        hr style="background-color: white; height: 1px; border: 0;"
-                                p = simple_format(com.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-block btn-outline-secondary text-light mb-2">\8</a>').gsub(">m=xml_data&amp;kereses=",">").gsub(">m=forditas&amp;s=",">").gsub("&amp;v=1<","<").html_safe
+            - if image.multi
+                td  class="bg-dark"
+               
+                    -image.photos.each do |im|
+                        a.color-gray-darker.td-hover-none data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#"
+                        .ba-0.tp-s    
+                            = image_tag im.variant(resize_to_limit: [300, 300]).processed, class: "" if im.present?
+                            =im.created_at
+                        .bg-dark
+                        |Uplader: 
+                        - if image.user_id
+                            =User.find(image.user_id).username.capitalize()
+                        - else 
+                            |Sediqwe
+                        br
+                        hr
+                    .card-body
+                        h4.card-title.color-gray-darker = image.title
+                        p.card-text.color-gray-darker = image.description 
+                td
+                    - image.comments.each do |com|
+                        .comment-box.bg-dark
+                            .heading
+                                span style="font-size: 48px; color: gray;"
+                                    i.fas.fa-user
+                            .content
+                                .h-in.text-light
+                                    .cont.text-light
+                                        strong 
+                                            = com.user.username.capitalize()
+                                        small.pull-right.m-2 = com.created_at
+                                        br
                                 
+                                    - d = com.idea.gsub(/http[s]?:\/\/(.+)/i)
+                                    - x = "http://gtav.forditas.xyz/index.php?m=forditas4&link_id="
+                                    -d.each do |s|
+                                        - s = s.strip
+                                        - x += "-" + s.gsub!("http://gtav.forditas.xyz/index.php?m=forditas&s=","").to_s
+                                    -if com.idea.include? "http://gtav.forditas.xyz/index.php?m=forditas"
+                                        -if com.idea.scan(/(?=#{'http://'})/).count >1
+                                            = link_to "Autó_Össz_Link", x, class:"btn btn-danger mb-2 text-light", target: "_blank"
+                                            hr style="background-color: white; height: 1px; border: 0;"
+                                    p = simple_format(com.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-block btn-outline-secondary text-light mb-2">\8</a>').gsub(">m=xml_data&amp;kereses=",">").gsub(">m=forditas&amp;s=",">").gsub("&amp;v=1<","<").html_safe
                                     
-                            .c-f
-                                - if current_user.present? 
+                                        
+                                .c-f
+                                    - if current_user.present? 
+                                        
+                                        - if current_user.admin? 
+                                            = link_to "Kommentár", image_path(image.id), class: "btn btn-success text-light "  
+                                            = link_to "Edit", edit_comment_path(com), class: "btn btn-primary text-light "
+                                            = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary text-light "
+                td 
+                    = link_to "Kommentár", image_path(image), class: "btn btn-success btn-block text-light"
+                  
+            -else
+                td class="bg-light"
+                    a.color-gray-darker.td-hover-none data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#"
+                        .ba-0.tp-s
+                            = image_tag image.image.variant(resize_to_limit: [300, 300]).processed, class: "" if image.image.present?
+                    .bg-dark
+                        |Uplader: 
+                        - if image.user_id
+                            =User.find(image.user_id).username.capitalize()
+                        - else 
+                            |Sediqwe
+                    .bg-dark
+                        |Updated: 
+                        =image.updated_at	    
+                    .bg-dark
+                        |Created: 
+                        =image.created_at	    
+		    - if image.multi
+            -else
+                td id="comment_#{image.id}" 
+                    
+                    .card-body
+                        h4.card-title.color-gray-darker = image.title
+                        p.card-text.color-gray-darker = image.description 
+                    - image.comments.each do |com|
+                        .comment-box.bg-dark
+                            .heading
+                                span style="font-size: 48px; color: gray;"
+                                    i.fas.fa-user
+                            .content
+                                .h-in.text-light
+                                    .cont.text-light
+                                        strong 
+                                            = com.user.username.capitalize()
+                                        small.pull-right.m-2 = com.created_at
+                                        br
+                                
+                                    - d = com.idea.gsub(/http[s]?:\/\/(.+)/i)
+                                    - x = "http://gtav.forditas.xyz/index.php?m=forditas4&link_id="
+                                    -d.each do |s|
+                                        - s = s.strip
+                                        - x += "-" + s.gsub!("http://gtav.forditas.xyz/index.php?m=forditas&s=","").to_s
+                                    -if com.idea.include? "http://gtav.forditas.xyz/index.php?m=forditas"
+                                        -if com.idea.scan(/(?=#{'http://'})/).count >1
+                                            = link_to "Autó_Össz_Link", x, class:"btn btn-danger mb-2 text-light", target: "_blank"
+                                            hr style="background-color: white; height: 1px; border: 0;"
+                                    p = simple_format(com.idea).gsub(URI.regexp, '<a href="\0" target="_blank" class="btn btn-block btn-outline-secondary text-light mb-2">\8</a>').gsub(">m=xml_data&amp;kereses=",">").gsub(">m=forditas&amp;s=",">").gsub("&amp;v=1<","<").html_safe
                                     
-                                    - if current_user.admin? 
-                                        = link_to "Kommentár", image_path(image.id), class: "btn btn-success text-light "  
-                                        = link_to "Edit", edit_comment_path(com), class: "btn btn-primary text-light "
-                                        = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary text-light "
-            td
-                -if image.done? &&  current_user.admin? 
-                    
-                    =link_to "NINCS KÉSZ", donetwo_path(id: image.id, done: "false"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"false", remote: true, method: :post, class: "btn btn-block btn-danger"
-                    
-                -else                
+                                        
+                                .c-f
+                                    - if current_user.present? 
+                                        
+                                        - if current_user.admin? 
+                                            = link_to "Kommentár", image_path(image.id), class: "btn btn-success text-light "  
+                                            = link_to "Edit", edit_comment_path(com), class: "btn btn-primary text-light "
+                                            = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary text-light "
+                td
+                
+                    -if image.done? &&  current_user.admin? 
+                        
+                        =link_to "NINCS KÉSZ", donetwo_path(id: image.id, done: "false"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"false", remote: true, method: :post, class: "btn btn-block btn-danger"
+                        
+                    -else                
+                        - if current_user.admin? 
+                            =link_to "ELKÉSZÜLT", donetwo_path(id: image.id, done: "true"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"true", remote: true, method: :post, class: "btn btn-block btn-success"
+                    -if current_user.id == image.user_id || current_user.admin? 
+                        = link_to "Módosít", edit_image_path(image), class: "btn btn-primary mr-2 btn-block text-light"    
                     - if current_user.admin? 
-                        =link_to "ELKÉSZÜLT", donetwo_path(id: image.id, done: "true"), :"id" => "DONE_#{image.id}",:"name" => image.id, :"info" =>"true", remote: true, method: :post, class: "btn btn-block btn-success"
-                -if current_user.id == image.user_id || current_user.admin? 
-                    = link_to "Módosít", edit_image_path(image), class: "btn btn-primary mr-2 btn-block text-light"    
-                - if current_user.admin? 
-                    = link_to "Töröl", image_path(image), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2 btn-block text-light"
-                = link_to "Kommentár", image_path(image), class: "btn btn-success btn-block text-light"
+                        = link_to "Töröl", image_path(image), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2 btn-block text-light"
+                    = link_to "Kommentár", image_path(image), class: "btn btn-success btn-block text-light"
 
                          
         
@@ -130,23 +190,7 @@ table.table.table-dark
 
                 .modal-footer
                     div
-                        p 
-                            |  Filename:
-                            = image.image.blob.filename                        
-                        
-                            |  Type:
-                            = image.image.blob.content_type
-                         
-                            |  Size:
-                            = image.image.blob.metadata[:width] 
-                            |  x 
-                            = image.image.blob.metadata[:height]              
-                         
-                            |  Size:
-                            = number_to_human_size(image.image.blob.byte_size)
-                            
-                            |  Created:
-                            = image.image.blob.created_at
+               
                         p
                             - image.comments.each do |com|
                                 .comment-box
@@ -168,7 +212,7 @@ table.table.table-dark
 
                                         .c-f
                                             = link_to "Edit", edit_comment_path(com), class: "btn btn-primary"
-                        = link_to 'Letöltés', rails_blob_path(image.image, disposition: 'attachment'), class: "bg-dark text-light p-2"
+                        
                     button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button" Bezárás
                     
                     
