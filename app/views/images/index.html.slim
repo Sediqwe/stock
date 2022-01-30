@@ -103,7 +103,7 @@ table.table.table-dark
                     = link_to "Kommentár", image_path(image), class: "btn btn-success btn-block text-light"
                   
             -else
-                td class="bg-light"
+                td class="bg-dark"
                     a.color-gray-darker.td-hover-none data-target="#modalIMG_#{image.id}" data-toggle="modal" href="#"
                         .ba-0.tp-s
                             = image_tag image.image.variant(resize_to_limit: [300, 300]).processed, class: "" if image.image.present?
