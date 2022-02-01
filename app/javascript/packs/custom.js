@@ -1,5 +1,41 @@
 $(document).on('turbolinks:load', function() {
   
+  $(document).on('click', 'button[id^="szuperdolog_"]', function(){
+    var data = $(this).attr('data-elso');
+    var textarea = $('textarea#comment_idea').val();
+    $('textarea#comment_idea').val(textarea +"\n" +  "http://gtav.forditas.xyz/index.php?m=forditas&s=" +data);
+    
+  });
+
+  
+
+
+  $("#search_eng").on( "keypress", function (e) {
+    var data = $(this).val();
+    if (e.which == 13) {
+              $.ajax({
+                type: "POST",
+                url: "/api/",
+                data: "type=eredeti&s=" + data,
+                success: function (data) {
+                   $("div#adatok").html(data);
+                },
+            });
+      }
+});
+$("#search_hun").keypress(function (e) {
+  var data = $(this).val();
+  if (e.which == 13) {
+            $.ajax({
+              type: "POST",
+              url: "/api/",
+              data: "type=forditas&s=" + data,
+              success: function (data) {
+                 $("div#adatok").html(data);
+              },
+          });
+    }
+});
     $('a[id^="DONE_"]').on("click",function(){
         var data = $(this).attr('name');
         var done = $(this).attr('info');
@@ -81,7 +117,7 @@ $(document).on('turbolinks:load', function() {
         
         
       });
-
+      
       $('select#oszlop_id_').on('change', function() {
         var y = $(this).val();
         $.ajax({

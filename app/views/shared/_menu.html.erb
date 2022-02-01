@@ -35,7 +35,9 @@
                 </li>
 
                 <% if current_user.username == "sediqwe" %>
-
+                <li class="nav-item <%= (url_for(only_path: true)) == "/kattanas" ? "active" : "" %> ">
+                <%= link_to "Kattanás", kattanas_path, class: "nav-link"  %>
+                </li>
                 <li class="nav-item <%= (url_for(only_path: true)) == "/uploads" ? "active" : "" %> ">
                   <%= link_to "Uploads", uploads_path, class: "nav-link"  %>
                 </li>

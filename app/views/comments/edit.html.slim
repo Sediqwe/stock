@@ -1,5 +1,21 @@
-- if current_user.present?
-  - if current_user.admin?
-    = simple_form_for @comment do |f|
-      = f.input :idea, :input_html => { :rows => 25 , :style => 'width: 50%'}
-      = f.submit
+  .container.bg-light.rounded.shadow.p-3.mb-5
+    .row
+      .col-6
+        -if current_user.present?
+          - if current_user.admin?
+            = simple_form_for @comment do |f|
+              = f.input :idea, :input_html => { :rows => 20}
+              = f.submit
+      .col-6
+        .row 
+          .col
+            label for="search_en"  ID/ANGOL
+            input.form-control id="search_eng" placeholder="ID/ANGOL" type="textbox" style="width:500px"
+        .row 
+          .col
+            label for="search_en"  ID/MAGYAR
+            input.form-control id="search_hun" placeholder="ID/MAGYAR" type="textbox" style="width:500px"
+        .row 
+          .col
+            .bg-light id="adatok"
+              |Adatok

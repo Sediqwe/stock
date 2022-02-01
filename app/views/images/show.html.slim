@@ -1,9 +1,39 @@
-h2.text-dark Új kép feltöltés:
-br
-= link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
-= simple_form_for @comment do |f|
-    = f.input :idea, :input_html => {resize: 'none', :rows => 20 , :style => 'width: 50%;'}
-    = f.hidden_field :image_id, :value => @image.id
-    = f.hidden_field :user_id, :value => current_user.id
-    = f.submit "Komment beküldés", class: "bg-success"
-= image_tag @image.image if @image.image.present?
+.container-bg
+    h2.text-dark Új kép feltöltés:
+    br
+    = link_to "Feltöltés", new_image_path, class: "btn btn-success m-2"
+    .row
+        .col-8  style="overflow:hidden"
+            = image_tag @image.image if @image.image.present?
+        .col-4
+            .container.bg-light.rounded.shadow
+                .row
+                    .col-6
+                        -if current_user.present?
+                            - if current_user.admin?
+                                = simple_form_for @comment do |f|
+                                    = f.input :idea, :input_html => {resize: 'none', :rows => 20 }
+                                    = f.hidden_field :image_id, :value => @image.id
+                                    = f.hidden_field :user_id, :value => current_user.id
+                                    = f.submit "Komment beküldés", class: "bg-success"
+                    .col-6
+                        .row 
+                            .col
+                                label for="search_en"  ID/ANGOL
+                                input.form-control id="search_eng" placeholder="ID/ANGOL" type="textbox" style="width:500px"
+                        .row 
+                            .col
+                                label for="search_en"  ID/MAGYAR
+                                input.form-control id="search_hun" placeholder="ID/MAGYAR" type="textbox" style="width:500px"
+                        .row 
+                            .col
+                                .bg-light.text-dark id="adatok"
+                                    |Adatok
+    
+    
+    
+
+
+
+   
+    

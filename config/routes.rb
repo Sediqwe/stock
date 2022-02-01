@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :blogs
   resources :translates
   post 'je', to: 'je#read'
+  post 'api', to: 'kattanas#start'
   resources :todos
   get 'todo/index'
   resources :youtubes
@@ -31,7 +32,7 @@ Rails.application.routes.draw do
   get 'proc', to: 'uploads#proc'
   get 'proc_csv', to: 'uploads#proc_csv'
   post 'donetwo', to: 'images#donetwo'
-
+  get 'kattanas', to: 'kattanas#start'
   resources :comments
   resources :apocas
   resources :images   
