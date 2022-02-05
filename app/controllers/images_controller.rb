@@ -88,6 +88,7 @@ before_action :authorized?
         @image.save
       else
       end
+
       redirect_to @image
     else
       render :edit
@@ -103,7 +104,8 @@ before_action :authorized?
   def destroy
     @image = Image.find(params[:id])
     @image.destroy
-    redirect_to @image
+    #redirect_to @image
+    redirect_to images_path(:done =>0), notice: "Felvétel sikeres"  
     
   end
 

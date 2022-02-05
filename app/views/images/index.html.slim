@@ -100,6 +100,8 @@ table.table.table-dark
                                             = link_to "Edit", edit_comment_path(com), class: "btn btn-primary text-light "
                                             = link_to "Töröl", com , method: "DELETE", class: "btn btn-primary text-light "
                 td 
+                    - if current_user.admin? 
+                        = link_to "Töröl", image_path(image), method: 'delete', data: { confirm: 'Biztos vagy benne tesó??' }, class: "btn btn-primary mr-2 btn-block text-light"
                     = link_to "Kommentár", image_path(image), class: "btn btn-success btn-block text-light"
                   
             -else
@@ -181,11 +183,17 @@ table.table.table-dark
 
 
 
-- @images.each do |image|  		
+- @images.each do |image|  
+    - image.multi?
+        |IGGEEEEEN
+
     .modal.fade aria-hidden="true" aria-labelledby="myModalLabel" id="modalIMG_#{image.id}" role="dialog" tabindex="-1"
         .modal-dialog.modal-xl role="document"
             .modal-content
                 .modal-body.mb-0.p-0
+                    -image.photos.each do |im|
+                        =im.inspect
+                        = image_tag im.variant(resize_to_limit: [300, 300]).processed, class: "" if im.present?
                     = image_tag image.image, class: "card-img-top" if image.image.present?
                         -image.photos.each do |im|
                             =im.inspect
