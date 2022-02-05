@@ -4,7 +4,9 @@ $(document).on('turbolinks:load', function() {
     var data = $(this).attr('data-elso');
     var textarea = $('textarea#comment_idea').val();
     $('textarea#comment_idea').val(textarea +"\n" +  "http://gtav.forditas.xyz/index.php?m=forditas&s=" +data);
-    
+    $("div#adatok").html("Adatok");
+    $("#search_hun").val("");
+    $("#search_eng").val("");
   });
 
   
