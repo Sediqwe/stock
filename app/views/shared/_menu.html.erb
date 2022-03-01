@@ -13,13 +13,11 @@
                 <li class="nav-item <%= (url_for(only_path: true)) == "/login" ? "active" : "" %> ">
                   <%= link_to "Belépés", login_path, class: "nav-link"  %>
                 </li>
-                
                 <li class="nav-item <%= (url_for(only_path: true)) == "/signup" ? "active" : "" %> ">
                   <a class="nav-link" href="signup">Regisztrálás</a>
                 </li>
                 <% end %>
                 <% if current_user.present? %>
-
                 <li class="nav-item <%= (url_for(only_path: true)) == "/images" ? "active" : "" %> ">
                     <%= link_to "Képek", images_path(done: "0"), class: "nav-link" %>
                 </li>
@@ -33,11 +31,7 @@
                 <li class="nav-item <%= (url_for(only_path: true)) == "/todos" ? "active" : "" %> ">
                   <%= link_to "TODO", todos_path, class: "nav-link"  %>
                 </li>
-
                 <% if current_user.username == "sediqwe" %>
-                <li class="nav-item <%= (url_for(only_path: true)) == "/kattanas" ? "active" : "" %> ">
-                <%= link_to "Kattanás", kattanas_path, class: "nav-link"  %>
-                </li>
                 <li class="nav-item <%= (url_for(only_path: true)) == "/uploads" ? "active" : "" %> ">
                   <%= link_to "Uploads", uploads_path, class: "nav-link"  %>
                 </li>
