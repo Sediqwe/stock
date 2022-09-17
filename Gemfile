@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-gem 'csv'
+#gem 'csv'
 gem 'image_processing'
 gem 'will_paginate', '~> 3.1.0'
 ruby '2.7.2'
@@ -8,7 +8,7 @@ gem 'active_storage_validations'
 gem 'slim-rails'
 gem 'simple_form'
 gem "font-awesome-rails"
-gem "smarter_csv"
+#gem "smarter_csv"
 gem 'jquery-turbolinks'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'

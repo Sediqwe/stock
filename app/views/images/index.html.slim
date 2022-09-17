@@ -45,7 +45,7 @@ table.table.table-dark
       td style="width:300px" ACTION
     - @images.each do |image|
         tr id="tr_#{image.id}"
-            td class="text-light #{ image.done ? ' bg-success' : ' bg-dark' }"  
+            td class="text-light #{ image.done ? ' bg-success' : 'bg-dark' }"  
               = link_to "# #{image.id}", image_path(image.id), class: "btn btn-link text-light"
             - if image.multi
                 td  class="bg-dark"

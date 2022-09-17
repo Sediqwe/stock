@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authorized?
     def index
-        @comment = Comment.all.order(id: :desc)
+        @comment = Comment.all.order(id: :desc).limit(10)
     end
     def show
         @comment = Comment.find(params[:id])
