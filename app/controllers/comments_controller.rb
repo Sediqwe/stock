@@ -2,6 +2,14 @@ class CommentsController < ApplicationController
   before_action :authorized?
     def index
         @comment = Comment.all.order(id: :desc).limit(10)
+        @c = Comment.all.size
+        cd = Comment.all
+        szamol = 0
+        cd.each do |dort|
+          szamol += dort.idea.scan(/(?=gtav.forditas)/).count
+        end
+        @szam = szamol
+
     end
     def show
         @comment = Comment.find(params[:id])
